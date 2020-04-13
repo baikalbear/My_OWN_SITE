@@ -8,11 +8,13 @@
 	</div>
 	<div style="float:right;margin-left:50px;width:300px;font-size:10pt;">
 		<div>
-			<a href="#" onclick="narisovatIzPolnoiIstoriiIzKoda('1:1:125:75:50:030 ');">Нарисовать палитру зелёных и красных с шагом через три!</a><br/><br/>
+			<a href="#" onclick="narisovatIzPolnoiIstoriiIzKoda('1:1:525:375:50:0bb 1:1:475:325:50:0bb 1:1:425:275:50:0bb 1:1:375:225:50:0bb 1:1:325:175:50:0bb 1:1:275:125:50:0bb 1:1:225:75:50:0bb 1:1:175:25:50:0bb 1:1:175:25:50:bb0 1:1:475:375:50:bbb 1:1:425:325:50:bbb 1:1:375:275:50:bbb 1:1:325:225:50:bbb 1:1:275:175:50:bbb 1:1:225:125:50:bbb 1:1:175:75:50:bbb 1:1:125:25:50:bbb 1:1:425:375:50:bb0 1:1:375:325:50:bb0 1:1:325:275:50:bb0 1:1:275:225:50:bb0 1:1:225:175:50:bb0 1:1:175:125:50:bb0 1:1:125:75:50:bb0 1:1:75:25:50:bb0 1:1:375:375:50:b00 1:1:325:325:50:b00 1:1:275:275:50:b00 1:1:225:225:50:b00 1:1:175:175:50:b00 1:1:125:125:50:b00 1:1:75:75:50:b00 1:1:25:25:50:b00');">Нарисовать четыре линии ступеньками - бордовый, жёлто-зелёный, светло-серый, сине-зелёный!</a><br/><br/>
 			Длина: <input type="text" id="rect_width"><br/>
 			Высота: <input type="text" id="rect_height"><br/>
 			Слева: <input type="text" id="rect_left"><br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Сдвиг: <input type="text" id="rect_sdvig_sleva" value=0><br/>
 			Сверху: <input type="text" id="rect_top"><br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Сдвиг: <input type="text" id="rect_sdvig_sverhu" value=0><br/>
 			Бордюр: <input type="text" id="rect_border"><br/>
 			Цвет КЗС: <input type="text" id="rect_color"><br/><br/>
 			<input type="submit" value="Создать прямоугольник" onclick="drawRect();">
@@ -48,11 +50,13 @@
 		rect_width = document.getElementById("rect_width").value;
 		rect_height = document.getElementById("rect_height").value;
 		rect_left = document.getElementById("rect_left").value;
+		rect_sdvig_sleva = document.getElementById("rect_sdvig_sleva").value;
 		rect_top = document.getElementById("rect_top").value;
+		rect_sdvig_sverhu = document.getElementById("rect_sdvig_sverhu").value;
 		rect_border = document.getElementById("rect_border").value;
 		rect_color = document.getElementById("rect_color").value;
 		
-		narisovatPramougolnik(rect_width, rect_height, rect_left, rect_top, rect_border, rect_color);				
+		narisovatPramougolnik(rect_width, rect_height, rect_left, rect_sdvig_sleva, rect_top, rect_sdvig_sverhu, rect_border, rect_color);				
 	}
 	
 	function drawRectHist(nomer_istorii){
@@ -63,11 +67,13 @@
 		rect_width = nabor_parametrov[0];
 		rect_height = nabor_parametrov[1];
 		rect_left = nabor_parametrov[2];
-		rect_top = nabor_parametrov[3];
-		rect_border = nabor_parametrov[4];
-		rect_color = nabor_parametrov[5];
+		rect_sdvig_sleva = nabor_parametrov[3];
+		rect_top = nabor_parametrov[4];
+		rect_sdvig_sverhu = nabor_parametrov[5];
+		rect_border = nabor_parametrov[6];
+		rect_color = nabor_parametrov[7];
 
-		narisovatPramougolnik(rect_width, rect_height, rect_left, rect_top, rect_border, rect_color);		
+		narisovatPramougolnik(rect_width, rect_height, rect_left, rect_sdvig_sleva, rect_top, rect_sdvig_sverhu, rect_border, rect_color);
 	}
 	
 	function narisovatIzPolnoiIstorii(){
@@ -85,12 +91,20 @@
 				rect_border = nabor_parametrov[4];
 				rect_color = nabor_parametrov[5];
 				
-				narisovatPramougolnik(rect_width, rect_height, rect_left, rect_top, rect_border, rect_color);
+				narisovatPramougolnik(rect_width, rect_height, rect_left, 0, rect_top, 0, rect_border, rect_color);
 			}
 		}
 	}
 	
-	function narisovatPramougolnik(rect_width, rect_height, rect_left, rect_top, rect_border, rect_color){
+	function narisovatPramougolnik(rect_width, rect_height, rect_left, rect_sdvig_sleva, rect_top, rect_sdvig_sverhu, rect_border, rect_color){
+		//Суммирование значений сдвигов слева и сверху
+		rect_left = (parseInt(rect_left) + parseInt(rect_sdvig_sleva)).toString();
+		rect_top = (parseInt(rect_top) + parseInt(rect_sdvig_sverhu)).toString();
+		
+		//Заменяю значения слева и сверху на актуальные
+		document.getElementById("rect_left").value = rect_left;
+		document.getElementById("rect_top").value = rect_top
+		
 		//Назначаю полученные параметры фигуре прямоугольник и рисую его
 		cx.lineWidth = rect_border;
 		cx.strokeStyle = "#" + rect_color;
