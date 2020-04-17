@@ -16,7 +16,7 @@
 		margin:0 auto;width:70%;padding:20px;
 	}
 	.glavnaya_kartinka{
-		width:100%;height:159px;
+		width:100%;height:163px;
 		background-image: linear-gradient(to bottom, transparent 50%, #28487d 50%),
 				linear-gradient(to right, #617ca2 50%, #28487d 50%);
 		background-size: 10px 10px, 10px 10px;		}
@@ -28,7 +28,7 @@
 		float:left;
 	}
 	.gk_sprava{
-		float:right;margin-top:30px;margin-right:40px;	
+		float:right;margin-top:0px;margin-right:40px;	
 		font-weight:bold;
 		text-align:center;
 	}
@@ -39,5 +39,12 @@
 	}
 	.glavnaya_kartinka img{
 		display:block;float:left;border-radius:50%;
+	}
+	.gk_po_seredine{
+		float:left;margin-left:120px;margin-top:30px;
+		padding:10px;color:#fff;
+	}
+	.gk_po_seredine a{
+		color:#fff;text-decoration:none;font-size:20pt;
 	}
 </style>
