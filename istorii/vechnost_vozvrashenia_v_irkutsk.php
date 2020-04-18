@@ -1,6 +1,6 @@
-<?php include("shablony/verhushka.php"); ?>
-<?php include("shablony/styli.php"); ?>
-<?php include("shablony/shapka.php"); ?>
+<?php include("../shablony/verhushka.php"); ?>
+<?php include("../shablony/styli.php"); ?>
+<?php include("../shablony/shapka.php"); ?>
 
 <h1>Вечность возвращения в Иркутск</h1>
 История берёт своё начало в далёком 2012 году (когда я пишу эту статью, то на дворе 2020-й). Именно тогда я купил машину - да, свою первую Mazda Demio.<br/><br/>
@@ -29,4 +29,4 @@
 в была всем, что у меня было в плане положительного опыта после института.<br/>
 Да, на момент, когда
 
-<?php include("shablony/podval.php"); ?>
+<?php include("../shablony/podval.php"); ?>

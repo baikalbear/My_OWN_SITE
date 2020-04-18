@@ -2,7 +2,7 @@
 <body>
 	<div class="centralnaia_chast">
 		<div class="glavnaya_kartinka">
-			<div class="gk_sleva">&nbsp;</div><div class="gk_v_centre"><a href="/" title="На главную"><img src="/glavnoe_foto_dlya_saita.jpg" width="300" height="159"/></a></div>
+			<div class="gk_sleva">&nbsp;</div><div class="gk_v_centre"><a href="/" title="На главную"><img src="/glavnoe_foto_dlya_saita.png" width="150" height="150" style="margin-top:7px;"/></a></div>
 			<div class="gk_po_seredine"><a href="/" title="На главную">Мастер.Байкал</a><br/>
 			Сайт Ильи Домышева
 			</div>
