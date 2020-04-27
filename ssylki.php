@@ -8,21 +8,9 @@
 		global $gde_moi_sait;
 		$gde_moi_sait = $_SERVER['DOCUMENT_ROOT'];
 	//Блок. Странный. Конец.
-	
-	//Удобная функция, которая выводит на экран ссылку и текст к ней, при этом значение текста равняется значению гиперссылки.
-	function uf_odinakovay_ssylka($s, $novaya_vkladka = 1){
-		$kod_ssylki = "<a href=\"" . $s . "\"";
-		
-		//Если задан параметр открытия в новом окне/вкладке
-		if($novaya_vkladka) {$kod_ssylki .= "target=\"_blank\"";}
-		
-		echo($kod_ssylki . ">" . $s . "</a>");
-		
-		
-	}
 ?>
 
-<?php include($gde_moi_sait . "/shablony/verhushka.php"); ?>
+<?php include_once($gde_moi_sait . "/shablony/verhushka.php"); ?>
 <?php include($gde_moi_sait . "/shablony/styli.php"); ?>
 <?php include($gde_moi_sait . "/shablony/shapka.php"); ?>
 

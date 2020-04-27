@@ -12,3 +12,4 @@
 				<a href="/baikal_i_irkutsk.php" style="margin-top:7px;">Байкал#Иркутск</a><a href="/moi_kontakty.php" style="margin-top:7px;">Контакты</a>
 			</div><div style="clear:both;"></div>
 		</div><br/>
+		<span style="font-size:12pt;color:#aaa;font-weight:bold;">Помощник</span>: <span style="font-size:11pt;"><?=$Navigacia->poluchit();?></span> 
