@@ -17,7 +17,7 @@
 			</div>	
 			<br/><b>Создать вертикальную линию:</b><br/>
 			<div style="margin-top:8px;"></div>
-			<input type="hidden" id="rect_width" value="4">
+			<input type="hidden" id="rect_width" value="1">
 			Высота: <input type="text" id="rect_height"><br/>
 			<div style="margin-top:4px;"></div>
 			Отступ слева: <input type="text" id="rect_left"><br/>
@@ -32,16 +32,15 @@
 			<div style="margin-top:4px;"></div>
 			Цвет КЗС:
 			<input type="hidden" id="rect_color" value="333">
-			<div style="margin-top:4px;"></div>
+			<div style="margin-top:8px;"></div>
 			<div>
-				<div style="float:left;width:30px;height:30px;background:#000;margin-right:5px;"></div>
-				<a href="#" onclick="document.getElementById('rect_color').value='f00'"><div style="float:left;width:30px;height:30px;background:#f00;margin-right:5px;"></div></a>
-				<div style="width:30px;height:30px;background:#f00;float:left;margin-right:5px;"></div>
-				<div style="width:30px;height:30px;background:#0f0;float:left;margin-right:5px;"></div>
-				<div style="width:30px;height:30px;background:#00f;float:left;margin-right:5px;"></div>
-				<div style="width:30px;height:30px;background:#ff0;float:left;margin-right:5px;"></div>
-				<div style="width:30px;height:30px;background:#f0f;float:left;margin-right:5px;"></div>
-				<div style="width:30px;height:30px;background:#0ff;float:left;margin-right:5px;"></div>				
+				<a href="#" onclick="vybratCvet('000');"><div id="cvet-000" style="float:left;width:34px;height:34px;background:#000;margin-right:5px;margin-top:-2px;"></div></a>
+				<a href="#" onclick="vybratCvet('f00');"><div id='cvet-f00' style="float:left;width:30px;height:30px;background:#f00;margin-right:5px;"></div></a>
+				<a href="#" onclick="vybratCvet('0f0');"><div id='cvet-0f0' style="width:30px;height:30px;background:#0f0;float:left;margin-right:5px;"></div></a>
+				<a href="#" onclick="vybratCvet('00f');"><div id='cvet-00f' style="width:30px;height:30px;background:#00f;float:left;margin-right:5px;"></div></a>
+				<a href="#" onclick="vybratCvet('ff0');"><div id='cvet-ff0' style="width:30px;height:30px;background:#ff0;float:left;margin-right:5px;"></div></a>
+				<a href="#" onclick="vybratCvet('f0f');"><div id='cvet-f0f' style="width:30px;height:30px;background:#f0f;float:left;margin-right:5px;"></div></a>
+				<a href="#" onclick="vybratCvet('0ff');"><div id='cvet-0ff' style="width:30px;height:30px;background:#0ff;float:left;margin-right:5px;"></div></a>
 				<div style="clear:both;"></div>
 			</div>
 			<br/><br/>
@@ -69,6 +68,7 @@
 	var canvas = document.getElementsByTagName('canvas')[0];
 	let istoria = [];
 	let nomer_zapisi = 0; 
+	let vybranyi_cvet_id="cvet-000";
 	let polnaia_istoria = "";
 	canvas.width  = 600;
 	canvas.height = 400;
@@ -130,6 +130,7 @@
 	function narisovatPramougolnik(rect_width, rect_height, rect_left, rect_sdvig_sleva, rect_top, rect_sdvig_sverhu, rect_border, rect_color){
 		//Суммирование значений сдвигов слева и сверху
 		rect_left = (parseInt(rect_left) + parseInt(rect_sdvig_sleva)).toString();
+
 		rect_top = (parseInt(rect_top) + parseInt(rect_sdvig_sverhu)).toString();
 		
 		//Заменяю значения слева и сверху на актуальные
@@ -138,8 +139,10 @@
 		
 		//Назначаю полученные параметры фигуре прямоугольник и рисую его
 		cx.lineWidth = rect_border;
-		cx.strokeStyle = "#" + rect_color;
-		cx.strokeRect(rect_left, rect_top, rect_width, rect_height);
+		cx.fillStyle = "#" + rect_color;
+		
+		//Под рисовалку схем задаём кратность 10.
+		cx.fillRect(rect_left * 10, rect_top * 10, rect_width * 10, rect_height * 10);
 	
 		//Записываю историю в блок истории, а также в перемеменную
 		istoria_block = document.getElementById("istoria");
@@ -160,6 +163,22 @@
 		document.getElementById("polnaia_istoria_pole").value = polnaya_istoria_iz_koda;
 		narisovatIzPolnoiIstorii();
 		document.getElementById("polnaia_istoria_pole").value = "";
+	}
+	
+	function vybratCvet(cvet){
+		document.getElementById('rect_color').value = cvet;
+		//Изменяю параметры текущего квадрата с выбранным цветом
+		document.getElementById('cvet-' + cvet).style.width = "34px";
+		document.getElementById('cvet-' + cvet).style.height = "34px";
+		document.getElementById('cvet-' + cvet).style.marginTop = "-2px";
+		
+		//Изменяю параметры предыдущего квадрата с выбранным цветом
+		document.getElementById(vybranyi_cvet_id).style.width = "30px";
+		document.getElementById(vybranyi_cvet_id).style.height = "30px";
+		document.getElementById(vybranyi_cvet_id).style.marginTop = "0px";
+		
+		//Отмечаю, квадрат с каким ID был помечен
+		vybranyi_cvet_id = "cvet-" + cvet;
 	}
 </script>
 
