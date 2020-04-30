@@ -33,6 +33,7 @@
 		Мастер.Байкал - сайт Ильи Домышева
 	</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="keywords" content="мастербайкал, мастер-байкал, мастер_байкал, мастерство, о_жизни, о-жизни, уборка-ушаковка-иркутск, уборка_ушаковка_иркутск, rekilove38, реки-иркутска, реки_иркутска">
 	<!--Проверочный код Яндекс-Вебмастер--><meta name="yandex-verification" content="b8670de260234c9b" />
 	<!-- Yandex.Metrika counter -->
 	<script type="text/javascript" >
