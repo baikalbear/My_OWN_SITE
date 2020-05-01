@@ -15,6 +15,14 @@
 	.centralnaia_chast{
 		margin:0 auto;width:70%;padding:20px;
 	}
+	h2{font-size:15pt;}
+	h3{font-size:12pt;}
+	table{
+		border-collapse: collapse;
+		border: 1px solid grey;
+	}
+	th, td {border: 1px solid grey;padding:5px;}
+	
 	.glavnaya_kartinka{
 		width:100%;height:163px;
 		background-image: linear-gradient(to bottom, transparent 50%, #28487d 50%),
@@ -28,7 +36,7 @@
 		float:left;
 	}
 	.gk_sprava{
-		float:right;margin-top:0px;margin-right:40px;	
+		float:right;margin-top:10px;margin-right:40px;	
 		font-weight:bold;
 		text-align:center;
 	}
@@ -41,10 +49,34 @@
 		display:block;float:left;border-radius:50%;
 	}
 	.gk_po_seredine{
-		float:left;margin-left:120px;margin-top:30px;
+		float:left;margin-left:120px;margin-top:25px;
 		padding:10px;color:#fff;
 	}
 	.gk_po_seredine a{
 		color:#fff;text-decoration:none;font-size:20pt;
+	}
+	.spisok{
+		margin-left:0px;
+		margin-top:7px;
+		padding-left:30px;
+	}
+	.spisok li{
+		list-style:square;
+		padding-left:0px;
+		margin-left:0px;
+		margin-top:5px;
+	}
+	.spisok .vnutri li{
+		list-style:circle;
+		margin-top:3px;
+	}
+	.second_header{
+		color:#666;font-size:14pt;
+	}
+	.third_header{
+		color:#999;font-size:12pt;
+	}
+	.spisok_detalei td{
+		text-align:center;
 	}
 </style>

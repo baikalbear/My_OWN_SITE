@@ -1,6 +1,8 @@
 <?php include("shablony/verhushka.php"); ?>
 <?php include("shablony/styli.php"); ?>
 <?php include("shablony/shapka.php"); ?>
+<h1>Новое!</h1>
+Reverse Engineering - <a href="/projects/radio-electronica/detali/vaz11113-vykluchatel-avariynoi-signalizacii/">разбираю, как устроен выключатель</a> аварийки на ВАЗ ОКА 11113
 <h1>Об авторе сайта</h1>
 Всем добрый день! Меня зовут Илья Домышев и я из Иркутска. Иркутск город с более чем трёхсотлетней историей, о своём городе <a href="o_moem_gorode.php">я пишу здесь.</a><br/><br/>
 То, чем я увлекаюсь - это программирование, медитация, философия, зарядка, уборка нашего города, мастерство.<br/> Обо всём этом - <a href="/moi_uvlechenia.php">здесь</a>.<br/><br/>
