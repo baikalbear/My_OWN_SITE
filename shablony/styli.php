@@ -11,17 +11,25 @@
 		font-family:Verdana;font-size:12pt;
 		width:100%;
 	}
-	h1{font-size:16pt;}
+	h1{font-size:14pt;}
 	.centralnaia_chast{
 		margin:0 auto;width:70%;padding:20px;
 	}
-	h2{font-size:15pt;}
+	h2{font-size:13pt;}
 	h3{font-size:12pt;}
 	table{
 		border-collapse: collapse;
 		border: 1px solid grey;
 	}
 	th, td {border: 1px solid grey;padding:5px;}
+	a{
+		font-size:12pt;
+		color:#000;
+		text-decoration:underline;
+	}
+	a:hover{
+		text-decoration:none;
+	}
 	
 	.glavnaya_kartinka{
 		width:100%;height:163px;
@@ -71,10 +79,10 @@
 		margin-top:3px;
 	}
 	.second_header{
-		color:#666;font-size:14pt;
+		color:#444;font-size:14pt;
 	}
 	.third_header{
-		color:#999;font-size:12pt;
+		color:#888;font-size:12pt;
 	}
 	.spisok_detalei td{
 		text-align:center;
