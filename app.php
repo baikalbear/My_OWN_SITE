@@ -3,6 +3,10 @@
 	global $MyPath;
 	$MyPath = $_SERVER['DOCUMENT_ROOT'];
 	
+	//Путь к активам - js, css...
+	const ASSETS_PATH = "./assets/";
+
+	
 	//Начал: Теперь пора подключать нужные классы функций. Ну чтобы вручную не тягать по файлу сделаю простенькое автоподключение...
 	$scandir = scandir($MyPath . "/classes_of_functions");
 	

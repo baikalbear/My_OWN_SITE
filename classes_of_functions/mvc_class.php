@@ -1,7 +1,4 @@
 <?php
-	//На время отладки
-	echo "Ты меня подключил. Я " . __FILE__ . "<br/>";
-	
 	//Реализация одноимённого подхода
 	class MVC{
 		//Выделю переменную для HTML-потока, обращаюсь только через функции класса, поэтому private
@@ -27,7 +24,6 @@
 			}
 			
 			//Если я здесь, то проверка прошла успешно и можно вызывать класс. Проверять существует ли имя класса уже не буду, чтобы не усложнять...
-			include_once($_SERVER['DOCUMENT_ROOT'] . "/classes_of_functions/" . $class_name . "_class.php");
 			$cf_name = ucfirst($class_name);
 			$instance = new $cf_name();
 			$this->html_flow = $instance->getList();
