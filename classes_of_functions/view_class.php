@@ -128,7 +128,7 @@
 		 */
 		public function assetCSS($file)
 		{
-			echo '<link href="'.\ASSETS_PATH.$file.'" rel="stylesheet">'."\n";
+			echo '<link href="'.ASSETS_PATH.$file.'" rel="stylesheet">'."\n";
 		}
 		
 		/**
