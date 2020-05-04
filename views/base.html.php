@@ -8,7 +8,6 @@
     <title>BeeJee test-day app</title>
     <!-- Link CSS files -->
     <?php $this->assetCSS('bootstrap.min.css') ?>
-    <?php $this->assetCSS('signin.css') ?>
     <?php $this->assetCSS('app.css') ?>
     
     <!-- Link Java Script -->
@@ -25,7 +24,17 @@
     <![endif]-->
   </head>
   <body>
-    <?php $this->output('body') ?>
+    <div class="container">
+		<div style="width:100%;text-align:right;margin-top:15px;">
+			<?php
+			if(isset($_SESSION['username']) && $_SESSION['username'] == "admin"){?>
+				admin <a href="/signout/" style="margin-left:25px;">Выйти</a>	
+			<?}else{?>
+					<a href="/signin/">Войти</a>
+			<?}?>
+		</div>			
+		<?php $this->output('body') ?>
+	</div>
     <?php $this->output('script') ?>
     <?php $this->assetJS('app.js') ?>
   </body>

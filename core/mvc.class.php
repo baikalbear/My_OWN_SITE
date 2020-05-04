@@ -38,11 +38,12 @@
 			$instance = new $cf_name();
 
 			if($action_word == ""){
-				//Стандартный контроллер getList если действие не указано явно
-				$this->html_flow = $instance->getList();
+				//Стандартное действие default если действие не указано явно
+				$this->html_flow = $instance->defaultAction();
 			}else{
-				//Явный контроллер по его названию из строки браузера
-				$this->html_flow = $instance->$action_word();
+				//Случай, когда действие указано явно
+				$action = $action_word . "Action";
+				$this->html_flow = $instance->$action();
 			}
 		}
 		

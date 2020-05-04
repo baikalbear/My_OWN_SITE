@@ -1,9 +1,9 @@
 <?php $this->extend('base') ?>
 
 <?php $this->start('body') ?><br/>
-	<h1 align="center">Добавить задачу</h1>
+	<h1 align="center">Выход</h1>
 	<div style="height:30px;"></div>
-	Задача успешно добавлена<br/><br/>
+	Вы успешно вышли<br/><br/>
 	<a href="/tasks/">Перейти к списку задач</a><br/>
 <?php $this->stop('body') ?>
 

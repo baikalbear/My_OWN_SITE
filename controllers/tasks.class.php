@@ -8,7 +8,7 @@ class Tasks {
 		$this->view_link = new View();
 	}
 	//Построит HTML всех имеющихся в базе задач
-	function getList(){
+	function defaultAction(){
 		$q = mysqli_query($this->db_link, "select * from tasks");
 
 		//while($t = mysqli_fetch_array($q)){
@@ -18,7 +18,7 @@ class Tasks {
 		return $this->view_link->load('tasks', ['q' => $q]);
 	}
 	
-	function add(){
+	function addAction(){
 		//Случай, когда форма отравлена
 		if(isset($_POST['username'])){
 			//Случай, когда есть неверно заполненные поля
