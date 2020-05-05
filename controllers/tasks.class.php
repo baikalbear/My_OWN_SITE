@@ -9,13 +9,38 @@ class Tasks {
 	}
 	//Построит HTML всех имеющихся в базе задач
 	function defaultAction(){
-		$q = mysqli_query($this->db_link, "select * from tasks");
-
-		//while($t = mysqli_fetch_array($q)){
-		//	echo $t['username'] . $t['email'] . "<br/>";
-		//}
+		//Настрою сортировку
+		if(isset($_GET['sort'])) {
+			$sort = $_GET['sort'];
+		}else{
+			$sort = 'username';
+		}
 		
-		return $this->view_link->load('tasks', ['q' => $q]);
+		//Настрою направление сортировки
+		if(isset($_GET['sortdirection'])) {
+			$sortdirection = $_GET['sortdirection'];
+		}else{
+			$sortdirection = 'asc';
+		}
+
+		//Настрою пагинацию
+		if(isset($_GET['page'])){
+			$page = $_GET['page'];
+		}else{
+			$page = 1;
+		}
+		
+		//Настрою отбор для SQL
+		$limit_from = ($page - 1)*3;
+		
+		$q = mysqli_query($this->db_link, "select * from tasks order by `$sort` $sortdirection limit $limit_from, 3");
+		echo "select * from tasks order by `$sort` `$sortdirection` limit $limit_from, 3";
+		
+		//Посчитаю сколько всего записей
+		$q1 = mysqli_query($this->db_link, "select * from tasks");
+		$tasks_num = mysqli_num_rows($q1);
+
+		return $this->view_link->load('tasks', ['q' => $q, 'tasks_num' => $tasks_num, 'sort' => $sort, 'page' => $page, 'sortdirection' => $sortdirection]);
 	}
 	
 	function addAction(){

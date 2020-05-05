@@ -20,24 +20,23 @@
 			$action_word = $parsed_url[2];
 			
 			
-			//Делаю первую букву большой и вызываю класс. А для того, чтобы не вызвать ничего "лишнего" проверяю, что это слово строка.
-			//Иначе падаю в fatal error.
-			if (!preg_match('/^[a-z]{1,30}$/', $class_name)){
-				echo "Fatal error on this operation.";
-				exit;
+			//Поведение для главной страницы
+			if($class_name== ""){
+				$class_name = "tasks";
+			}else{
+				//Делаю первую букву большой и вызываю класс. А для того, чтобы не вызвать ничего "лишнего" проверяю, что это слово строка.
+				if (!preg_match('/^[a-z]{1,30}$/', $class_name)){
+					//Иначе падаю в fatal error.
+					echo "Fatal error on this operation.";
+					exit;
+				}
 			}
-			
-			//Проверка второго слова в url
-			if (!preg_match('/^[a-z]{0,30}$/', $action_word)){
-				echo "Fatal error on this operation.";
-				exit;
-			}
-			
+						
 			//Если я здесь, то проверка прошла успешно и можно вызывать класс. Проверять существует ли имя класса уже не буду, чтобы не усложнять...
 			$cf_name = ucfirst($class_name);
 			$instance = new $cf_name();
 
-			if($action_word == ""){
+			if($action_word == "" || !preg_match('/^[a-z]{1,30}$/', $action_word)){
 				//Стандартное действие default если действие не указано явно
 				$this->html_flow = $instance->defaultAction();
 			}else{
