@@ -87,4 +87,13 @@
 	.spisok_detalei td{
 		text-align:center;
 	}
+	ul.glavnaya{
+		list-style-type:none;
+		padding-left:0;
+		padding-top:0;	
+		margin-top:5px;
+	}
+	ul.glavnaya li{
+		padding-top:3px;
+	}
 </style>

@@ -1,3 +1,4 @@
+<?php $AdditionalKeywords = "";?>
 <?php include($_SERVER['DOCUMENT_ROOT'] . "/shablony/verhushka.php"); ?>
 <?php include($_SERVER['DOCUMENT_ROOT'] . "/shablony/styli.php"); ?>
 <?php include($_SERVER['DOCUMENT_ROOT'] . "/shablony/shapka.php"); ?>
@@ -20,7 +21,9 @@
 Сразу скажу, что в нумерации ниже два толстых розовых провода, которые на картинке находятся в нижнем ряду слева на втором месте - это второй контакт. 
 Два голубых провода (у них чуть подплавлена изоляция) в верхнем ряду слева - это контакт 5. То есть фишка перевёрнута относительно вертикальной оси.
 
+
 <div style="height:25px;"></div>
+<a name="kontakty"></a>
 
 Я считаю контакты исходя из этого изображения:
 <div style="height:5px;"></div>
