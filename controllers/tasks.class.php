@@ -34,7 +34,6 @@ class Tasks {
 		$limit_from = ($page - 1)*3;
 		
 		$q = mysqli_query($this->db_link, "select * from tasks order by `$sort` $sortdirection limit $limit_from, 3");
-		echo "select * from tasks order by `$sort` `$sortdirection` limit $limit_from, 3";
 		
 		//Посчитаю сколько всего записей
 		$q1 = mysqli_query($this->db_link, "select * from tasks");
@@ -53,11 +52,47 @@ class Tasks {
 			//В этом случае добавляю запись в базу
 			}else{
 				mysqli_query($this->db_link, "INSERT INTO `tasks` SET username='" . $_POST['username'] . "', email='" . $_POST['email'] . "', text='" . htmlspecialchars($_POST['text']) . "', status=0");
-				return $this->view_link->load('success');
+				return $this->view_link->load('add_ok');
 			}
 		//Случай, когда форма ещё не была отправлена
 		}else{
 			return $this->view_link->load('add', ['hidden' => 'hidden', 'username'=>"", 'email'=>"", 'text'=>""]);
 		}
 	}
+	
+	function editAction(){
+		//Редактирование делаю, опираясь на id элемента в БД
+		if(!isset($_GET['id'])){
+			echo "Fatal error";
+			exit;
+		}
+
+		//Теперь получаю элемент из базы в виде ассоц. массива
+		$id = $_GET['id'];
+		
+		//Форма уже отправлена?
+		if(!isset($_POST['text'])){
+			
+			$q = mysqli_query($this->db_link, "SELECT * FROM `tasks` WHERE `id`=" . $id);
+			
+			$task = mysqli_fetch_array($q);
+			
+			return $this->view_link->load('edit', ['hidden' => 'hidden', 'task' => $task]);
+		} else {
+			mysqli_query($this->db_link, "UPDATE `tasks` SET `text`='" . htmlspecialchars($_POST['text']) . "' WHERE id=" . $id);
+			return $this->view_link->load('edit_ok');
+		}
+	}
+	
+	function changestatusAction(){
+		$id = $_POST['id'];
+		$status = $_POST['status'];
+		
+		//Обновляю статус в БД
+		mysqli_query($this->db_link, "UPDATE `tasks` SET `status`='$status' WHERE id=" . $id);
+		
+		//Формирую ответ JSON встроенными средствами PHP
+		return json_encode( ['result' => 'success']);
+	}
+		
 }

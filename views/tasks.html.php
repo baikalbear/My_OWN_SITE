@@ -15,7 +15,7 @@
 		//Ссылки строю для каждого столбца сортировки.
 		$columns = ['username', 'email', 'status'];
 		foreach($columns as $null => $column){
-			if($this->data['sort'] == "username"){
+			if($this->data['sort'] == $column){
 				if($this->data['sortdirection'] == 'asc'){
 					$new_sortdirection = 'desc';
 				}else{
@@ -35,9 +35,14 @@
 		<tr>
 		  
 		  <th scope="col"><a href="<?=$links['username']?>">Имя пользователя</a></th>
-		  <th scope="col">Email</th>
+		  <th scope="col"><a href="<?=$links['email']?>">Email</a></th>
 		  <th scope="col">Текст задачи</th>
-		  <th scope="col">Статус</th>
+		  <th scope="col"><a href="<?=$links['status']?>">Статус</a></th>
+		  <?
+			if(isset($_SESSION['username']) && $_SESSION['username'] == "admin"){
+				?><th>Действие</th><?
+			}
+		  ?>
 		</tr>
 	  </thead>
 	  <tbody>
@@ -56,6 +61,11 @@
 				  <td><?=$t['email']?></td>
 				  <td><?=$t['text']?></td>
 				  <td><?=$status?></td>
+				  <?
+					if(isset($_SESSION['username']) && $_SESSION['username'] == "admin"){
+						?><td><a href="/tasks/edit/?id=<?=$t['id']?>">Изменить</a></td><?
+					}
+				  ?>
 				</tr>		
 		<?}?>
 	</table>
@@ -64,7 +74,7 @@
 		<?	//Настраиваем пагинатор
 			$tasks_num = $this->data['tasks_num'];
 			$pages_num = round($tasks_num / 3, 0);
-			if($pages_num % 3 > 0) $pages_num++;
+			if($tasks_num % 3 > 0) $pages_num++;
 			$paginator = "";
 			for($i=1;$i <= $pages_num;$i++){
 				if($this->data['page'] == $i){
