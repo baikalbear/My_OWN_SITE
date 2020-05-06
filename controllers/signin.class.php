@@ -3,7 +3,7 @@ class Signin {
 	private $db_link;	
 
 	function __construct(){
-		$this->db_link = mysqli_connect("localhost", "masterbaikal", "8E6E+#m*7TAzXCj", "beejee");
+		$this->db_link = mysqli_connect($GLOBALS['db_host'], $GLOBALS['db_user'], $GLOBALS['db_pass'], $GLOBALS['db_base']);
 		$this->view_link = new View();
 	}
 	

@@ -4,7 +4,8 @@ class Tasks {
 	private $db_link;	
 
 	function __construct(){
-		$this->db_link = mysqli_connect("localhost", "masterbaikal", "8E6E+#m*7TAzXCj", "beejee");
+		$this->db_link = mysqli_connect($GLOBALS['db_host'], $GLOBALS['db_user'], $GLOBALS['db_pass'], $GLOBALS['db_base']);
+		//masterba_beejee
 		$this->view_link = new View();
 	}
 	//Построит HTML всех имеющихся в базе задач
@@ -70,17 +71,41 @@ class Tasks {
 		//Теперь получаю элемент из базы в виде ассоц. массива
 		$id = $_GET['id'];
 		
+		$q = mysqli_query($this->db_link, "SELECT * FROM `tasks` WHERE `id`=" . $id);
+		
+		$task = mysqli_fetch_array($q);
+
 		//Форма уже отправлена?
-		if(!isset($_POST['text'])){
-			
-			$q = mysqli_query($this->db_link, "SELECT * FROM `tasks` WHERE `id`=" . $id);
-			
-			$task = mysqli_fetch_array($q);
-			
-			return $this->view_link->load('edit', ['hidden' => 'hidden', 'task' => $task]);
+		if(isset($_POST['text'])){
+			//Да
+			//Проверка входа при сохранении
+			if(!isset($_SESSION['username']) || $_SESSION['username'] != "admin"){
+				//Просим авторизоваться
+				header("location: /signin");
+			} else {
+				//Перезаписываем значение в базе, только если текст отличается
+				if($task['text'] != $_POST['text']){
+					mysqli_query($this->db_link, "UPDATE `tasks` SET `text`='" . htmlspecialchars($_POST['text']) . "', `text_changed`=1 WHERE id=" . $id);
+				}
+
+				//Для вывода сообщения используем хранение в COOKIE
+				$_SESSION['task_edited'] = true;
+				
+				//Переадресация
+				header("location: /tasks/edit/?id=$id");
+			}
 		} else {
-			mysqli_query($this->db_link, "UPDATE `tasks` SET `text`='" . htmlspecialchars($_POST['text']) . "' WHERE id=" . $id);
-			return $this->view_link->load('edit_ok');
+			//Нет
+			if(isset($_SESSION['task_edited']) && $_SESSION['task_edited'] == true){
+				$hidden = "";
+				$message = "Задача успешно сохранена";
+				unset($_SESSION['task_edited']);
+			} else {
+				$hidden = "hidden";
+				$message = "";
+			}
+			
+			return $this->view_link->load('edit', ['task' => $task, 'hidden' => $hidden, 'message' => $message]);
 		}
 	}
 	

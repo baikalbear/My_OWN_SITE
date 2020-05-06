@@ -54,6 +54,12 @@
 				}else{
 					$status = "";
 				}
+
+				if($t['text_changed'] == 1){
+					if($status != "") $status .= "<br/>";
+					$status .= "Отредактировано администратором";
+				}else{
+				}
 				
 				?>
 				<tr>
@@ -78,12 +84,15 @@
 			$paginator = "";
 			for($i=1;$i <= $pages_num;$i++){
 				if($this->data['page'] == $i){
-					$num_style = "text-decoration:none;";
+					$num_style = "text-decoration:none;font-weight:bold;";
 				}else{
-					$num_style = "text-decoration:underline;";
+					$num_style = "text-decoration:underline;font-weight:normal;";
 				}
 				$paginator .= "<a href=\"/tasks/?page=$i&sort={$this->data['sort']}&sortdirection={$this->data['sortdirection']}\" style=\"$num_style\">$i</a> | ";
 			}
+			
+			//Подрежу вертикальный разделитель в конце
+			$paginator = substr($paginator, 0, strlen($paginator) - 3);
 		?>
 		Страницы: <?=$paginator?>
 	</div>

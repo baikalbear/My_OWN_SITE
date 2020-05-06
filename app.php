@@ -1,8 +1,7 @@
 <?php
-	//Сохраняю себе путь к папке с MVC, чтоб было на что опереться независимо от области видимости...
-	global $MyPath;
-	$MyPath = $_SERVER['DOCUMENT_ROOT'];
-	
+	//Подключаю настройки
+	include_once($_SERVER['DOCUMENT_ROOT'] . "/config.php");
+
 	//Путь к активам - js, css...
 	const ASSETS_PATH = "/assets/";
 	
@@ -12,11 +11,11 @@
 	//Теперь пора подключать нужные классы функций. Ну чтобы вручную не тягать по файлу сделаю простенькое автоподключение...
 	//Начинаю.
 	foreach(['core', 'controllers'] as $null => $class){
-		$scandir = scandir($MyPath . "/" . $class);
+		$scandir = scandir($_SERVER['DOCUMENT_ROOT'] . "/" . $class);
 		
 		foreach($scandir as $n => $fname){
 			if ($fname != "." && $fname != ".."){
-				include_once($MyPath . "/" . $class . "/" . $fname);
+				include_once($_SERVER['DOCUMENT_ROOT'] . "/" . $class . "/" . $fname);
 			}
 		}
 	}

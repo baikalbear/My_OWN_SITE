@@ -3,8 +3,8 @@
 <?php $this->start('body') ?><br/>
 	<h1 align="center">Редактировать задачу</h1>
 	<form action="/tasks/edit/?id=<?=$this->data['task']['id']?>" method="post">
-		<div class="alert alert-danger <?=$this->data['hidden']?>" role="alert" id="submitAnswer">
-			<?=$this->data['error']?>
+		<div class="alert alert-info <?=$this->data['hidden']?>" role="alert" id="submitAnswer">
+			<?=$this->data['message']?>
 		</div>
 		<div class="form-group">
 		  <label for="inputUsername">Имя пользователя</label>
