@@ -46,15 +46,21 @@ class Tasks {
 	function addAction(){
 		//Случай, когда форма отравлена
 		if(isset($_POST['username'])){
-			//Случай, когда есть неверно заполненные поля
+			//Не заполнено имя пользователя либо текст задачи
+			if(trim($_POST['username']) == "" || trim($_POST['text']) == ""){
+				return $this->view_link->load('add', ['hidden' => '', 'username' => $_POST['username'], 'email' => $_POST['email'], 'text' => $_POST['text'],
+												'error' => "Не все поля заполнены"]);
+			}
+			
+			//Случай, когда неверно заполнен е-мэйл
 			if(!preg_match("/^[a-z0-9A-Z\.\-\_]{1,100}\@[a-z0-9A-Z\.\-\_]{1,100}\.[a-zA-Z]{1,20}$/", $_POST['email'])){
 				return $this->view_link->load('add', ['hidden' => '', 'username' => $_POST['username'], 'email' => $_POST['email'], 'text' => $_POST['text'],
 												'error' => "Е-мэйл заполнен некорректно"]);
-			//В этом случае добавляю запись в базу
-			}else{
-				mysqli_query($this->db_link, "INSERT INTO `tasks` SET username='" . $_POST['username'] . "', email='" . $_POST['email'] . "', text='" . htmlspecialchars($_POST['text']) . "', status=0");
-				return $this->view_link->load('add_ok');
 			}
+			
+			//Если этот код будет выполнен, значит ошибок валидации не было
+			mysqli_query($this->db_link, "INSERT INTO `tasks` SET username='" . $_POST['username'] . "', email='" . $_POST['email'] . "', text='" . htmlspecialchars($_POST['text']) . "', status=0, text_changed=0");
+			return $this->view_link->load('add_ok');
 		//Случай, когда форма ещё не была отправлена
 		}else{
 			return $this->view_link->load('add', ['hidden' => 'hidden', 'username'=>"", 'email'=>"", 'text'=>""]);
@@ -110,6 +116,11 @@ class Tasks {
 	}
 	
 	function changestatusAction(){
+		//Проверка авторизации
+		if(!isset($_SESSION['username'])){
+			return json_encode( ['result' => 'non-authorized']);
+		}
+		
 		$id = $_POST['id'];
 		$status = $_POST['status'];
 		

@@ -79,22 +79,31 @@
 	<div>
 		<?	//Настраиваем пагинатор
 			$tasks_num = $this->data['tasks_num'];
-			$pages_num = round($tasks_num / 3, 0);
-			if($tasks_num % 3 > 0) $pages_num++;
-			$paginator = "";
-			for($i=1;$i <= $pages_num;$i++){
-				if($this->data['page'] == $i){
-					$num_style = "text-decoration:none;font-weight:bold;";
-				}else{
-					$num_style = "text-decoration:underline;font-weight:normal;";
-				}
-				$paginator .= "<a href=\"/tasks/?page=$i&sort={$this->data['sort']}&sortdirection={$this->data['sortdirection']}\" style=\"$num_style\">$i</a> | ";
-			}
 			
-			//Подрежу вертикальный разделитель в конце
-			$paginator = substr($paginator, 0, strlen($paginator) - 3);
+			if($tasks_num > 0){
+				$pages_num = $tasks_num / 3;
+				
+				//Случай, когда страниц не кратное 3 число
+				if($tasks_num % 3 > 0) $pages_num++;
+
+				$paginator = "Страницы: ";
+				$pages = "Страницы: ";
+				for($i=1;$i <= $pages_num;$i++){
+					if($this->data['page'] == $i){
+						$num_style = "text-decoration:none;font-weight:bold;color:black;";
+					}else{
+						$num_style = "text-decoration:underline;font-weight:normal;";
+					}
+					$paginator .= "<a href=\"/tasks/?page=$i&sort={$this->data['sort']}&sortdirection={$this->data['sortdirection']}\" style=\"$num_style\">$i</a> | ";
+				}
+			
+				//Подрежу вертикальный разделитель в конце
+				$paginator = substr($paginator, 0, strlen($paginator) - 2);
+			} else {
+				$paginator = "";
+			}
 		?>
-		Страницы: <?=$paginator?>
+		<?=$paginator?>
 	</div>
     
 <?php $this->stop('body') ?>

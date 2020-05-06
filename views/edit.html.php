@@ -67,6 +67,11 @@
 					if (data.result == 'success') {
 						//alert("есть");
 					}
+					
+					if (data.result == 'non-authorized') {
+						alert("Вы не авторизованы и будете перенаправлены на главную страницу...");
+						window.location.replace("/")
+					}
 				}
 			});
 		}

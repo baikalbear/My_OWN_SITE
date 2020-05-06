@@ -8,12 +8,12 @@
 		</div>
 		<div class="form-group">
 		  <label for="inputUsername">Имя пользователя</label>
-		  <input type="text" data-noempty class="form-control" id="inputTitle" name="username" value="<?=$this->data['username']?>" style="width:300px;" required>
+		  <input type="text" data-noempty class="form-control" id="inputTitle" name="username" value="<?=$this->data['username']?>" style="width:300px;">
 		  <div class="help-block with-errors"></div>
 		</div>
 		<div class="form-group">
 		  <label for="inputEmail">Пароль</label>
-		  <input type="password" data-noempty class="form-control" id="inputEmail" name="password" value=""  style="width:300px;" required>
+		  <input type="password" data-noempty class="form-control" id="inputEmail" name="password" value=""  style="width:300px;">
 		  <div class="help-block with-errors"></div>
 		</div>                       
 		<div class="form-group" style="width:100%;text-align:left;">
