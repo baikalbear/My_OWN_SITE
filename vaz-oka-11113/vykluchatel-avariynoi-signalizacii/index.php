@@ -2,8 +2,11 @@
 <?php include($_SERVER['DOCUMENT_ROOT'] . "/shablony/styli.php"); ?>
 <?php include($_SERVER['DOCUMENT_ROOT'] . "/shablony/shapka.php"); ?>
 
-<h1>Наши проекты. <span class="second_header">Радиоэлектроника.</span> <span class="third_header">ВАЗ ОКА 11113, выключатель аварийной сигнализации (часть 1)</span></h1>
-<h3>Фишка "папа" или выключатель аварийки</h3>
+<h1>
+	ВАЗ "ОКА" 11113.<br/>
+	<span class="second_header">Кнопка аварийки.</span><br/>
+	<span class="third_header">Устройство, фишка "мама", подключение проводов, принцип работы</span>
+ </h1>
 
 Выключатель имеет 6 контактов слева направо от четвёртого до седьмого.<br/>Контакты 5 и 6 отсутствуют - но об этом дальше.<br/>
 Нарисовал, как смог. Вроде похоже...<br/><br/>Нажимайте на фотки, чтобы они стали больше.<br/>
@@ -53,7 +56,7 @@
 <a href="./vaz11113-vykluchatel-avariynoi-signalizacii-fishka2-big.jpg" target="_blank"><img src="vaz11113-vykluchatel-avariynoi-signalizacii-fishka2.jpg" style="margin-top:20px;margin-left:100px;margin-bottom:20px;"/></a>
 <a href="./vaz11113-vykluchatel-avariynoi-signalizacii-fishka-mama-big.jpg" target="_blank"><img src="vaz11113-vykluchatel-avariynoi-signalizacii-fishka-mama.jpg" style="margin-top:20px;margin-left:100px;margin-bottom:20px;"/></a><br/><br/>
 Как я писал в первой части, контакт 5, который не представлен на фишке "папа" объединяет два чёрных провода "земля". А контакт 6 отсутствует на обеих фишках - и "папа", и "мама".<br/><br/>
-Теперь те данные, которые я переписывал ранее, <a href="#">когда разбирался с устройством</a> фишки подрулевого переключателя поворотов и фар.<br/><br/>	
+Теперь те данные, которые я переписывал ранее, <a href="/vaz-oka-11113/fary_i_povoroty/">когда разбирался с устройством фишки подрулевого переключателя поворотов и фар</a>.<br/><br/>	
 Вот провода по цветам с той фишки "мама", она кстати 8и контактная:<br/>
 <ul>
 	<li>5 - голубой, при включенном правом повороте напряжение прыгает здесь от 0 до 9 вольт</li>

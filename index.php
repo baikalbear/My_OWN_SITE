@@ -9,16 +9,16 @@
 <span style="color:#c00">*** ВАЗ ОКА 11113 ***</span>
 
 <div style="height:5px;"></div>
-<a href="/vaz-oka-11113/fary_i_povoroty/">Фары и поворотники</a> - подрулевые переключатели, фишка "мама", проводка, принцип работы
+<a href="/vaz-oka-11113/fary_i_povoroty/">Переключатель дальнего и ближнего света, поворотников</a> - устройство, фишка "мама", проводка, принцип работы
 
 <div style="height:5px;"></div>
-<a href="/projects/radio-electronica/detali/vaz11113-vykluchatel-avariynoi-signalizacii/">Аварийка</a> - выключатель,  фишка "мама",  проводка, принцип работы
+<a href="/vaz-oka-11113/perednij-stekloochistitel/">Переключатель переднего стеклоочистителя</a> - подрулевые переключатели, фишка "мама", проводка, принцип работы
 
 <div style="height:5px;"></div>
-<a href="/vaz-oka-11113/perednij-stekloochistitel/">Передний стеклоочиститель</a> - подрулевые переключатели, фишка "мама", проводка, принцип работы
+<a href="/vaz-oka-11113/vykluchatel-avariynoi-signalizacii/">Кнопка аварийной сигнализации</a> - устройство, фишка "мама", подключение проводов, принцип работы
 
 <div style="height:5px;"></div>
-<a href="/vaz-oka-11113/knopka-far/">Кнопка фар</a> - cама кнопка, фишка "мама", проводка, принцип работы, выводы, идея<br/><br/>
+<a href="/vaz-oka-11113/knopka-far/">Кнопка фар</a> - устройство, фишка "мама", подключение проводов, принцип работы, идеи по доработке<br/><br/>
 
 <div style="height:15px;"></div>
 <h1 style="font-size:14pt;">Слово автора</h1>
