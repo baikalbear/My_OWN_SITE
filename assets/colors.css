@@ -1,0 +1,47 @@
+/*По тегам*/
+a,a:active,a:hover,a:visited{
+	color:#333;
+}
+
+/*По классам*/
+.pink_fine{
+	background: #ff5050;
+}
+
+
+.yellow_bright{
+	background: #ffcc00;
+}
+
+.orange_ground{
+	background: #cc3300;
+}
+
+.orange_pale{
+	background: #ffcc66;
+}
+
+.brown_fine{
+	background:#cc6600;
+}
+
+
+.cian_noble{
+	background: #00ccff;
+}
+
+.cian_light{
+	background: #66ccff;
+}
+
+.blue_light{
+	background: #3399ff;
+}
+
+.magenta_light{
+	background: #9999ff;
+}
+
+
+
+

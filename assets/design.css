@@ -1,0 +1,31 @@
+/*Блок очистки float-ов*/
+.clear{
+	clear:both;
+}
+
+.mce-notification-inner {display:none!important;}
+
+.block_16{
+	float:left;
+	width:200px;
+	height:100px;
+	margin-left:40px;
+	margin-top:40px;
+	padding: 20px;
+	background: #aaa;
+}
+
+.block_9{
+	float:left;
+	width:267px;
+	height:133px;
+	margin-left:40px;
+	margin-top:40px;
+	padding: 20px;
+	background: #aaa;
+}
+
+.inner_block{
+	width:227px;
+	height:93px;
+}

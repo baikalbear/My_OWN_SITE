@@ -1,12 +1,12 @@
 <?php
 //Класс предметной области "Задачи"
-class Tasks {
+class Records {
 	private $db_link;	
 
 	function __construct(){
 		$this->db_link = mysqli_connect($GLOBALS['db_host'], $GLOBALS['db_user'], $GLOBALS['db_pass'], $GLOBALS['db_base']);
 		//masterba_beejee
-		$this->view_link = new View();
+		$this->view = new View();
 	}
 	//Построит HTML всех имеющихся в базе задач
 	function defaultAction(){
@@ -34,13 +34,13 @@ class Tasks {
 		//Настрою отбор для SQL
 		$limit_from = ($page - 1)*3;
 		
-		$q = mysqli_query($this->db_link, "select * from tasks order by `$sort` $sortdirection limit $limit_from, 3");
+		$q = mysqli_query($this->db_link, "select * from `records` order by `$sort` $sortdirection limit $limit_from, 3");
 		
 		//Посчитаю сколько всего записей
-		$q1 = mysqli_query($this->db_link, "select * from tasks");
+		$q1 = mysqli_query($this->db_link, "select * from `records`");
 		$tasks_num = mysqli_num_rows($q1);
 
-		return $this->view_link->load('tasks', ['q' => $q, 'tasks_num' => $tasks_num, 'sort' => $sort, 'page' => $page, 'sortdirection' => $sortdirection]);
+		return $this->view->load('records', ['q' => $q, 'tasks_num' => $tasks_num, 'sort' => $sort, 'page' => $page, 'sortdirection' => $sortdirection]);
 	}
 	
 	function addAction(){
@@ -48,22 +48,22 @@ class Tasks {
 		if(isset($_POST['username'])){
 			//Не заполнено имя пользователя либо текст задачи
 			if(trim($_POST['username']) == "" || trim($_POST['text']) == ""){
-				return $this->view_link->load('add', ['hidden' => '', 'username' => $_POST['username'], 'email' => $_POST['email'], 'text' => $_POST['text'],
+				return $this->view->load('add', ['hidden' => '', 'username' => $_POST['username'], 'email' => $_POST['email'], 'text' => $_POST['text'],
 												'error' => "Не все поля заполнены"]);
 			}
 			
 			//Случай, когда неверно заполнен е-мэйл
 			if(!preg_match("/^[a-z0-9A-Z\.\-\_]{1,100}\@[a-z0-9A-Z\.\-\_]{1,100}\.[a-zA-Z]{1,20}$/", $_POST['email'])){
-				return $this->view_link->load('add', ['hidden' => '', 'username' => $_POST['username'], 'email' => $_POST['email'], 'text' => $_POST['text'],
+				return $this->view->load('add', ['hidden' => '', 'username' => $_POST['username'], 'email' => $_POST['email'], 'text' => $_POST['text'],
 												'error' => "Е-мэйл заполнен некорректно"]);
 			}
 			
 			//Если этот код будет выполнен, значит ошибок валидации не было
-			mysqli_query($this->db_link, "INSERT INTO `tasks` SET username='" . $_POST['username'] . "', email='" . $_POST['email'] . "', text='" . htmlspecialchars($_POST['text']) . "', status=0, text_changed=0");
-			return $this->view_link->load('add_ok');
+			mysqli_query($this->db_link, "INSERT INTO `records` SET username='" . $_POST['username'] . "', email='" . $_POST['email'] . "', text='" . htmlspecialchars($_POST['text']) . "', status=0, text_changed=0");
+			return $this->view->load('add_ok');
 		//Случай, когда форма ещё не была отправлена
 		}else{
-			return $this->view_link->load('add', ['hidden' => 'hidden', 'username'=>"", 'email'=>"", 'text'=>""]);
+			return $this->view->load('add', ['hidden' => 'hidden', 'username'=>"", 'email'=>"", 'text'=>""]);
 		}
 	}
 	
@@ -77,7 +77,7 @@ class Tasks {
 		//Теперь получаю элемент из базы в виде ассоц. массива
 		$id = $_GET['id'];
 		
-		$q = mysqli_query($this->db_link, "SELECT * FROM `tasks` WHERE `id`=" . $id);
+		$q = mysqli_query($this->db_link, "SELECT * FROM `records` WHERE `id`=" . $id);
 		
 		$task = mysqli_fetch_array($q);
 
@@ -91,14 +91,14 @@ class Tasks {
 			} else {
 				//Перезаписываем значение в базе, только если текст отличается
 				if($task['text'] != $_POST['text']){
-					mysqli_query($this->db_link, "UPDATE `tasks` SET `text`='" . htmlspecialchars($_POST['text']) . "', `text_changed`=1 WHERE id=" . $id);
+					mysqli_query($this->db_link, "UPDATE `records` SET `text`='" . htmlspecialchars($_POST['text']) . "', `text_changed`=1 WHERE id=" . $id);
 				}
 
 				//Для вывода сообщения используем хранение в COOKIE
 				$_SESSION['task_edited'] = true;
 				
 				//Переадресация
-				header("location: /tasks/edit/?id=$id");
+				header("location: /records/edit/?id=$id");
 			}
 		} else {
 			//Нет
@@ -111,7 +111,7 @@ class Tasks {
 				$message = "";
 			}
 			
-			return $this->view_link->load('edit', ['task' => $task, 'hidden' => $hidden, 'message' => $message]);
+			return $this->view->load('edit', ['task' => $task, 'hidden' => $hidden, 'message' => $message]);
 		}
 	}
 	
@@ -125,10 +125,10 @@ class Tasks {
 		$status = $_POST['status'];
 		
 		//Обновляю статус в БД
-		mysqli_query($this->db_link, "UPDATE `tasks` SET `status`='$status' WHERE id=" . $id);
+		mysqli_query($this->db_link, "UPDATE `records` SET `status`='$status' WHERE id=" . $id);
 		
 		//Формирую ответ JSON встроенными средствами PHP
 		return json_encode( ['result' => 'success']);
 	}
-		
+	
 }

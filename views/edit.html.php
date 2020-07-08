@@ -2,7 +2,7 @@
 
 <?php $this->start('body') ?><br/>
 	<h1 align="center">Редактировать задачу</h1>
-	<form action="/tasks/edit/?id=<?=$this->data['task']['id']?>" method="post">
+	<form action="/records/edit/?id=<?=$this->data['task']['id']?>" method="post">
 		<div class="alert alert-info <?=$this->data['hidden']?>" role="alert" id="submitAnswer">
 			<?=$this->data['message']?>
 		</div>
@@ -16,11 +16,16 @@
 		  <input type="text" data-noempty class="form-control" id="inputEmail" value="<?=$this->data['task']['email']?>" rows="7" readonly>
 		  <div class="help-block with-errors"></div>
 		</div>                       
+		<script>
+		tinymce.init({
+		  selector: '#inputText'
+		});
+		</script>			
 		<div class="form-group">
 		  <label for="inputText">Текст задачи</label>
 		  <textarea data-noempty class="form-control" id="inputText" name="text" rows="7" required><?=$this->data['task']['text']?></textarea>
 		  <div class="help-block with-errors"></div>
-		</div>                       
+		</div>           
 		<div class="form-group">
 			<label>Задача выполнена</label>
 			<?php

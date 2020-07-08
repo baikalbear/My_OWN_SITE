@@ -1,10 +1,10 @@
 <?php $this->extend('base') ?>
 
 <?php $this->start('body') ?><br/>
-	<h1 align="center">Задачи</h1>
+	<h1 align="center">Записи</h1>
 	<br/>
-	<button type="button" class="btn btn-success btn-sm" onclick="location.href='/tasks/add'">
-		Добавить задачу
+	<button type="button" class="btn btn-success btn-sm" onclick="location.href='/records/add'">
+		Добавить запись
 	</button>
 	<br/><br/>
 	<div id="postsList"></div>
@@ -25,7 +25,7 @@
 				$new_sortdirection = 'asc';
 			}
 		
-			$links[$column] = "/tasks/?page=" . $this->data['page'] . "&sort=$column&sortdirection=$new_sortdirection";
+			$links[$column] = "/records/?page=" . $this->data['page'] . "&sort=$column&sortdirection=$new_sortdirection";
 		}
 		
 	?>
@@ -69,7 +69,7 @@
 				  <td><?=$status?></td>
 				  <?
 					if(isset($_SESSION['username']) && $_SESSION['username'] == "admin"){
-						?><td><a href="/tasks/edit/?id=<?=$t['id']?>">Изменить</a></td><?
+						?><td><a href="/records/edit/?id=<?=$t['id']?>">Изменить</a></td><?
 					}
 				  ?>
 				</tr>		
