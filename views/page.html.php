@@ -11,6 +11,9 @@
 	?>
 	
 	<?php
+		Заголовок: <?=$t['title']?>
+		<br/>
+		
 		while($t = mysqli_fetch_array($this->data['q'])){?>
 			<a href="http://baikal.net.ru/vaz-oka-11113/fary_i_povoroty/">
 			<div class="block_9 <?=$t['color']?>">

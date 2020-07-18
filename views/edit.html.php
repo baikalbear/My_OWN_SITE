@@ -2,18 +2,18 @@
 
 <?php $this->start('body') ?><br/>
 	<h1 align="center">Редактировать задачу</h1>
-	<form action="/records/edit/?id=<?=$this->data['task']['id']?>" method="post">
+	<form action="/records/edit/?id=<?=$this->data['record']['id']?>" method="post">
 		<div class="alert alert-info <?=$this->data['hidden']?>" role="alert" id="submitAnswer">
 			<?=$this->data['message']?>
 		</div>
 		<div class="form-group">
 		  <label for="inputUsername">Имя пользователя</label>
-		  <input type="text" data-noempty class="form-control" id="inputUsername" value="<?=$this->data['task']['username']?>" readonly>
+		  <input type="text" data-noempty class="form-control" id="inputUsername" value="<?=$this->data['record']['username']?>" readonly>
 		  <div class="help-block with-errors"></div>
 		</div>
 		<div class="form-group">
 		  <label for="inputEmail">Емэйл</label>
-		  <input type="text" data-noempty class="form-control" id="inputEmail" value="<?=$this->data['task']['email']?>" rows="7" readonly>
+		  <input type="text" data-noempty class="form-control" id="inputEmail" value="<?=$this->data['record']['email']?>" rows="7" readonly>
 		  <div class="help-block with-errors"></div>
 		</div>                       
 		<script>
@@ -22,14 +22,29 @@
 		});
 		</script>			
 		<div class="form-group">
-		  <label for="inputText">Текст задачи</label>
-		  <textarea data-noempty class="form-control" id="inputText" name="text" rows="7" required><?=$this->data['task']['text']?></textarea>
+		  <label for="inputText">Заголовок</label>
+		  <input type="text" data-noempty class="form-control" id="inputTitle" name ="title" value="<?=$this->data['record']['title']?>" rows="7">
+		  <div class="help-block with-errors"></div>
+		</div>
+		<div class="form-group">
+		  <label for="inputText">Описание</label>
+		  <textarea data-noempty class="form-control" id="inputDescription" name="description" rows="7" required><?=$this->data['record']['description']?></textarea>
 		  <div class="help-block with-errors"></div>
 		</div>           
 		<div class="form-group">
+		  <label for="inputText">Текст</label>
+		  <textarea data-noempty class="form-control" id="inputText" name="text" rows="7" required><?=$this->data['record']['text']?></textarea>
+		  <div class="help-block with-errors"></div>
+		</div>           
+		<div class="form-group">
+		  <label for="inputText">Уникальное имя</label>
+		  <input type="text" data-noempty class="form-control" id="inputUniqueName" name ="unique_name" value="<?=$this->data['record']['unique_name']?>" rows="7">
+		  <div class="help-block with-errors"></div>
+		</div>
+		<div class="form-group">
 			<label>Задача выполнена</label>
 			<?php
-				if($this->data['task']['status'] == 1){
+				if($this->data['record']['status'] == 1){
 					$status = "checked";
 				} else {
 					$status = "";
@@ -43,7 +58,7 @@
 		</div>
 	</form>
 	
-	<a href="/tasks/">Перейти к списку задач</a><br/>
+	<a href="/records/">Перейти к списку задач</a><br/><br/><br/>
 
 <?php $this->stop('body') ?>
 
@@ -57,11 +72,11 @@
 			}
 			
 			$.ajax({
-				url: "/tasks/changestatus/",
+				url: "/records/changestatus/",
 				type: "POST",
 				dataType: "json",
 				data: {
-					id: <?=$this->data['task']['id']?>,
+					id: <?=$this->data['record']['id']?>,
 					status: status
 				},
 				error: function(data) {

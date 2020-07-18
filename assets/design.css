@@ -21,6 +21,8 @@
 	height:133px;
 	margin-left:40px;
 	margin-top:40px;
+	overflow:hidden;
+	text-overflow: clip;
 	padding: 20px;
 	background: #aaa;
 }

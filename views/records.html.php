@@ -36,7 +36,7 @@
 		  
 		  <th scope="col"><a href="<?=$links['username']?>">Имя пользователя</a></th>
 		  <th scope="col"><a href="<?=$links['email']?>">Email</a></th>
-		  <th scope="col">Текст задачи</th>
+		  <th scope="col">Заголовок записи</th>
 		  <th scope="col"><a href="<?=$links['status']?>">Статус</a></th>
 		  <?
 			if(isset($_SESSION['username']) && $_SESSION['username'] == "admin"){
@@ -65,7 +65,7 @@
 				<tr>
 				  <td><?=$t['username']?></td>
 				  <td><?=$t['email']?></td>
-				  <td><?=$t['text']?></td>
+				  <td><?=$t['title']?></td>
 				  <td><?=$status?></td>
 				  <?
 					if(isset($_SESSION['username']) && $_SESSION['username'] == "admin"){
@@ -78,13 +78,13 @@
 	
 	<div>
 		<?	//Настраиваем пагинатор
-			$tasks_num = $this->data['tasks_num'];
+			$records_num = $this->data['records_num'];
 			
-			if($tasks_num > 0){
-				$pages_num = $tasks_num / 3;
+			if($records_num > 0){
+				$pages_num = $records_num / 3;
 				
 				//Случай, когда страниц не кратное 3 число
-				if($tasks_num % 3 > 0) $pages_num++;
+				if($records_num % 3 > 0) $pages_num++;
 
 				$paginator = "Страницы: ";
 				$pages = "Страницы: ";
@@ -94,7 +94,7 @@
 					}else{
 						$num_style = "text-decoration:underline;font-weight:normal;";
 					}
-					$paginator .= "<a href=\"/tasks/?page=$i&sort={$this->data['sort']}&sortdirection={$this->data['sortdirection']}\" style=\"$num_style\">$i</a> | ";
+					$paginator .= "<a href=\"/records/?page=$i&sort={$this->data['sort']}&sortdirection={$this->data['sortdirection']}\" style=\"$num_style\">$i</a> | ";
 				}
 			
 				//Подрежу вертикальный разделитель в конце
@@ -106,6 +106,8 @@
 		<?=$paginator?>
 	</div>
     
+	<br/>
+	<a href="/">Перейти на главную</a>
 <?php $this->stop('body') ?>
 
 <?php $this->start('script') ?>

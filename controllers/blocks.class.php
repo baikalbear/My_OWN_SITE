@@ -11,7 +11,7 @@ class Blocks {
 
 	function defaultAction(){
 		$q = mysqli_query($this->db_link, "
-				select `blocks`.`color` as `color`, `records`.`title` as `title`, `records`.`text` as `text`
+				select `blocks`.`color` as `color`, `records`.`id` as `record_id`, `records`.`title` as `title`, `records`.`description` as `description`
 				FROM `blocks`
 				left join records_blocks on blocks.id=records_blocks.block_id
 				left join records on records.id=records_blocks.record_id
@@ -36,7 +36,7 @@ class Blocks {
 			}
 			
 			//Если этот код будет выполнен, значит ошибок валидации не было
-			mysqli_query($this->db_link, "INSERT INTO `tasks` SET username='" . $_POST['username'] . "', email='" . $_POST['email'] . "', text='" . htmlspecialchars($_POST['text']) . "', status=0, text_changed=0");
+			mysqli_query($this->db_link, "INSERT INTO `records` SET username='" . $_POST['username'] . "', email='" . $_POST['email'] . "', text='" . htmlspecialchars($_POST['text']) . "', status=0, text_changed=0");
 			return $this->view->load('add_ok');
 		//Случай, когда форма ещё не была отправлена
 		}else{
@@ -54,9 +54,9 @@ class Blocks {
 		//Теперь получаю элемент из базы в виде ассоц. массива
 		$id = $_GET['id'];
 		
-		$q = mysqli_query($this->db_link, "SELECT * FROM `tasks` WHERE `id`=" . $id);
+		$q = mysqli_query($this->db_link, "SELECT * FROM `records` WHERE `id`=" . $id);
 		
-		$task = mysqli_fetch_array($q);
+		$record = mysqli_fetch_array($q);
 
 		//Форма уже отправлена?
 		if(isset($_POST['text'])){
@@ -67,28 +67,28 @@ class Blocks {
 				header("location: /signin");
 			} else {
 				//Перезаписываем значение в базе, только если текст отличается
-				if($task['text'] != $_POST['text']){
-					mysqli_query($this->db_link, "UPDATE `tasks` SET `text`='" . htmlspecialchars($_POST['text']) . "', `text_changed`=1 WHERE id=" . $id);
+				if($record['text'] != $_POST['text']){
+					mysqli_query($this->db_link, "UPDATE `records` SET `text`='" . htmlspecialchars($_POST['text']) . "', `text_changed`=1 WHERE id=" . $id);
 				}
 
 				//Для вывода сообщения используем хранение в COOKIE
-				$_SESSION['task_edited'] = true;
+				$_SESSION['record_edited'] = true;
 				
 				//Переадресация
-				header("location: /tasks/edit/?id=$id");
+				header("location: /records/edit/?id=$id");
 			}
 		} else {
 			//Нет
-			if(isset($_SESSION['task_edited']) && $_SESSION['task_edited'] == true){
+			if(isset($_SESSION['record_edited']) && $_SESSION['record_edited'] == true){
 				$hidden = "";
 				$message = "Задача успешно сохранена";
-				unset($_SESSION['task_edited']);
+				unset($_SESSION['record_edited']);
 			} else {
 				$hidden = "hidden";
 				$message = "";
 			}
 			
-			return $this->view->load('edit', ['task' => $task, 'hidden' => $hidden, 'message' => $message]);
+			return $this->view->load('edit', ['record' => $record, 'hidden' => $hidden, 'message' => $message]);
 		}
 	}
 	
@@ -102,7 +102,7 @@ class Blocks {
 		$status = $_POST['status'];
 		
 		//Обновляю статус в БД
-		mysqli_query($this->db_link, "UPDATE `tasks` SET `status`='$status' WHERE id=" . $id);
+		mysqli_query($this->db_link, "UPDATE `records` SET `status`='$status' WHERE id=" . $id);
 		
 		//Формирую ответ JSON встроенными средствами PHP
 		return json_encode( ['result' => 'success']);

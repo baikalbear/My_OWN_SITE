@@ -38,9 +38,9 @@ class Records {
 		
 		//Посчитаю сколько всего записей
 		$q1 = mysqli_query($this->db_link, "select * from `records`");
-		$tasks_num = mysqli_num_rows($q1);
+		$records_num = mysqli_num_rows($q1);
 
-		return $this->view->load('records', ['q' => $q, 'tasks_num' => $tasks_num, 'sort' => $sort, 'page' => $page, 'sortdirection' => $sortdirection]);
+		return $this->view->load('records', ['q' => $q, 'records_num' => $records_num, 'sort' => $sort, 'page' => $page, 'sortdirection' => $sortdirection]);
 	}
 	
 	function addAction(){
@@ -79,7 +79,7 @@ class Records {
 		
 		$q = mysqli_query($this->db_link, "SELECT * FROM `records` WHERE `id`=" . $id);
 		
-		$task = mysqli_fetch_array($q);
+		$record = mysqli_fetch_array($q);
 
 		//Форма уже отправлена?
 		if(isset($_POST['text'])){
@@ -90,28 +90,39 @@ class Records {
 				header("location: /signin");
 			} else {
 				//Перезаписываем значение в базе, только если текст отличается
-				if($task['text'] != $_POST['text']){
-					mysqli_query($this->db_link, "UPDATE `records` SET `text`='" . htmlspecialchars($_POST['text']) . "', `text_changed`=1 WHERE id=" . $id);
+				if($record['title'] != $_POST['title']){
+					mysqli_query($this->db_link, "UPDATE `records` SET `title`='" . htmlspecialchars($_POST['title']) . "', `text_changed`=1 WHERE id=" . $id);
 				}
 
+				if($record['description'] != $_POST['description']){
+					mysqli_query($this->db_link, "UPDATE `records` SET `description`='" . htmlspecialchars($_POST['description']) . "', `text_changed`=1 WHERE id=" . $id);
+				}
+				
+				if($record['text'] != $_POST['text']){
+					mysqli_query($this->db_link, "UPDATE `records` SET `text`='" . htmlspecialchars($_POST['text']) . "', `text_changed`=1 WHERE id=" . $id);
+				}				
+
+				if($record['unique_name'] != $_POST['unique_name']){
+					mysqli_query($this->db_link, "UPDATE `records` SET `unique_name`='" . htmlspecialchars($_POST['unique_name']) . "', `text_changed`=1 WHERE id=" . $id);
+				}
 				//Для вывода сообщения используем хранение в COOKIE
-				$_SESSION['task_edited'] = true;
+				$_SESSION['record_edited'] = true;
 				
 				//Переадресация
 				header("location: /records/edit/?id=$id");
 			}
 		} else {
 			//Нет
-			if(isset($_SESSION['task_edited']) && $_SESSION['task_edited'] == true){
+			if(isset($_SESSION['record_edited']) && $_SESSION['record_edited'] == true){
 				$hidden = "";
 				$message = "Задача успешно сохранена";
-				unset($_SESSION['task_edited']);
+				unset($_SESSION['record_edited']);
 			} else {
 				$hidden = "hidden";
 				$message = "";
 			}
 			
-			return $this->view->load('edit', ['task' => $task, 'hidden' => $hidden, 'message' => $message]);
+			return $this->view->load('edit', ['record' => $record, 'hidden' => $hidden, 'message' => $message]);
 		}
 	}
 	

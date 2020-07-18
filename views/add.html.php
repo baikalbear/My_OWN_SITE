@@ -2,7 +2,7 @@
 
 <?php $this->start('body') ?><br/>
 	<h1 align="center">Добавить задачу</h1>
-	<form id="addPostForm" action="/tasks/add" method="post">
+	<form id="addPostForm" action="/records/add" method="post">
 		<div class="alert alert-danger <?=$this->data['hidden']?>" role="alert" id="submitAnswer">
 			<?=$this->data['error']?>
 		</div>
@@ -26,7 +26,7 @@
 		</div>
 	</form>
 	
-	<a href="/tasks/">Перейти к списку задач</a><br/>
+	<a href="/records/">Перейти к списку задач</a><br/>
 <?php $this->stop('body') ?>
 
 <?php $this->start('script') ?>
