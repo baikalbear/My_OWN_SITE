@@ -8,11 +8,33 @@
 	<span class="third_header">Устройство, фишка "мама", подключение проводов, принцип работы</span>
  </h1>
 
-Выключатель имеет 6 контактов слева направо от четвёртого до седьмого.<br/>Контакты 5 и 6 отсутствуют - но об этом дальше.<br/>
-Нарисовал, как смог. Вроде похоже...<br/><br/>Нажимайте на фотки, чтобы они стали больше.<br/>
+Кнопка аварийной сигнализации в ОКЕ выглядит так:<br/>
+<a href="./vaz11113-vykluchatel-avariynoi-signalizacii-fishka1-big.jpg" target="_blank"><img src="vaz11113-vykluchatel-avariynoi-signalizacii-fishka1.jpg" style="margin-top:20px;margin-left:0px;margin-bottom:20px;"/></a>
+
+<br/>
+Фото кнопки с обратной стороны смотрите ниже.<br/>
+Для удобства я сделал отдельную картинку, чтобы видеть, в каком порядке контакты расположены.<br/>
+<a href="./vaz11113-vykluchatel-avariynoi-signalizacii-fishka2-big.jpg" target="_blank"><img src="vaz11113-vykluchatel-avariynoi-signalizacii-fishka2.jpg" style="margin-top:20px;margin-left:0px;margin-bottom:20px;"/></a>
 <img src="vaz11113-vykluchatel-avariynoi-signalizacii.png" style="margin-top:20px;margin-left:100px;margin-bottom:20px;"/>
-<a href="./vaz11113-vykluchatel-avariynoi-signalizacii-fishka1-big.jpg" target="_blank"><img src="vaz11113-vykluchatel-avariynoi-signalizacii-fishka1.jpg" style="margin-top:20px;margin-left:100px;margin-bottom:20px;"/></a>
-<a href="./vaz11113-vykluchatel-avariynoi-signalizacii-fishka2-big.jpg" target="_blank"><img src="vaz11113-vykluchatel-avariynoi-signalizacii-fishka2.jpg" style="margin-top:20px;margin-left:100px;margin-bottom:20px;"/></a>
+
+<br/>Да, деталь действительно очень замысловатая, и контакты расположены так, чтобы нечаянно не с
+<br/>Порядок взят с оригинальной фотки и если вы её увеличите, то всё сами увидите.<br/>
+
+
+<br/>Почему контакты пронумерованы именно так - я не знаю,<br/> как и не знаю, на что опирался конструктор при их нумерации.
+<br/><br/>Контакты 5 и 6 отсутствуют здесь на кнопке, как видно из фото.
+<br/><br/>
+
+<h1>Фишка "мама"</h1>
+Теперь посмотрим на фишку "мама", в которую вставляется кнопка - фото ниже.<br/>
+На этой фишке 5ый контакт есть, в отличие от самой кнопки.<br/>
+А вот контакт 6 отсуствует и здесь.<br/><br/>
+<a href="./vaz11113-vykluchatel-avariynoi-signalizacii-fishka-mama-big.jpg" target="_blank"><img src="vaz11113-vykluchatel-avariynoi-signalizacii-fishka-mama.jpg"/></a><br/><br/>
+
+
+
+
+
 <div></div>
 Честно говоря, других таких удивительных деталей я в ОКЕ не встречал. Пожалуй, эта самая удивительная из тех, что я видел...<br/>
 <br/>Не менее удивительно, как она работает! Её работу я разбираю ниже.<br/><br/>
@@ -25,7 +47,7 @@
 
 <h3>Фишка "мама"</h3>
 Итак, вот она виновница такой странной нумерации - это фишка "мама". <br/><br/>
-<a href="./vaz11113-vykluchatel-avariynoi-signalizacii-fishka-mama-big.jpg" target="_blank"><img src="vaz11113-vykluchatel-avariynoi-signalizacii-fishka-mama.jpg"/></a><br/><br/>
+
 Видно, что контакт 6 отсутствует - если увеличить фотку, то можно разобрать цифру 5 на соседнем контакте. А напротив контакта 1 ответный к фишке "папе" выступ.<br/><br/>
 Но ведь в фишке "папа" есть всего 6 контактов. Какой же из них не подключается? Об этом можно догадаться из нумерации фишки "папа". Это контакт 5.<br/><br/>
 На самом делел контакт нужен, но это непонятное инженерное решение нужно вот для чего - на контакт 5 приходит два тонких черных провода в "маме" и они обжаты 

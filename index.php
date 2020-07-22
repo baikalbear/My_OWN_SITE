@@ -4,7 +4,7 @@
 
 <div style="height:5px;"></div>
 
-<h1 style="font-size:14pt;">Новое! Reverse Engineering</h1>
+<h1 style="font-size:14pt;">Новое!<!-- Reverse Engineering--></h1>
 <div style="height:0px;"></div>
 <span style="color:#c00">*** ВАЗ ОКА 11113 ***</span>
 
@@ -19,6 +19,10 @@
 
 <div style="height:5px;"></div>
 <a href="/vaz-oka-11113/knopka-far/">Кнопка фар</a> - устройство, фишка "мама", подключение проводов, принцип работы, идеи по доработке<br/><br/>
+
+<div style="height:15px;"></div>
+<h1 style="font-size:14pt;">Радиодетали</h1>
+<a href="/radio/ot-deda/">То, что досталось мне от деда</a>
 
 <div style="height:15px;"></div>
 <h1 style="font-size:14pt;">Слово автора</h1>
