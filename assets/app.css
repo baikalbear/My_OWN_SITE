@@ -2,3 +2,13 @@ img.post-image{
     width:64px;
     height:64px;
 }
+
+#inputText{
+	height:400px;
+}
+
+#submitAnswer{
+	margin-top:25px;
+}
+
+h2{padding-top:10px;}

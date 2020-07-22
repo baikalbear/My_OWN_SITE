@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>BeeJee test-day app</title>
+    <title>Байкал.net.ru - мастерство, техника и многое другое</title>
     <!-- Link CSS files -->
     <?php $this->assetCSS('bootstrap.min.css') ?>
     <?php $this->assetCSS('app.css') ?>

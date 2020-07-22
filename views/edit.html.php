@@ -1,7 +1,7 @@
 <?php $this->extend('base') ?>
 
 <?php $this->start('body') ?><br/>
-	<h1 align="center">Редактировать задачу</h1>
+	<h1 align="center">Редактировать запись</h1>
 	<form action="/records/edit/?id=<?=$this->data['record']['id']?>" method="post">
 		<div class="alert alert-info <?=$this->data['hidden']?>" role="alert" id="submitAnswer">
 			<?=$this->data['message']?>
@@ -58,7 +58,7 @@
 		</div>
 	</form>
 	
-	<a href="/records/">Перейти к списку задач</a><br/><br/><br/>
+	<a href="/records/">Перейти к списку записей</a><br/><br/><br/>
 
 <?php $this->stop('body') ?>
 

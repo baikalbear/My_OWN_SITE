@@ -115,7 +115,7 @@ class Records {
 			//Нет
 			if(isset($_SESSION['record_edited']) && $_SESSION['record_edited'] == true){
 				$hidden = "";
-				$message = "Задача успешно сохранена";
+				$message = "Запись успешно сохранена";
 				unset($_SESSION['record_edited']);
 			} else {
 				$hidden = "hidden";

@@ -3,6 +3,7 @@
 	class MVC{
 		//Выделю переменную для HTML-потока, обращаюсь только через функции класса, поэтому private
 		private $html_flow;
+		private $url_pieces;
 		
 		function __construct(){
 			
@@ -12,6 +13,9 @@
 		function processUrl(){
 			//Беру url запроса, пришедшего на веб-сервер и разделяю его на части по слэшу
 			$parsed_url = explode("/", $_SERVER['REQUEST_URI']);
+			
+			//Сохраню для обращения из вне через getter
+			$this->url_pieces = $parsed_url;
 			
 			//Первая часть после доменного имени и до второго слэша - это название класса с функционалом предметной области.			
 			$class_name = $parsed_url[1];
@@ -44,6 +48,10 @@
 				$action = $action_word . "Action";
 				$this->html_flow = $instance->$action();
 			}
+		}
+		
+		public function getPiece($num){
+			return $this->url_pieces[$num];
 		}
 		
 		//Отдаю HTML-поток в вызывающий код
