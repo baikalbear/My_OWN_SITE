@@ -1,6 +1,7 @@
 <?php $this->extend('base') ?>
 
-<?php $this->start('body') ?><br/>
+<?php $this->start('body') ?>
+	<br/><br/><a href="/records/">Перейти к списку записей</a><br/>
 	<h1 align="center">Редактировать запись</h1>
 	<form action="/records/edit/?id=<?=$this->data['record']['id']?>" method="post">
 		<div class="alert alert-info <?=$this->data['hidden']?>" role="alert" id="submitAnswer">

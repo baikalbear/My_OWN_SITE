@@ -1,51 +1,24 @@
 <?php
 //Класс предметной области "Задачи"
-class Records {
+class Tags {
 	private $db_link;	
 
 	function __construct(){
 		$this->db_link = mysqli_connect($GLOBALS['db_host'], $GLOBALS['db_user'], $GLOBALS['db_pass'], $GLOBALS['db_base']);
+		
 		//Устанавливаю кодировку работы с БД
 		mysqli_query($this->db_link, "set names utf8mb4");
+		
 		//masterba_beejee
 		$this->view = new View();
 	}
 	//Построит HTML всех имеющихся в базе задач
 	function defaultAction(){
-		//Определяет количество записей на странице
-		$records_per_page = 20;
-		//Настрою сортировку
-		if(isset($_GET['sort'])) {
-			$sort = $_GET['sort'];
-		}else{
-			$sort = 'username';
-		}
-		
-		//Настрою направление сортировки
-		if(isset($_GET['sortdirection'])) {
-			$sortdirection = $_GET['sortdirection'];
-		}else{
-			$sortdirection = 'asc';
-		}
+		$q = mysqli_query($this->db_link, "select * from `tags` order by `name`");
 
-		//Настрою пагинацию
-		if(isset($_GET['page'])){
-			$page = $_GET['page'];
-		}else{
-			$page = 1;
-		}
-		
-		//Настрою отбор для SQL
-		$limit_from = ($page - 1) * $records_per_page;
-		
-		$q = mysqli_query($this->db_link, "select * from `records` order by `$sort` $sortdirection limit $limit_from, $records_per_page");
-		
-		//Посчитаю сколько всего записей
-		$q1 = mysqli_query($this->db_link, "select * from `records`");
-		$records_num = mysqli_num_rows($q1);
+		$tags_num = mysqli_num_rows($q);
 
-		return $this->view->load('records', ['q' => $q, 'records_num' => $records_num, 'sort' => $sort, 'page' => $page, 'sortdirection' => $sortdirection,
-												'records_per_page' => $records_per_page]);
+		return $this->view->load('tags', ['q' => $q]);
 	}
 	
 	function addAction(){

@@ -2,7 +2,8 @@
 
 <?php $this->start('body') ?><br/>
 	<?$r=$this->data['r']?>
-	<h1 align="center">Мастер.Байкал</h1>
+	<h1 align="center"><a href="/" style="color:#000;">Baikal.Net.Ru</a></h1>
+	<div align="center" style="font-size:12pt;padding-bottom:20px;">Мастерство, техника и многое другое</div>
 	<?php
 		if(isset($_SESSION['username']) || $_SESSION['username'] == "admin"){?>
 			<div style="padding-left:0px;">

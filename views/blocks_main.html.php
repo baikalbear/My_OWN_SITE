@@ -6,7 +6,9 @@
 	<?php
 		if(isset($_SESSION['username']) || $_SESSION['username'] == "admin"){?>
 			<div style="padding-left:40px;">
-				<a href="/records/">Смотреть все записи</a>
+				<a href="/records/">Записи</a>
+				<span style="padding-left:30px;"></span>
+				<a href="/tags/">Теги</a>
 			</div>
 		<?}
 	?>

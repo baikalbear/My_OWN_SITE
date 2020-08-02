@@ -79,12 +79,13 @@
 	<div>
 		<?	//Настраиваем пагинатор
 			$records_num = $this->data['records_num'];
+			$records_per_page = $this->data['records_per_page'];
 			
 			if($records_num > 0){
-				$pages_num = $records_num / 3;
+				$pages_num = $records_num / $records_per_page;
 				
 				//Случай, когда страниц не кратное 3 число
-				if($records_num % 3 > 0) $pages_num++;
+				if($records_num % $records_per_page > 0) $pages_num++;
 
 				$paginator = "Страницы: ";
 				$pages = "Страницы: ";
