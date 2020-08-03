@@ -6,7 +6,7 @@ class Records {
 	function __construct(){
 		$this->db_link = mysqli_connect($GLOBALS['db_host'], $GLOBALS['db_user'], $GLOBALS['db_pass'], $GLOBALS['db_base']);
 		//Устанавливаю кодировку работы с БД
-		mysqli_query($this->db_link, "set names utf8mb4");
+		mysqli_query($this->db_link, "set names " . $GLOBALS['db_encoding']);
 		//masterba_beejee
 		$this->view = new View();
 	}

@@ -17,35 +17,38 @@
 			//Сохраню для обращения из вне через getter
 			$this->url_pieces = $parsed_url;
 			
-			//Первая часть после доменного имени и до второго слэша - это название класса с функционалом предметной области.			
-			$class_name = $parsed_url[1];
+			//Записываю значение первого и второго кусочков URL в отдельные переменные, чтобы было проще обращаться с ними			
+			$piece1 = $parsed_url[1];
+			$piece2 = $parsed_url[2];
 			
-			//Второе слово - действие
-			$action_word = $parsed_url[2];
-			
-			
-			//Поведение для главной страницы
-			if($class_name== ""){
-				$class_name = "blocks";
-			}else{
-				//Делаю первую букву большой и вызываю класс. А для того, чтобы не вызвать ничего "лишнего" проверяю, что это слово строка.
-				if (!preg_match('/^[a-z]{1,30}$/', $class_name)){
-					//Иначе падаю в fatal error.
-					echo "Fatal error on this operation.";
-					exit;
-				}
+			//Синтаксическая проверка первого и второго кусочков URL
+			if (!preg_match('/^[a-z]{0,30}$/', $piece1) || !preg_match('/^[a-z\_\-]{0,100}$/', $piece2)){
+				echo "Check url fatal error.";
+				exit;
 			}
 						
-			//Если я здесь, то проверка прошла успешно и можно вызывать класс. Проверять существует ли имя класса уже не буду, чтобы не усложнять...
-			$cf_name = ucfirst($class_name);
-			$instance = new $cf_name();
+			//Маршрутизация
+			if($piece1 == ""){
+				$cf_name = "Blocks";
+			} else {
+				//Определяю имя класса, сделав первую букву большой
+				$cf_name = ucfirst($piece1);
+			}
 
-			if($action_word == "" || !preg_match('/^[a-z]{1,30}$/', $action_word)){
+			//Создаю экземпляр класса
+			$instance = new $cf_name();
+			
+			if($piece2 == ""){
 				//Стандартное действие default если действие не указано явно
 				$this->html_flow = $instance->defaultAction();
 			}else{
+				if ($piece1 == "articles"){
+					$action_main_word = "show";
+				} else {
+					$action_main_word = $piece2;
+				}
 				//Случай, когда действие указано явно
-				$action = $action_word . "Action";
+				$action = $action_main_word . "Action";
 				$this->html_flow = $instance->$action();
 			}
 		}

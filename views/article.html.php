@@ -7,11 +7,13 @@
 	<?php
 		if(isset($_SESSION['username']) || $_SESSION['username'] == "admin"){?>
 			<div style="padding-left:0px;">
-				<a href="/records/edit/?id=<?=$r['record_id']?>" style="margin-left:5px;padding:1px 3px;font-size:9pt;background:#aaa;">ред</a>
+				<a href="/" style="margin-left:5px;padding:1px 5px;font-size:9pt;background:#20B2AA;">на_главную</a>
 				<span style="padding-left:10px;">&nbsp;</span>
-				<a href="/records/" style="margin-left:5px;padding:1px 3px;font-size:9pt;background:#98FB98;">все</a>
+				<a href="/records/" style="margin-left:5px;padding:1px 5px;font-size:9pt;background:#98FB98;">все</a>
 				<span style="padding-left:10px;">&nbsp;</span>
-				<a href="/" style="margin-left:5px;padding:1px 3px;font-size:9pt;background:#20B2AA;">на_главную</a>
+				<a href="/records/edit/?id=<?=$r['record_id']?>" style="margin-left:5px;padding:1px 5px;font-size:9pt;background:#aaa;">ред.</a>
+				<span style="padding-left:10px;">&nbsp;</span>
+				
 			</div>
 		<?}
 	?>
