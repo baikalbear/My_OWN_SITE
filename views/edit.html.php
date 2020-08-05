@@ -5,7 +5,7 @@
 	<div class="control1">
 		<a href="/" class="red1">Главная</a>
 		<a href="/records/" class="red2">Записи</a>
-		<a href="/articles/<?=$this->data['record']['unique_name']?>" class="red3">Запись на сайте</a>
+		<a href="/articles/<?=$this->data['record']['unique_name']?>" class="rda1">=на сайте=</a>
 	</div>	
 	<!--END-->
 	

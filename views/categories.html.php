@@ -1,12 +1,12 @@
 <?php $this->extend('base') ?>
 
-<?php $this->start('body') ?><br/>
+<?php $this->start('body') ?>
+
 	<?php
 		if(isset($_SESSION['username']) || $_SESSION['username'] == "admin"){?>
 			<!--BEGIN: Управление-->		
 			<div class="control1">
 				<a href="/" class="red1">Главная</a>
-				<a href="/records/" class="red2">Записи</a>
 			</div>
 			<!--END-->			
 		<?}

@@ -5,8 +5,9 @@
 	<?php
 		if(isset($_SESSION['username']) || $_SESSION['username'] == "admin"){?>
 			<div class="control2">
-				<a href="/records/" class="red1">Записи</a>
-				<a href="/categories/" class="red2">Категории</a>
+				<a href="/" class="red1">Главная</a>
+				<a href="/records/" class="red2">Записи</a>
+				<a href="/categories/" class="red3">Категории</a>
 			</div>
 		<?}
 	?>
