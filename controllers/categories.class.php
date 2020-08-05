@@ -8,6 +8,6 @@ class Categories extends BaseController  {
 
 		$tags_num = mysqli_num_rows($q);
 
-		return $this->view->load('categories', ['q' => $q]);
+		return $this->view->load('categories', ['q' => $q, 'auth'=>$this->auth]);
 	}	
 }

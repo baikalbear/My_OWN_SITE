@@ -16,6 +16,6 @@ class Articles  extends BaseController {
 				
 		$r = mysqli_fetch_array($q);
 				
-		return $this->view->load('article', ['r'=>$r]);
+		return $this->view->load('article', ['r'=>$r, 'auth'=>$this->auth]);
 	}
 }

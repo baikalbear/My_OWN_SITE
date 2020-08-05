@@ -49,3 +49,10 @@ h1.control{
 	background:#F08080;
 }
 
+.mred{
+	position:absolute;
+	margin:0 0 0 5px;
+	padding:0px 3px;
+	font-size:9pt;
+	background:#FF7F50;
+}

@@ -37,7 +37,7 @@ class Records extends BaseController {
 		$records_num = mysqli_num_rows($q1);
 
 		return $this->view->load('records', ['q' => $q, 'records_num' => $records_num, 'sort' => $sort, 'page' => $page, 'sortdirection' => $sortdirection,
-												'records_per_page' => $records_per_page]);
+												'records_per_page' => $records_per_page, 'auth'=>$this->auth]);
 	}
 	
 	function addAction(){
@@ -60,7 +60,7 @@ class Records extends BaseController {
 			return $this->view->load('add_ok');
 		//Случай, когда форма ещё не была отправлена
 		}else{
-			return $this->view->load('add', ['hidden' => 'hidden', 'username'=>"", 'email'=>"", 'text'=>""]);
+			return $this->view->load('add', ['hidden' => 'hidden', 'username'=>"", 'email'=>"", 'text'=>"", 'auth'=>$this->auth]);
 		}
 	}
 	
@@ -82,7 +82,7 @@ class Records extends BaseController {
 		if(isset($_POST['text'])){
 			//Да
 			//Проверка входа при сохранении
-			if(!isset($_SESSION['username']) || $_SESSION['username'] != "admin"){
+			if(!$this->auth->isAdmin()){
 				//Просим авторизоваться
 				header("location: /signin");
 			} else {
@@ -119,13 +119,13 @@ class Records extends BaseController {
 				$message = "";
 			}
 			
-			return $this->view->load('edit', ['record' => $record, 'hidden' => $hidden, 'message' => $message]);
+			return $this->view->load('edit', ['record' => $record, 'hidden' => $hidden, 'message' => $message, 'auth'=>$this->auth]);
 		}
 	}
 	
 	function changestatusAction(){
 		//Проверка авторизации
-		if(!isset($_SESSION['username'])){
+		if(!$this->auth->isAdmin()){
 			return json_encode( ['result' => 'non-authorized']);
 		}
 		

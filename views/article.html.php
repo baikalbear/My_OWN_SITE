@@ -5,15 +5,13 @@
 	<?$r=$this->data['r']?>
 
 	<!--BEGIN: Управление-->
-	<?php
-		if(isset($_SESSION['username']) || $_SESSION['username'] == "admin"){?>
-			<div class="control1">
-				<a href="/" class="red1">Главная</a>
-				<a href="/records/" class="red2">Записи</a>
-				<a href="/records/edit/?id=<?=$r['record_id']?>" class="rda1">=ред=</a>
-			</div>
-		<?}
-	?>
+	<?if($this->auth->isAdmin()){?>
+		<div class="control1">
+			<a href="/" class="red1">Главная</a>
+			<a href="/records/" class="red2">Записи</a>
+			<a href="/records/edit/?id=<?=$r['record_id']?>" class="rda1">=ред=</a>
+		</div>
+	<?}?>
 	<!--END-->
 		
 	<h2><?=$r['title']?></h2>

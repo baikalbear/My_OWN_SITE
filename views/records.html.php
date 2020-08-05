@@ -49,11 +49,9 @@
 		  <th scope="col"><a href="<?=$links['email']?>">Email</a></th>
 		  <th scope="col">Заголовок записи</th>
 		  <th scope="col"><a href="<?=$links['status']?>">Статус</a></th>
-		  <?
-			if(isset($_SESSION['username']) && $_SESSION['username'] == "admin"){
-				?><th>Действие</th><?
-			}
-		  ?>
+		  <?if($this->auth->isAdmin()){?>
+				<th>Действие</th>
+		  <?}?>
 		</tr>
 	  </thead>
 	  <tbody>
@@ -78,11 +76,9 @@
 				  <td><?=$t['email']?></td>
 				  <td><?=$t['title']?></td>
 				  <td><?=$status?></td>
-				  <?
-					if(isset($_SESSION['username']) && $_SESSION['username'] == "admin"){
-						?><td><a href="/records/edit/?id=<?=$t['id']?>">Изменить</a></td><?
-					}
-				  ?>
+				  <?if($this->auth->isAdmin()){?>
+						<td><a href="/records/edit/?id=<?=$t['id']?>">Изменить</a></td>
+				  <?}?>
 				</tr>		
 		<?}?>
 	</table>

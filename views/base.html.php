@@ -58,11 +58,10 @@
 		<!--BEGIN: Панель авторизации-->
 		<div style="width:100%;text-align:right;margin-top:15px;">
 			<a href="/">На главную</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<?php
-			if(isset($_SESSION['username']) && $_SESSION['username'] == "admin"){?>
-				admin <a href="/signout/" style="margin-left:25px;">Выйти</a>	
+			<?if($this->auth->isAdmin()){?>
+				<?=$_SESSION['username']?> <a href="/signout/" style="margin-left:25px;">Выйти</a>	
 			<?}else{?>
-					<a href="/signin/">Войти</a>
+				<a href="/signin/">Войти</a>
 			<?}?>
 		</div>
 		<!--END-->	

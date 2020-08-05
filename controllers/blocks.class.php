@@ -1,7 +1,6 @@
 <?php
 class Blocks extends BaseController {
 
-
 	function defaultAction(){
 		$q = mysqli_query($this->db_link, "
 				select `blocks`.`color` as `color`, `records`.`id` as `record_id`, `records`.`title` as `title`, `records`.`description` as `description`,
@@ -16,6 +15,6 @@ class Blocks extends BaseController {
 				FROM `categories`
 				order by `id` asc");		
 		
-		return $this->view->load('main', ['q'=>$q, 'q1'=>$q1]);
+		return $this->view->load('main', ['q'=>$q, 'q1'=>$q1, 'auth'=>$this->auth]);
 	}
 }

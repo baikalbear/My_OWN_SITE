@@ -1,7 +1,7 @@
 <?php $this->extend('base') ?>
 
 <?php $this->start('body') ?><br/>
-	<h1 align="center">Вход</h1>
+	<h1 align="center" class="control">Вход</h1>
 	<form id="addPostForm" action="/signin" method="post">
 		<div class="alert alert-danger <?=$this->data['hidden']?>" role="alert" id="submitAnswer">
 			<?=$this->data['error']?>

@@ -2,15 +2,13 @@
 
 <?php $this->start('body') ?>
 
-	<?php
-		if(isset($_SESSION['username']) || $_SESSION['username'] == "admin"){?>
-			<!--BEGIN: Управление-->		
-			<div class="control1">
-				<a href="/" class="red1">Главная</a>
-			</div>
-			<!--END-->			
-		<?}
-	?>	
+	<?if($this->auth->isAdmin()){?>
+		<!--BEGIN: Управление-->		
+		<div class="control1">
+			<a href="/" class="red1">Главная</a>
+		</div>
+		<!--END-->			
+	<?}?>	
 	
 	<h1 align="center" class="control">Категории</h1>
 	

@@ -2,15 +2,13 @@
 
 <?php $this->start('body') ?>
 	<!--BEGIN: Управление-->
-	<?php
-		if(isset($_SESSION['username']) || $_SESSION['username'] == "admin"){?>
-			<div class="control2">
-				<a href="/" class="red1">Главная</a>
-				<a href="/records/" class="red2">Записи</a>
-				<a href="/categories/" class="red3">Категории</a>
-			</div>
-		<?}
-	?>
+	<?if($this->auth->isAdmin()){?>
+		<div class="control2">
+			<a href="/" class="red1">Главная</a>
+			<a href="/records/" class="red2">Записи</a>
+			<a href="/categories/" class="red3">Категории</a>
+		</div>
+	<?}?>
 	<!--END-->
 	
 	<!--BEGIN: Навигация-->
@@ -31,8 +29,8 @@
 			<div class="block_design <?=$t['color']?>">
 				<div>
 					<span style="font-size:11pt;color:#222;"><?=$t['title']?></span>
-					<?if(isset($_SESSION['username']) || $_SESSION['username'] == "admin"){?>
-						<a href="/records/edit/?id=<?=$t['record_id']?>" style="margin-left:5px;padding:1px 5px;font-size:9pt;background:#aaa;">ред.</a>
+					<?if($this->auth->isAdmin()){?>
+						<a href="/records/edit/?id=<?=$t['record_id']?>" class="mred">*ред*</a>
 					<?}?>
 				</div>
 				<div style="margin-top:5px;font-size:10pt;color:#222;"><?=htmlspecialchars_decode ($t['description'])?></div>
