@@ -1,8 +1,19 @@
 <?php $this->extend('base') ?>
 
 <?php $this->start('body') ?><br/>
-	<h1 align="center">Записи</h1>
+	<!--BEGIN: Управление-->		
+	<div class="control1">
+		<a href="/" class="red1">Главная</a>
+		<a href="/records/" class="red2">Записи</a>	
+	</div>
+	<!--END-->
+	
+	<!--BEGIN: Заголовок страницы-->
+	<h1 align="center" class="control">Записи</h1>
+	<!--END-->
+	
 	<br/>
+	
 	<button type="button" class="btn btn-success btn-sm" onclick="location.href='/records/add'">
 		Добавить запись
 	</button>

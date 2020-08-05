@@ -3,14 +3,17 @@
 <?php $this->start('body') ?><br/>
 	<?php
 		if(isset($_SESSION['username']) || $_SESSION['username'] == "admin"){?>
-			<div style="padding-left:0px;margin-bottom:20px;">
-				<a href="/" class="underlined">Главная</a>
-				<span style="padding-left:30px;"></span>
-				<a href="/records/" class="underlined">Записи</a>
+			<!--BEGIN: Управление-->		
+			<div class="control1">
+				<a href="/" class="red1">Главная</a>
+				<a href="/records/" class="red2">Записи</a>
 			</div>
+			<!--END-->			
 		<?}
 	?>	
-	<h1 align="center">Категории</h1>
+	
+	<h1 align="center" class="control">Категории</h1>
+	
 	<br/>
 
 	<?php

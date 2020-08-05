@@ -8,7 +8,7 @@
 .block_design{
 	float:left;
 	width:320px;
-	height:160px;
+	height:170px;
 	margin-left:40px;
 	margin-top:20px;
 	margin-bottom:20px;
@@ -21,13 +21,6 @@
 .inner_block{
 	width:227px;
 	height:93px;
-}
-
-.red1, .red2, .red3, .red4, .red5 {
-	margin-right:15px;
-	padding:1px 5px;
-	font-size:9pt;
-	background:#666;
 }
 
 h1.logo1{
@@ -48,14 +41,3 @@ a.nav1{
 	text-decoration:underline;
 }
 
-.red1{
-	background:#20B2AA;
-}
-
-.red2{
-	background:#98FB98;
-}
-
-.red3{
-	background:#aaa;
-}

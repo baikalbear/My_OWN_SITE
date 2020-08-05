@@ -1,8 +1,15 @@
 <?php $this->extend('base') ?>
 
 <?php $this->start('body') ?>
-	<br/><br/><a href="/records/">Перейти к списку записей</a><br/>
-	<h1 align="center">Редактировать запись</h1>
+	<!--BEGIN: Управление-->
+	<div class="control1">
+		<a href="/records/" class="red1">Записи</a>
+		<a href="/articles/<?=$this->data['record']['unique_name']?>" class="red2">Запись на сайте</a>
+	</div>	
+	<!--END-->
+	
+	
+	<h1 align="center" class="control">Редактировать запись</h1>
 	<form action="/records/edit/?id=<?=$this->data['record']['id']?>" method="post">
 		<div class="alert alert-info <?=$this->data['hidden']?>" role="alert" id="submitAnswer">
 			<?=$this->data['message']?>
@@ -19,7 +26,11 @@
 		</div>                       
 		<script>
 		tinymce.init({
-		  selector: '#inputText'
+		  selector: '#inputText, #inputDescription',
+		  language:"ru",
+		  plugins: 'advlist autolink lists link image charmap print preview hr anchor pagebreak code imagetools',
+		  toolbar_mode: 'floating',		
+		  relative_urls : false		  
 		});
 		</script>			
 		<div class="form-group">

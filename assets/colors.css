@@ -5,41 +5,50 @@ a,a:active,a:hover,a:visited{
 
 /*По классам*/
 .pink_fine{
-	background: #ff5050;
+	background:#fff;
+	border: 2px solid #ff5050;
 }
 
 
 .yellow_bright{
-	background: #ffcc00;
+	background:#fff;
+	border: 2px solid #ffcc00;
 }
 
 .orange_ground{
-	background: #cc3300;
+	background:#fff;
+	border: 2px solid #cc3300;
 }
 
 .orange_pale{
-	background: #ffcc66;
+	background:#fff;
+	border: 2px solid #ffcc66;
 }
 
 .brown_fine{
-	background:#cc6600;
+	background:#fff;
+	border: 2px solid #cc6600;
 }
 
 
 .cian_noble{
-	background: #00ccff;
+	background:#fff;
+	border: 2px solid #00ccff;
 }
 
 .cian_light{
-	background: #66ccff;
+	background:#fff;
+	border: 2px solid #66ccff;
 }
 
 .blue_light{
-	background: #3399ff;
+	background:#fff;
+	border: 2px solid #3399ff;
 }
 
 .magenta_light{
-	background: #9999ff;
+	background:#fff;
+	border: 2px solid #9999ff;
 }
 
 

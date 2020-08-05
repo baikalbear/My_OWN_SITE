@@ -29,12 +29,12 @@
 			<a href="/articles/<?=$t['unique_name']?>/">
 			<div class="block_design <?=$t['color']?>">
 				<div>
-					<span style="font-size:13pt;color:#222;"><?=$t['title']?></span>
+					<span style="font-size:11pt;color:#222;"><?=$t['title']?></span>
 					<?if(isset($_SESSION['username']) || $_SESSION['username'] == "admin"){?>
 						<a href="/records/edit/?id=<?=$t['record_id']?>" style="margin-left:5px;padding:1px 5px;font-size:9pt;background:#aaa;">ред.</a>
 					<?}?>
 				</div>
-				<div style="margin-top:5px;font-size:10pt;color:#222;"><?=htmlspecialchars_decode ($t['description'])?>...</div>
+				<div style="margin-top:5px;font-size:10pt;color:#222;"><?=htmlspecialchars_decode ($t['description'])?></div>
 			</div>
 		</a>
 		<?}

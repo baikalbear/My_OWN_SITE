@@ -20,3 +20,27 @@ a.underlined{text-decoration:underline;}
 .control2{
 	padding:0 0 10px 40px;
 }
+
+h1.control{
+	font-size:14pt;
+}
+
+.red1, .red2, .red3, .red4, .red5 {
+	margin-right:15px;
+	padding:2px 5px;
+	font-size:9pt;
+	background:#666;
+}
+
+.red1{
+	background:#20B2AA;
+}
+
+.red2{
+	background:#98FB98;
+}
+
+.red3{
+	background:#aaa;
+}
+
