@@ -1,22 +1,33 @@
 <?php $this->extend('base') ?>
 
-<?php $this->start('body') ?><br/>
-	<h1 align="center">Baikal.Net.Ru</h1>
-	<div align="center" style="font-size:12pt;padding-bottom:20px;">Мастерство, техника и многое другое</div>
+<?php $this->start('body') ?>
+	<!--BEGIN: Управление-->
 	<?php
 		if(isset($_SESSION['username']) || $_SESSION['username'] == "admin"){?>
-			<div style="padding-left:40px;">
-				<a href="/records/">Записи</a>
-				<span style="padding-left:30px;"></span>
-				<a href="/tags/">Теги</a>
+			<div class="control2">
+				<a href="/records/" class="red1">Записи</a>
+				<a href="/categories/" class="red2">Категории</a>
 			</div>
 		<?}
 	?>
+	<!--END-->
 	
+	<!--BEGIN: Навигация-->
+	<div class="nav1">
+		Категории: <a href="/" class="nav1">Все</a>
+		<?php
+			while($t1 = mysqli_fetch_array($this->data['q1'])){?>	
+				<a href="#" class="nav1"><?=$t1['name']?></a>			
+			<?}
+		?>		
+	</div>
+	<!--END-->
+	
+	<!--BEGIN: Блоки-->
 	<?php
 		while($t = mysqli_fetch_array($this->data['q'])){?>
 			<a href="/articles/<?=$t['unique_name']?>/">
-			<div class="block_9 <?=$t['color']?>">
+			<div class="block_design <?=$t['color']?>">
 				<div>
 					<span style="font-size:13pt;color:#222;"><?=$t['title']?></span>
 					<?if(isset($_SESSION['username']) || $_SESSION['username'] == "admin"){?>
@@ -28,8 +39,13 @@
 		</a>
 		<?}
 	?>
+	<!--END-->
 
 	<div class="clear"></div>
+	
+	<!--BEGIN: Подвал-->
+	<br/><br/><br/><br/>
+	<!--END-->
 	
 <?php $this->stop('body') ?>
 

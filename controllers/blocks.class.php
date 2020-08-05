@@ -18,7 +18,12 @@ class Blocks {
 				left join records_blocks on blocks.id=records_blocks.block_id
 				left join records on records.id=records_blocks.record_id
 				order by blocks.id asc");		
+
+		$q1 = mysqli_query($this->db_link, "
+				select *
+				FROM `categories`
+				order by `id` asc");		
 		
-		return $this->view->load('main', ['q'=>$q]);
+		return $this->view->load('main', ['q'=>$q, 'q1'=>$q1]);
 	}
 }

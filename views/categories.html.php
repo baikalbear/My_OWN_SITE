@@ -10,7 +10,7 @@
 			</div>
 		<?}
 	?>	
-	<h1 align="center">Теги</h1>
+	<h1 align="center">Категории</h1>
 	<br/>
 
 	<?php

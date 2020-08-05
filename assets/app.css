@@ -14,3 +14,9 @@ img.post-image{
 h2{padding-top:10px;}
 
 a.underlined{text-decoration:underline;}
+
+.control1{}
+
+.control2{
+	padding:0 0 10px 40px;
+}
