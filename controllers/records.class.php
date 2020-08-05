@@ -1,15 +1,7 @@
 <?php
 //Класс предметной области "Задачи"
-class Records {
-	private $db_link;	
+class Records extends BaseController {
 
-	function __construct(){
-		$this->db_link = mysqli_connect($GLOBALS['db_host'], $GLOBALS['db_user'], $GLOBALS['db_pass'], $GLOBALS['db_base']);
-		//Устанавливаю кодировку работы с БД
-		mysqli_query($this->db_link, "set names " . $GLOBALS['db_encoding']);
-		//masterba_beejee
-		$this->view = new View();
-	}
 	//Построит HTML всех имеющихся в базе задач
 	function defaultAction(){
 		//Определяет количество записей на странице

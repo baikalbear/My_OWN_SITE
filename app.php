@@ -8,18 +8,18 @@
 	//Мне не нужно думать, какие http-заголовки формировать, чтобы открыть сессию, php сам сделает за меня эту работу...
 	session_start();
 	
-	//Теперь пора подключать нужные классы функций. Ну чтобы вручную не тягать по файлу сделаю простенькое автоподключение...
-	//Начинаю.
-	foreach(['core', 'controllers'] as $null => $class){
-		$scandir = scandir($_SERVER['DOCUMENT_ROOT'] . "/" . $class);
+	//BEGIN: Автоподключение классов именно в таком порядке по степени значимости/порядке наследования
+	foreach(['core', 'controllers/base', 'controllers'] as $null => $class_dir){
+		$scandir = scandir($_SERVER['DOCUMENT_ROOT'] . "/" . $class_dir);
 		
 		foreach($scandir as $n => $fname){
-			if ($fname != "." && $fname != ".."){
-				include_once($_SERVER['DOCUMENT_ROOT'] . "/" . $class . "/" . $fname);
+			if ($fname != "." && $fname != ".." && preg_match("/\.class\.php$/", $fname)){
+				//echo "fname:".$fname."<br/>";       //Илья, не удаляй эту строчку, она нужна, чтобы отлаживать автоподключение (редко, но бывает)
+				include_once($_SERVER['DOCUMENT_ROOT'] . "/" . $class_dir . "/" . $fname);
 			}
 		}
 	}
-	//Закончил.
+	//END
 	
 	
 

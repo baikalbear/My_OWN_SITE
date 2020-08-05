@@ -1,4 +1,4 @@
-img.post-image{
+	img.post-image{
     width:64px;
     height:64px;
 }
@@ -27,7 +27,7 @@ h1.control{
 
 .red1, .red2, .red3, .red4, .red5 {
 	margin-right:15px;
-	padding:2px 5px;
+	padding:3px 5px;
 	font-size:9pt;
 	background:#666;
 }
@@ -41,6 +41,6 @@ h1.control{
 }
 
 .red3{
-	background:#aaa;
+	background:#F08080;
 }
 
