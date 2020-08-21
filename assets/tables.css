@@ -1,0 +1,13 @@
+#blocks_table td {
+	border: 1px solid gray;
+	padding: 2px 3px;
+}
+
+#blocks_form input {
+	border:1px solid #FFA07A;
+	border-radius:5px;
+}
+
+#blocks_form .zapis {
+	width:200px;
+}

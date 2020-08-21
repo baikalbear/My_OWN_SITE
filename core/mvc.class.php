@@ -39,8 +39,18 @@
 			$instance = new $cf_name();
 			
 			if($piece2 == ""){
-				//Стандартное действие default если действие не указано явно
-				$this->html_flow = $instance->defaultAction();
+				if($piece1 == ""){
+					//Для главной страницы действие по умолчанию отличается
+					$this->html_flow = $instance->mainPageAction();
+				} else {
+					//Проверяю, существует ли метод default в объекте класса
+					if (method_exists($instance, 'defaultAction')) {
+						//Стандартное действие default если действие не указано явно
+						$this->html_flow = $instance->defaultAction();
+					} else {
+						echo mys_format_error("Метод defaultAction отсутствует в контроллере класса $cf_name");
+					}
+				}
 			}else{
 				if ($piece1 == "articles"){
 					$action_main_word = "show";

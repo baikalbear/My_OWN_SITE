@@ -13,6 +13,8 @@
     <?php $this->assetCSS('app.css') ?>
 	<?php $this->assetCSS('design.css') ?>
 	<?php $this->assetCSS('colors.css') ?>
+	<?php $this->assetCSS('tables.css') ?>
+	<?php $this->assetCSS('menus.css') ?>
 	<!--END-->
 
 	<!-- Yandex.Metrika counter -->

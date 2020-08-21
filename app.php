@@ -1,6 +1,9 @@
 <?php
 	//Подключаю настройки
 	include_once($_SERVER['DOCUMENT_ROOT'] . "/config.php");
+	
+	//Подключаю 'стандартные' функции 'моей системы'
+	include_once($_SERVER['DOCUMENT_ROOT'] . "/mys_functions.php");
 
 	//Путь к активам - js, css...
 	const ASSETS_PATH = "/assets/";

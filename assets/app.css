@@ -45,6 +45,10 @@ h1.control{
 	background:#8FBC8F;
 }
 
+.red4{
+	background:#20B2AA;
+}
+
 .rda1{
 	background:#F08080;
 }
@@ -55,4 +59,11 @@ h1.control{
 	padding:0px 3px;
 	font-size:9pt;
 	background:#FF7F50;
+}
+
+.mys_error_1 {
+	font-family:Tahoma;
+	padding: 3px 50px;
+	background: #FF69B4;
+	font-size:14pt;
 }

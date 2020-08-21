@@ -7,6 +7,7 @@
 			<a href="/" class="red1">Главная</a>
 			<a href="/records/" class="red2">Записи</a>
 			<a href="/categories/" class="red3">Категории</a>
+			<a href="/blocks/" class="red4">Блоки</a>
 		</div>
 	<?}?>
 	<!--END-->
