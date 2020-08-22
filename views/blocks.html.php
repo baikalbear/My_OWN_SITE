@@ -15,14 +15,17 @@
 	<br/>
 	
 	<?php
-
-		$records_list_html = "";
+		$records_list_html = "";$m = [];$m[0] = "==НЕ ВЫБРАНО==";
 		
 		while ($t1 = mysqli_fetch_array($this->data['q1'])){
-			$records_list_html .= "<a href=\"#\" onclick=\"dd_menu1_choose({id}, '{$t1['title']}', {$t1['id']})\">{$t1['title']}</a>
-									<input type='hidden' name='record_link[{id}]' value='' id='record_link_{id}'/><br/>";
+			$m[$t1['id']] = $t1['title'];
 		}
 		
+		foreach ($m as $id => $title){
+			$records_list_html .= "<a href=\"#\" onclick=\"dd_menu1_choose({id}, '{$title}', {$id})\">{$title}</a>
+							<input type='hidden' name='record_link[{id}]' value='' id='record_link_{id}'/><br/>";
+		}
+
 	?>
 
 	<form id="blocks_form">
@@ -34,11 +37,18 @@
 			</tr>
 			<?php
 				while($t = mysqli_fetch_array($this->data['q'])){
+					$db_link = $this->data['db_link'];
+					$q1 = mysqli_query($db_link, "SELECT * FROM `records` 
+											LEFT JOIN `records_blocks` ON `records`.`id`=`records_blocks`.`record_id`
+											WHERE `records_blocks`.`block_id`={$t['id']}");
+					$t1 = mysqli_fetch_array($q1);
+					if($t1['record_id'] == 0) $t1['title'] = "==НЕ ВЫБРАНО==";
+					
 					?>
 						<tr>
 							<td><?=$t['id']?></td>
 							<td><input type="text" name="b_<?=$t['id']?>" value="<?=$t['color']?>"></td>
-							<td class="zapis"><a href="#" onclick="dd_menu1(<?=$t['id']?>);" id="dd_menu1_a_<?=$t['id']?>">НЕ ВЫБРАНО</a>
+							<td class="zapis"><a href="#" onclick="dd_menu1(<?=$t['id']?>);" id="dd_menu1_a_<?=$t['id']?>"><?=$t1['title']?></a>
 							<div class="dd_menu1" id="dd_menu1_<?=$t['id']?>">
 								<?=str_replace("{id}", $t['id'], $records_list_html)?>
 							</div></td>
@@ -83,9 +93,9 @@
 				},
 				success : function(data) {
 					if (data.result == 'success') {
-						alert("AJAX-запрос успешно обработан");
+						//alert("AJAX-запрос успешно обработан");
 					} else {
-						alert(data.result);
+						//alert(data.result);
 					}
 				}
 			});			

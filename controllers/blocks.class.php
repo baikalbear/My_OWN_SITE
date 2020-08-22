@@ -25,7 +25,7 @@ class Blocks extends BaseController {
 
 		$num = mysqli_num_rows($q);
 
-		return $this->view->load('blocks', ['q' => $q, 'q1' => $q1, 'auth'=>$this->auth]);
+		return $this->view->load('blocks', ['q' => $q, 'q1' => $q1, 'auth'=>$this->auth, 'db_link'=>$this->db_link]);
 	}
 	
 	function linkrecordAction(){
@@ -37,9 +37,7 @@ class Blocks extends BaseController {
 							SELECT *
 							FROM `records_blocks`
 							where block_id=$block_id and `area_id`=$area_id");
-							
-			//return json_encode( ['result' => "SELECT * FROM `records_blocks` where block_id=$block_id and `area_id`=$area_id"]);			
-							
+														
 		$num = mysqli_num_rows($q);
 		
 		if($num > 0) {
