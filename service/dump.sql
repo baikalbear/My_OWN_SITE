@@ -134,7 +134,7 @@ CREATE TABLE `records_blocks` (
   `record_id` int(11) NOT NULL,
   `area_id` mediumint(9) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -143,7 +143,7 @@ CREATE TABLE `records_blocks` (
 
 LOCK TABLES `records_blocks` WRITE;
 /*!40000 ALTER TABLE `records_blocks` DISABLE KEYS */;
-INSERT INTO `records_blocks` VALUES (8,8,8,1),(13,13,13,1),(14,14,14,1),(15,15,15,1),(25,10,7,1),(35,3,6,1),(36,4,7,1),(40,2,7,1),(48,5,0,1),(49,12,0,1),(51,6,6,1),(52,7,5,1),(53,11,1,1),(55,1,9,1),(56,9,3,1);
+INSERT INTO `records_blocks` VALUES (8,8,8,1),(13,13,13,1),(14,14,14,1),(15,15,15,1),(25,10,7,1),(48,5,0,1),(49,12,0,1),(51,6,6,1),(52,7,5,1),(53,11,1,1),(56,9,3,1),(57,1,1,1),(58,2,2,1),(59,3,3,1),(60,4,4,1);
 /*!40000 ALTER TABLE `records_blocks` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -156,4 +156,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-08-24 13:37:06
+-- Dump completed on 2020-08-24 16:34:35
