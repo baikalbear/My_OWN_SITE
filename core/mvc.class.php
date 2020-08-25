@@ -11,8 +11,17 @@
 		
 		//Маршрутизация url-а		
 		function processUrl(){
+			//Отделяю Facebook Client ID
+			if(preg_match("/^(.*)\?fbclid=(.*)$/", $_SERVER['REQUEST_URI'], $m)) {
+
+				$url = $m[1];
+				$fbclientid = $m[2];
+			} else {
+				$url = $_SERVER['REQUEST_URI'];
+			}
+			
 			//Беру url запроса, пришедшего на веб-сервер и разделяю его на части по слэшу
-			$parsed_url = explode("/", $_SERVER['REQUEST_URI']);
+			$parsed_url = explode("/", $url);
 			
 			//Сохраню для обращения из вне через getter
 			$this->url_pieces = $parsed_url;
