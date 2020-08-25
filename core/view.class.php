@@ -61,6 +61,11 @@
 			//Store the view which we work with
 			$this->view = $view;
 			
+			//Проверяю наличие файла шаблона
+			if(!file_exists(static::VIEWS_PATH.$view.'.html.php')) {
+				crash("Файл шаблона " . static::VIEWS_PATH.$view.'.html.php' . " не найден");
+			}
+			
 			//Execute child view file and collect blocks of content
 			//to $this->blocks property.
 			require(static::VIEWS_PATH.$view.'.html.php');

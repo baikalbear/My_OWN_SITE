@@ -61,9 +61,18 @@ h1.control{
 	background:#FF7F50;
 }
 
-.mys_error_1 {
+.mys1, .mys2 {
 	font-family:Tahoma;
-	padding: 3px 50px;
+	padding: 3px 10px;
 	background: #FF69B4;
+}
+
+.mys1 {
+	padding: 3px 10px;	
 	font-size:14pt;
+}
+
+.mys2 {
+	padding:1px 5px;
+	font-size:11pt;
 }

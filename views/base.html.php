@@ -59,6 +59,9 @@
     <div class="container">
 		<!--BEGIN: Панель авторизации-->
 		<div style="width:100%;text-align:right;margin-top:15px;">
+			<?if($this->auth->isAdmin()){?>
+				<a href="/service/" style="margin-right:25px;">Сервис</a>
+			<?}?>
 			<a href="/">На главную</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<?if($this->auth->isAdmin()){?>
 				<?=$_SESSION['username']?> <a href="/signout/" style="margin-left:25px;">Выйти</a>	

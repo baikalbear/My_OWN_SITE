@@ -2,8 +2,11 @@
 	//Подключаю настройки
 	include_once($_SERVER['DOCUMENT_ROOT'] . "/config.php");
 	
-	//Подключаю 'стандартные' функции 'моей системы'
-	include_once($_SERVER['DOCUMENT_ROOT'] . "/mys_functions.php");
+	//Локализации
+	include_once($_SERVER['DOCUMENT_ROOT'] . "/locale.php");
+	
+	//Подключаю систему декорирования
+	include_once($_SERVER['DOCUMENT_ROOT'] . "/core/systems/mds.php");
 
 	//Путь к активам - js, css...
 	const ASSETS_PATH = "/assets/";

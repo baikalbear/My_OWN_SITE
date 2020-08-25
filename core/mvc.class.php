@@ -57,7 +57,7 @@
 						//Стандартное действие default если действие не указано явно
 						$this->html_flow = $instance->defaultAction();
 					} else {
-						echo mys_format_error("Метод defaultAction отсутствует в контроллере класса $cf_name");
+						crash("Метод defaultAction отсутствует в контроллере класса $cf_name");
 					}
 				}
 			}else{
@@ -68,7 +68,12 @@
 				}
 				//Случай, когда действие указано явно
 				$action = $action_main_word . "Action";
-				$this->html_flow = $instance->$action();
+				
+				if (method_exists($instance, $action)) {
+					$this->html_flow = $instance->$action();
+				} else {
+				crash("Метод {$action} отсутствует в контроллере класса $cf_name");
+				}
 			}
 		}
 		
