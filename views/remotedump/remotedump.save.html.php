@@ -8,17 +8,19 @@
 	
 		<div class="control2">
 			<a href="/" class="red1">Главная</a>
+			<a href="/service/" class="red2">Сервис</a>
+			<a href="/remotedump/" class="red3">Работа с файлом дампа</a>
 		</div>
 	
 	<!--END-->
 	
 	<!--BEGIN: Заголовок-->
-		<h1 align="center" class="control"><?=TITLE_REMOTEDUMP?></h1>
+		<h1 align="center" class="control">Сохранить БД в локальный файл дампа</h1>
 		<br/>
 	<!--END-->
 	
 	<?
-		$dump_file = "{$_SERVER['DOCUMENT_ROOT']}/service/dump.sql";
+		$dump_file = $GLOBALS['dump_file'];
 		$command = "{$GLOBALS['mysqldump_path']} --user={$GLOBALS['db_user']} -p\"{$GLOBALS['db_pass']}\" --host={$GLOBALS['db_host']} {$GLOBALS['db_base']} > $dump_file";
 	?>
 	

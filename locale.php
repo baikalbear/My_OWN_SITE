@@ -1,2 +1,2 @@
 <?
-const TITLE_REMOTEDUMP = 'Выгрузка файла дампа БД на удалённый сервер';
+const TITLE_REMOTEDUMP = 'Выгрузка БД в локальный файл дампа';

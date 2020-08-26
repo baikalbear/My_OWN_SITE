@@ -19,9 +19,9 @@
 	
 	<!--BEGIN: Тело-->
 		<div style="margin:0 40px;">
-			<a href="/remotedump/">Выгрузить файл дампа БД на удалённый сервер</a>
+			<a href="/remotedump/">Работа с файлом дампа БД</a>
 			<br/><br/>
-			<a href="/dbconnect/">Работать с MySQL</a>
+			<a href="/dbconnect/">Работа с MySQL</a>
 		</div>
 	<!--END-->
 	
