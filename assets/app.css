@@ -13,7 +13,16 @@
 
 h2{padding-top:10px;}
 
-a.underlined{text-decoration:underline;}
+a{
+	text-decoration:underline;
+}
+a:hover{
+	text-decoration:none;
+}
+
+a.underlined{
+	text-decoration:underline;
+}
 
 .control1{}
 

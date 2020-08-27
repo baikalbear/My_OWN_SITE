@@ -22,8 +22,9 @@
 		<div style="margin:0 40px;">
 			<a href='/remotedump/save/' class="control">Сохранить БД в локальный файл дампа</a>
 			<br/><br/>
-			<a href='/remotedump/load/'>Загрузить БД из локального файла дампа</a>
-		</div>
+			<a href='/remotedump/upload/'>Загрузить файл дампа БД на удалённый сервер</a>			
+			<br/><br/>
+			<a href='/remotedump/load/'>Загрузить БД из локального файла дампа</a>		</div>
 	<!--END-->
 	
 <?php $this->stop('body') ?>

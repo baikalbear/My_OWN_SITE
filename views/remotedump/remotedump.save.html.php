@@ -27,16 +27,35 @@
 	<!--BEGIN: Тело-->
 		<div style="margin:0 40px;">
 			<? if(!isset($_POST['confirm_save'])){?>
-				Я собираюсь выгрузить дамп БД в локальный файл.<br/>
-				Для этого мне нужно выполнить команду:<br/><br/>
+				Я собираюсь сохранить дамп БД в локальный файл по следующему пути<br/>
+				<p>
+					<?mds("показать инфо-бледный-золотарник открыть-тэг")?>
+					<?=$dump_file?>
+					<?mds("закрыть-тэг показать")?>
+				</p>
+				<?if(file_exists($dump_file)){?>
+					<b>В папке уже имеется файл с таким именем.</b><br/>
+					Поэтому он будет переименован в файл с текущей меткой времени.<br/><br/>
+
+				<?}else{?>
+					<b>Файл дампа в папке сейчас отсутствует</b><br/><br/>
+				<?}?>
+				Для создания дампа я собираюсь выполнить команду:<br/><br/>
 				<?=mds('код', $command)?><br/><br/>
 				<form action='/remotedump/save/' method='post'>
 					<input type='hidden' name='confirm_save' value='1'>
-					<input type='submit' value='Выполнить'>
+					<input type='submit' value='Поехали'>
 				</form>
 			<?}else{
-				shell_exec($command);
-				?>
+				if(file_exists($dump_file)){?>
+					<?$new_dump_file = "{$GLOBALS['dump_file_path']}dump_" . time() . ".sql";?>
+					<?if(rename($dump_file, $new_dump_file)){?>
+						Предыдущий файл был успешно переименован в <?=$new_dump_file?><br/><br/>
+					<?}else{?>
+						Возникла ошибка при переименовании предыдущего файла<br/><br/>
+					<?}?>
+				<?}?>
+				<?shell_exec($command);?>
 				<p>Следующая команда была выполнена:</p>
 				<?=mds('код', $command)?><br/><br/>
 				<p>Результат проверки файла дампа:</p>
@@ -58,11 +77,11 @@
 						Дамп корректный!
 						<?mds("закрыть-тэг показать")?>
 						<br/><br/><br/>
-						Хочешь загрузить дамп в БД?<br/>
-						<b>Внимание! Все таблицы будут перезатёрты</b><br/><br/>
-						<form action='/remotedump/load/' method='post'>
-							<input type='hidden' name='confirm_load' value='1'>
-							<input type='submit' value='Загрузить дамп в БД'>
+						Хочешь закачать дамп на удалённый сервер?<br/>
+						<b>Закачка будет произведена по FTP</b><br/><br/>
+						<form action='/remotedump/upload/' method='post'>
+							<input type='hidden' name='confirm_upload' value='1'>
+							<input type='submit' value='Закачать'>
 						</form>
 					<?}else{
 						mds('предупреждение показать', "Файл дампа непригодный, его возраст более $time_diff_limit секунд или размер равняется нулю");

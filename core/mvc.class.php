@@ -57,7 +57,7 @@
 						//Стандартное действие default если действие не указано явно
 						$this->html_flow = $instance->defaultAction();
 					} else {
-						crash("Метод defaultAction отсутствует в контроллере класса $cf_name");
+						crash("Метод defaultAction отсутствует в контроллере $cf_name");
 					}
 				}
 			}else{
@@ -72,7 +72,7 @@
 				if (method_exists($instance, $action)) {
 					$this->html_flow = $instance->$action();
 				} else {
-				crash("Метод {$action} отсутствует в контроллере класса $cf_name");
+				crash("Метод {$action} отсутствует в контроллере $cf_name");
 				}
 			}
 		}
