@@ -63,9 +63,9 @@
 			<div id="uppanel_leftside">
 				<?if($this->auth->isAdmin()){?>
 					<?if($_SERVER['HTTP_HOST'] == $GLOBALS['remote_server_host']){?>
-						УДАЛЁННЫЙ ХОСТ
+						УДАЛЁННЫЙ ХОСТ (<a href="<?=$GLOBALS['local_server_url'] . $_SERVER['REQUEST_URI']?>">изменить</a>)
 					<?}elseif($_SERVER['HTTP_HOST'] == $GLOBALS['local_server_host']){?>
-						ЛОКАЛЬНЫЙ ХОСТ
+						ЛОКАЛЬНЫЙ ХОСТ (<a href="<?=$GLOBALS['remote_server_url'] . $_SERVER['REQUEST_URI']?>">изменить</a>)
 					<?}?>
 				<?}?>
 			</div>

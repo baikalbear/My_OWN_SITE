@@ -88,7 +88,7 @@
 								
 								Теперь ты можешь загрузить дамп на удалённом сервере в БД<br/>
 								<b>Внимание! Все таблицы удалённой БД будут перезатёрты!</b><br/><br/>
-								<form action='<?=$GLOBALS['remote_server_url']?>remotedump/load/' method='post'>
+								<form action='<?=$GLOBALS['remote_server_url']?>/remotedump/load/' method='post'>
 									<input type='hidden' name='confirm_load' value='1'>
 									<input type='submit' value='Я понимаю, что перезатираю таблицы удалённой БД. Всё равно выполнить.'>
 								</form>
