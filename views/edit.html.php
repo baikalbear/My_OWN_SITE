@@ -3,9 +3,9 @@
 <?php $this->start('body') ?>
 	<!--BEGIN: Управление-->
 	<div class="control1">
-		<a href="/" class="red1">Главная</a>
-		<a href="/records/" class="red2">Записи</a>
-		<a href="/articles/<?=$this->data['record']['unique_name']?>" class="rda1">=на сайте=</a>
+		<a href="/" class="link-type1-style1">Главная</a>
+		<a href="/records/" class="link-type1-style2">Записи</a>
+		<a href="/articles/<?=$this->data['record']['unique_name']?>" class="link-type2-style1">=на сайте=</a>
 	</div>	
 	<!--END-->
 	

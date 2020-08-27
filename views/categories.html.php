@@ -5,7 +5,7 @@
 	<?if($this->auth->isAdmin()){?>
 		<!--BEGIN: Управление-->		
 		<div class="control1">
-			<a href="/" class="red1">Главная</a>
+			<a href="/" class="link-type1-style1">Главная</a>
 		</div>
 		<!--END-->			
 	<?}?>	

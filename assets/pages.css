@@ -1,0 +1,13 @@
+/*Оформление главной страницы*/
+.blocks_on_mainpage {
+	float:left;
+	width:320px;
+	height:170px;
+	margin-left:40px;
+	margin-top:20px;
+	margin-bottom:20px;
+	overflow:hidden;
+	text-overflow: clip;
+	padding: 20px;
+	background: #aaa;
+}

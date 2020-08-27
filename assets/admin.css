@@ -1,0 +1,51 @@
+/*----------------------------------------------------------------------------
+В этом файле прописываются общие стили для элементов, относящихся к админской части.
+То есть те, которых нет в общем доступе на сайте. Стили для отдельных разделов админского
+функционала прописываются в файле admin_pages.css
+----------------------------------------------------------------------------*/
+
+/*Используется для форм в админке, форм редактирования записей*/
+#inputText{
+	height:400px;
+}
+
+#submitAnswer{
+	margin-top:25px;
+}
+
+/*Оформление ссылок на действия. Например, "=ред=" в блоке записи на главной или "=на сайте=" в карточке записи.*/
+.link-type1-style1, .link-type1-style2, .link-type1-style3, .link-type1-style4, .link-type1-style5,
+.link-type2-style1 {
+	margin-right:15px;
+	padding:3px 5px;
+	font-size:9pt;
+	background:#666;
+}
+
+.link-type1-style1{
+	background:#66CDAA;
+}
+
+.link-type1-style2{
+	background:#98FB98;
+}
+
+.link-type1-style3{
+	background:#8FBC8F;
+}
+
+.link-type1-style4{
+	background:#20B2AA;
+}
+
+.link-type2-style1{
+	background:#F08080;
+}
+
+.link-type3-style1{
+	position:absolute;
+	margin:0 0 0 5px;
+	padding:0px 3px;
+	font-size:9pt;
+	background:#FF7F50;
+}

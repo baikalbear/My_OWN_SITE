@@ -6,9 +6,9 @@
 <?php $this->start('body') ?>
 	<!--BEGIN: Управление-->
 	
-		<div class="control2">
-			<a href="/" class="red1">Главная</a>
-			<a href="/service/" class="red2">Сервис</a>
+		<div class="nav1">
+			<a href="/" class="link-type1-style1">Главная</a>
+			<a href="/service/" class="link-type1-style2">Сервис</a>
 		</div>
 	
 	<!--END-->

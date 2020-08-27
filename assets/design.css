@@ -1,42 +1,37 @@
-/*Блок очистки float-ов*/
-.clear{
-	clear:both;
+/*Панель авторизации (верхняя панель)*/
+#uppanel {
+	width:100%;
+	margin:15px 0 0 0;
 }
 
-.mce-notification-inner {display:none!important;}
-
-.block_design{
+#uppanel_leftside{
 	float:left;
-	width:320px;
-	height:170px;
-	margin-left:40px;
-	margin-top:20px;
-	margin-bottom:20px;
-	overflow:hidden;
-	text-overflow: clip;
-	padding: 20px;
-	background: #aaa;
 }
 
-.inner_block{
-	width:227px;
-	height:93px;
+#uppanel_rightside{
+	float:right;
 }
 
-h1.logo1{
+/*Логотип сайта*/
+#sitelogo_header {
 	font-size:36px;
 }
-
-div.logo1{
+#sitelogo_descr {
 	padding: 0 0 20px 0;
 	font-size:12pt;
 }
 
-div.nav1{
+/*Навигация первого уровня. Используется на админских страницах. Например, на главной - "Главная  Записи  Категории  Блоки"*/
+.nav1{
+	padding:0 0 10px 40px;
+}
+
+/*Навигация второго уровня. Например, на главной - "Категории: ВСЕ Категория1 Категория2 ..."*/
+#nav2{
 	margin:10px 0 10px 40px;
 }
 
-a.nav1{
+a.nav2{
 	padding:0 10px 0 10px;
 	text-decoration:underline;
 }

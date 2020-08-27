@@ -7,9 +7,9 @@
 	<!--BEGIN: Управление-->
 	<?if($this->auth->isAdmin()){?>
 		<div class="control1">
-			<a href="/" class="red1">Главная</a>
-			<a href="/records/" class="red2">Записи</a>
-			<a href="/records/edit/?id=<?=$r['record_id']?>" class="rda1">=ред=</a>
+			<a href="/" class="link-type1-style1">Главная</a>
+			<a href="/records/" class="link-type1-style2">Записи</a>
+			<a href="/records/edit/?id=<?=$r['record_id']?>" class="link-type2-style1">=ред=</a>
 		</div>
 	<?}?>
 	<!--END-->

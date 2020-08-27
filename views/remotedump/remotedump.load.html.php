@@ -6,10 +6,10 @@
 <?php $this->start('body') ?>
 	<!--BEGIN: Управление-->
 	
-		<div class="control2">
-			<a href="/" class="red1">Главная</a>
-			<a href="/service/" class="red2">Сервис</a>
-			<a href="/remotedump/" class="red3">Работа с файлом дампа</a>
+		<div class="nav1">
+			<a href="/" class="link-type1-style1">Главная</a>
+			<a href="/service/" class="link-type1-style2">Сервис</a>
+			<a href="/remotedump/" class="link-type1-style3">Работа с файлом дампа</a>
 		</div>
 	
 	<!--END-->
@@ -46,7 +46,7 @@
 					<input type='submit' value='Я понимаю, что таблицы будут перезатёрты. Загрузить.'>
 				</form>
 			<?}else{?>
-				Я готова к загрузке данных из дампа в БД.<br/>
+				Сейчас я загружу данные из файла дампа в БД.<br/>
 				<?$command = "{$GLOBALS['mysql_path']} --user={$GLOBALS['db_user']} -p\"{$GLOBALS['db_pass']}\" --host={$GLOBALS['db_host']} {$GLOBALS['db_base']} < $dump_file";?>
 				<p>Следующая команда будет выполнена:</p>
 				<?=mds('код', $command)?><br/><br/>

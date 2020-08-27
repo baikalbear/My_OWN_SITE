@@ -6,10 +6,10 @@
 <?php $this->start('body') ?>
 	<!--BEGIN: Управление-->
 	
-		<div class="control2">
-			<a href="/" class="red1">Главная</a>
-			<a href="/service/" class="red2">Сервис</a>
-			<a href="/remotedump/" class="red3">Работа с файлом дампа</a>
+		<div class="nav1">
+			<a href="/" class="link-type1-style1">Главная</a>
+			<a href="/service/" class="link-type1-style2">Сервис</a>
+			<a href="/remotedump/" class="link-type1-style3">Работа с файлом дампа</a>
 		</div>
 	
 	<!--END-->
@@ -69,10 +69,29 @@
 						<b>Логин на FTP-сервер успешно выполнен</b><br/>
 						<?if(@ftp_chdir($conn_id, $GLOBALS['dump_file_remote_path'])){?>
 							<b>Директория на FTP-сервере успешно изменена на <?=$GLOBALS['dump_file_remote_path']?></b><br/>
+							<?$new_file_name = $GLOBALS['dump_file_name_without_extension'] . "_remote_" . time() . "." . $GLOBALS['dump_file_extension'];?>
+							<?if(@ftp_rename($conn_id, $GLOBALS['dump_file_name'], $new_file_name)){?>
+								Удалённый файл дампа успешно переименован в <?=$new_file_name?><br/>
+							<?}else{?>
+								Ошибка при переименовании удалённого файла дампа или он не существует<br/>
+							<?}?>
 							<?if(@ftp_put($conn_id, $GLOBALS['dump_file_name'], $dump_file)){?>
 								<?mds("показать инфо-умеренный-аквамарин открыть-тэг параграф")?>
 								<b>Файл <?=$dump_file?> успешно передан на FTP-сервер!</b><br/>
-								<?mds("закрыть-тэг показать параграф")?><br/>
+								<?mds("закрыть-тэг показать параграф")?>
+								
+								<?if(@ftp_close($conn_id)){?>
+									Соединение с FTP-сервером успешно закрыто<br/><br/>
+								<?}else{?>
+									Возникла ошибка при закрытии соединения с FTP-сервером<br/><br/>
+								<?}?>
+								
+								Теперь ты можешь загрузить дамп на удалённом сервере в БД<br/>
+								<b>Внимание! Все таблицы удалённой БД будут перезатёрты!</b><br/><br/>
+								<form action='<?=$GLOBALS['remote_server_url']?>remotedump/load/' method='post'>
+									<input type='hidden' name='confirm_load' value='1'>
+									<input type='submit' value='Я понимаю, что перезатираю таблицы удалённой БД. Всё равно выполнить.'>
+								</form>
 							<?}else{?>
 								<b>Ошибка передачи файла <?=$dump_file?> на FTP-сервер</b>
 							<?}?>

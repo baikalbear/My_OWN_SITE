@@ -10,11 +10,12 @@
 	
     <!--BEGIN: Блок подключения CSS файлов-->
     <?php $this->assetCSS('bootstrap.min.css') ?>
-    <?php $this->assetCSS('app.css') ?>
-	<?php $this->assetCSS('design.css') ?>
-	<?php $this->assetCSS('colors.css') ?>
-	<?php $this->assetCSS('tables.css') ?>
-	<?php $this->assetCSS('menus.css') ?>
+	<?php $this->assetCSS('generalrules.css') //Общие правила для всего сайта?>		
+	<?php $this->assetCSS('design.css') //Общий дизайн, для всего сайта?>	
+	<?php $this->assetCSS('pages.css') //Дизайн, по страницам?>	
+    <?php $this->assetCSS('admin.css') //Общий дизайн, только для админов?>	
+	<?php $this->assetCSS('admin_pages.css') //Админский дизайн, по страницам ?>	
+	<?php $this->assetCSS('colors.css') //Таблица цветов?>
 	<!--END-->
 
 	<!-- Yandex.Metrika counter -->
@@ -58,22 +59,34 @@
   <body>
     <div class="container">
 		<!--BEGIN: Панель авторизации-->
-		<div style="width:100%;text-align:right;margin-top:15px;">
-			<?if($this->auth->isAdmin()){?>
-				<a href="/service/" style="margin-right:25px;">Сервис</a>
-			<?}?>
-			<a href="/">На главную</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<?if($this->auth->isAdmin()){?>
-				<?=$_SESSION['username']?> <a href="/signout/" style="margin-left:25px;">Выйти</a>	
-			<?}else{?>
-				<a href="/signin/">Войти</a>
-			<?}?>
+		<div id="uppanel">
+			<div id="uppanel_leftside">
+				<?if($this->auth->isAdmin()){?>
+					<?if($_SERVER['HTTP_HOST'] == $GLOBALS['remote_server_host']){?>
+						УДАЛЁННЫЙ ХОСТ
+					<?}elseif($_SERVER['HTTP_HOST'] == $GLOBALS['local_server_host']){?>
+						ЛОКАЛЬНЫЙ ХОСТ
+					<?}?>
+				<?}?>
+			</div>
+			<div id="uppanel_rightside">
+				<?if($this->auth->isAdmin()){?>
+					<a href="/service/" style="margin-right:25px;">Сервис</a>
+				<?}?>			
+				<a href="/">На главную</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<?if($this->auth->isAdmin()){?>
+					<?=$_SESSION['username']?> <a href="/signout/" style="margin-left:25px;">Выйти</a>	
+				<?}else{?>
+					<a href="/signin/">Войти</a>
+				<?}?>
+			</div>
+			<div class="floatstop"></div>
 		</div>
 		<!--END-->	
 		
 		<!--BEGIN: Лого сайта-->
-		<h1 align="center" class="logo1">Baikal.Net.Ru</h1>
-		<div align="center" class="logo1">Мастерство, техника и многое другое</div>
+		<h1 align="center" id="sitelogo_header">Baikal.Net.Ru</h1>
+		<div align="center" class="sitelogo_descr">Мастерство, техника и многое другое</div>
 		<!--END-->		
 		
 		<?php $this->output('body') ?>

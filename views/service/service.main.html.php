@@ -6,8 +6,8 @@
 <?php $this->start('body') ?>
 	<!--BEGIN: Управление-->
 	
-		<div class="control2">
-			<a href="/" class="red1">Главная</a>
+		<div class="nav1">
+			<a href="/" class="link-type1-style1">Главная</a>
 		</div>
 	
 	<!--END-->

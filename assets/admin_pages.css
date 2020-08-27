@@ -1,3 +1,4 @@
+/* Раздел /blocks/ */
 #blocks_table td {
 	border: 1px solid gray;
 	padding: 2px 3px;
@@ -10,4 +11,13 @@
 
 #blocks_form .zapis {
 	width:200px;
+}
+
+.dd_menu1 { /*DropDown меню*/
+	position:absolute;
+	display:none;
+	width:350px;
+	border:1px solid #666;
+	padding:8px;
+	background:#AFEEEE;
 }
