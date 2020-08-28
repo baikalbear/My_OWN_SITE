@@ -57,4 +57,25 @@ class Blocks extends BaseController {
 	
 		return json_encode( ['result' => 'Неизвестная ошибка']);
 	}
+	
+	function addAction(){
+		mysqli_query($this->db_link, "INSERT INTO `blocks` SET `color`=''");
+		header("location:/blocks/");
+	}
+	
+	function changeColorAction(){
+		$block_id = $_POST['block_id'];
+		$color = $_POST['color'];
+
+		$sql = "UPDATE `blocks` SET `color`='$color' WHERE `id`=$block_id";
+		//echo "'" . $sql . "'";
+		
+		mysqli_query($this->db_link, $sql);
+		
+		if(mysqli_affected_rows($this->db_link) > 0){
+			return json_encode( ['result' => 'SQL-запрос успешно выполнен']);
+		}else{
+			return json_encode( ['result' => 'Ошибка выполнения SQL-запроса']);
+		}
+	}
 }

@@ -91,6 +91,9 @@
 		
 		<?php $this->output('body') ?>
 	</div>
+	<div id="footer">
+		Это подвал моего сайта
+	</div>
     <?php $this->output('script') ?>
   </body>
 </html>

@@ -11,8 +11,9 @@
 	<?}?>	
 	
 	<h1 align="center" class="control">Блоки</h1>
-	
 	<br/>
+	<a href="/blocks/add" class="link-type2-style1">=добавить=</a>
+	<br/><br/>
 	
 	<?php
 		$records_list_html = "";$m = [];$m[0] = "==НЕ ВЫБРАНО==";
@@ -47,7 +48,7 @@
 					?>
 						<tr>
 							<td><?=$t['id']?></td>
-							<td><input type="text" name="b_<?=$t['id']?>" value="<?=$t['color']?>"></td>
+							<td><input type="text" name="b_<?=$t['id']?>" value="<?=$t['color']?>" onchange="change_color(<?=$t['id']?>, this);"></td>
 							<td class="zapis"><a href="#" onclick="dd_menu1(<?=$t['id']?>);" id="dd_menu1_a_<?=$t['id']?>"><?=$t1['title']?></a>
 							<div class="dd_menu1" id="dd_menu1_<?=$t['id']?>">
 								<?=str_replace("{id}", $t['id'], $records_list_html)?>
@@ -98,7 +99,26 @@
 						//alert(data.result);
 					}
 				}
-			});			
+			});
+		}
+		
+		function change_color(block_id, obj){
+			$.ajax({
+				url: "/blocks/changecolor/",
+				type: "POST",
+				dataType: "json",
+				data: {
+					block_id: block_id,
+					color: obj.value
+				},
+				error: function(data) {
+					//alert('AJAX response for "' + this.url + '" error:\n' + data.responseText);
+					alert("Системная ошибка обработки запроса AJAX. Текст ошибки: " + data.responseText);
+				},
+				success : function(data) {
+					//alert(data.result);
+				}
+			});					
 		}
     </script>
 <?php $this->stop('script') ?>

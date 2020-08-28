@@ -49,3 +49,12 @@
 	font-size:9pt;
 	background:#FF7F50;
 }
+
+/*Сообщения об ошибке (используются, например, в функции crash)*/
+.msg-error-style1{
+	font-family:Tahoma;
+	padding: 3px 50px;
+	padding: 3px 10px;
+	background: #FF69B4;
+}
+}
