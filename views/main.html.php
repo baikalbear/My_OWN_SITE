@@ -26,17 +26,23 @@
 	<!--BEGIN: Блоки-->
 	<?php
 		while($t = mysqli_fetch_array($this->data['q'])){?>
-			<a href="/articles/<?=$t['unique_name']?>/">
-			<div class="blocks_on_mainpage <?=$t['color']?>">
-				<div>
-					<span style="font-size:11pt;color:#222;"><?=$t['title']?></span>
-					<?if($this->auth->isAdmin()){?>
-						<a href="/records/edit/?id=<?=$t['record_id']?>" class="link-type3-style1">*ред*</a>
-					<?}?>
+			<?if($t['record_id']){?>
+				<a href="/articles/<?=$t['unique_name']?>/">
+			<?}?>
+				<div class="blocks_on_mainpage <?=$t['color']?>">
+					<div>
+						<span style="font-size:11pt;color:#222;"><?=$t['title']?></span>
+						<?if($this->auth->isAdmin()){?>
+							<?if($t['record_id']){?>
+								<a href="/records/edit/?id=<?=$t['record_id']?>" class="link-type3-style1">*ред*</a>
+							<?}?>
+						<?}?>
+					</div>
+					<div style="margin-top:5px;font-size:10pt;color:#222;"><?=htmlspecialchars_decode ($t['description'])?></div>
 				</div>
-				<div style="margin-top:5px;font-size:10pt;color:#222;"><?=htmlspecialchars_decode ($t['description'])?></div>
-			</div>
-		</a>
+			<?if($t['record_id']){?>
+				</a>
+			<?}?>
 		<?}
 	?>
 	<!--END-->

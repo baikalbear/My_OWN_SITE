@@ -1,7 +1,7 @@
 <?php
 
 function crash_without_exit($str, $style_no=1){
-	echo "<link href=\"/assets/app.css\" rel=\"stylesheet\">" . "<span class=\"mys{$style_no}\">" . $str . "</span>";
+	echo "<link href=\"/assets/admin.css\" rel=\"stylesheet\">" . "<span class=\"msg-error-style{$style_no}\">" . $str . "</span>";
 }
 
 function crash($str, $style_no=1) {
