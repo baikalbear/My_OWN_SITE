@@ -41,34 +41,23 @@ class Records extends BaseController {
 	}
 	
 	function addAction(){
-		//Случай, когда форма отравлена
-		if(isset($_POST['username'])){
-			//Не заполнено имя пользователя либо текст задачи
-			if(trim($_POST['username']) == "" || trim($_POST['text']) == ""){
-				return $this->view->load('add', ['hidden' => '', 'username' => $_POST['username'], 'email' => $_POST['email'], 'text' => $_POST['text'],
-												'error' => "Не все поля заполнены"]);
+		if(isset($_POST['confirm_add'])){
+			$sql = "INSERT INTO `records` SET text='" . htmlspecialchars($_POST['text']) . "', status=0, text_changed=0";
+			mysqli_query($this->db_link, $sql);
+			if(mysqli_affected_rows($this->db_link) > 0){
+				header("location:/records");
+			}else{
+				crash("Ошибка добавления записи");
 			}
-			
-			//Случай, когда неверно заполнен е-мэйл
-			if(!preg_match("/^[a-z0-9A-Z\.\-\_]{1,100}\@[a-z0-9A-Z\.\-\_]{1,100}\.[a-zA-Z]{1,20}$/", $_POST['email'])){
-				return $this->view->load('add', ['hidden' => '', 'username' => $_POST['username'], 'email' => $_POST['email'], 'text' => $_POST['text'],
-												'error' => "Е-мэйл заполнен некорректно"]);
-			}
-			
-			//Если этот код будет выполнен, значит ошибок валидации не было
-			mysqli_query($this->db_link, "INSERT INTO `records` SET username='" . $_POST['username'] . "', email='" . $_POST['email'] . "', text='" . htmlspecialchars($_POST['text']) . "', status=0, text_changed=0");
-			return $this->view->load('add_ok');
-		//Случай, когда форма ещё не была отправлена
 		}else{
-			return $this->view->load('add', ['hidden' => 'hidden', 'username'=>"", 'email'=>"", 'text'=>"", 'auth'=>$this->auth]);
+			crash("Действие невозможно без отправки формы");
 		}
 	}
 	
 	function editAction(){
 		//Редактирование делаю, опираясь на id элемента в БД
 		if(!isset($_GET['id'])){
-			echo "Fatal error";
-			exit;
+			crash("ID не определён");
 		}
 
 		//Теперь получаю элемент из базы в виде ассоц. массива
@@ -80,12 +69,15 @@ class Records extends BaseController {
 
 		//Форма уже отправлена?
 		if(isset($_POST['text'])){
+			echo "Привет!";
 			//Да
 			//Проверка входа при сохранении
 			if(!$this->auth->isAdmin()){
 				//Просим авторизоваться
 				header("location: /signin");
 			} else {
+				echo "Привет";
+				exit;
 				//Перезаписываем значение в базе, только если текст отличается
 				if($record['title'] != $_POST['title']){
 					mysqli_query($this->db_link, "UPDATE `records` SET `title`='" . htmlspecialchars($_POST['title']) . "', `text_changed`=1 WHERE id=" . $id);
@@ -137,6 +129,10 @@ class Records extends BaseController {
 		
 		//Формирую ответ JSON встроенными средствами PHP
 		return json_encode( ['result' => 'success']);
+	}
+	
+	function trainvueAction(){
+		return $this->view->load('records/trainvue', []);
 	}
 	
 }

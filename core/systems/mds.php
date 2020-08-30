@@ -1,14 +1,5 @@
 <?php
 
-function crash_without_exit($str, $style_no=1){
-	echo "<link href=\"/assets/admin.css\" rel=\"stylesheet\">" . "<span class=\"msg-error-style{$style_no}\">" . $str . "</span>";
-}
-
-function crash($str, $style_no=1) {
-	crash_without_exit($str, $style_no);
-	exit;
-}
-
 //mds - "My decoration system" или "Моя система декорирования"
 function mds($command, $string=""){
 	$command = "  " . $command . " ";

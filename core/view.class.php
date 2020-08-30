@@ -1,9 +1,7 @@
 <?php
 	class View
 	{
-		/**
-		 * Define path to views files
-		 */
+		//Задаю путь к скриптам шаблонов
 		const VIEWS_PATH = "./views/";
 		
 		/**
@@ -22,22 +20,13 @@
 		 */
 		public $blocks = [];
 
-		/**
-		 * Store name of view, which is called by helper view()
-		 * or method View::load().
-		 */
+		//Сюда буду сохранять имя скрипта шаблона
 		public $view = '';
 		
-		/**
-		 * Store name for parent of $this->view,
-		 * which is set by $this->extend() method.
-		 */
+		//Здесь я буду хранить имя родительского шаблона
 		public $parentView = '';
 
-		/**
-		 * If variable $this->name is not found,
-		 * then take value from $this->data[$name]
-		 */
+		//Буду выполнять эту функцию при обращении к недоступным свойствам объекта
 		public function __get($name) {
 			if (isset($this->data[$name])) return $this->data[$name];
 			return "";
@@ -66,16 +55,16 @@
 				crash("Файл шаблона " . static::VIEWS_PATH.$view.'.html.php' . " не найден");
 			}
 			
-			//Execute child view file and collect blocks of content
-			//to $this->blocks property.
-			require(static::VIEWS_PATH.$view.'.html.php');
+			//Исполняю дочерний скрипт шаблона, в результате исполнения вывод скрипта оказывается в переменной $this->blocks['имя блока']
+			require(static::VIEWS_PATH . $view . '.html.php');
 			
+			//Начинаем сохранять вывод в буфер
 			ob_start();
 			
-			//Execute parent for $view file and replace collected blocks of content
+			//Выполняем скрипт родительского шаблона
 			require(static::VIEWS_PATH.$this->parentView.'.html.php');
 			
-			//Return ready HTML to controller
+			//Возврат буферизированного вывода методу контроллера
 			return ob_get_clean();
 		}
 		
@@ -86,33 +75,28 @@
 		   $this->data[$name] = $value;
 		}
 		
-		/**
-		 * Define parent's view file which we extend.
-		 * This method should be used in the beginning of child's view file.
-		 */
+		//С помощью данной функции я определяю имя родительского шаблона из файла шаблона
 		public function extend($parent_view)
 		{
-			//Save parent's buffer to take it in $this->load()
 			$this->parentView = $parent_view;
 		}
 		
-		/**
-		 * Start catching child view buffer.
-		 * This method should be used in child views before $this->start() method.
-		 */
+		//Алиас для extend с 2020/08/30
+		public function setParentView($parent_view){
+			return $this->extend($parent_view);
+		}
+		
+		//Эту функцию использую в скрипте шаблона, чтобы начать буферизацию вывода
 		public function start($block)
 		{
 			ob_start();
 		}
 		
-		/**
-		 * Stop catching child view buffer and save it.
-		 * Then start catching parent view buffer.
-		 * This method should be used in child views after $this->start() method.
-		 */
+		//Эту функцию использую, чтобы остановить начатую с помощью start() функции буферизацию вывода
+		//и сохранить полученный буфер в переменную $this->blocks['имя блока'].
 		public function stop($block)
 		{
-			//Catch child view buffer and save it to variable
+			//Записываю буфер после чего очищаю его
 			$this->blocks[$block] = ob_get_clean();
 		}
 		

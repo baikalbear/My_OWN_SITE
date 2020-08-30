@@ -1,11 +1,14 @@
 <?php
+	//Подключаю систему обработки ошибок
+	include_once($_SERVER['DOCUMENT_ROOT'] . "/core/systems/error.php");	
+
 	//Подключаю настройки
-	include_once($_SERVER['DOCUMENT_ROOT'] . "/config.php");
+	include_once($_SERVER['DOCUMENT_ROOT'] . "/core/configs/config.php");	
 	
-	//Локализации
-	include_once($_SERVER['DOCUMENT_ROOT'] . "/locale.php");
-	
-	//Подключаю систему декорирования
+	//Подключаю настройки переводов (локализаций)
+	include_once($_SERVER['DOCUMENT_ROOT'] . "/core/configs/locale.php");
+
+	//Подключаю систему оформления вывода
 	include_once($_SERVER['DOCUMENT_ROOT'] . "/core/systems/mds.php");
 
 	//Путь к активам - js, css...

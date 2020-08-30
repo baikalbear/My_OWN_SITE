@@ -13,10 +13,12 @@
 	<!--END-->
 	
 	<br/>
-	
-	<button type="button" class="btn btn-success btn-sm" onclick="location.href='/records/add'">
-		Добавить запись
-	</button>
+	<form action="/records/add" method="post">
+		<button type="submit" class="btn btn-success btn-sm" onclick="location.href='/records/add'">
+			Добавить запись
+		</button>
+		<input type="hidden" name="confirm_add" value="1"/>
+	</form>
 	<br/><br/>
 	<div id="postsList"></div>
 	
