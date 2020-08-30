@@ -19,7 +19,7 @@ function handle_error($errno, $errstr, $errfile, $errline){
 	$output .= " В файле '$errfile'<br/>";
 	$output .= "На строке '$errline'<br/>";
 	$output .= "Информация для отладки:<br/><br/><pre style='background:#FFFACD;'>" . print_r($errstr, true) . "</pre>";
-	echo "<div style='padding:10px;background:#F0E68C;'><b>Системная ошибка</b><br/>" . $output . "</div";
+	echo "<div style='padding:10px;background:#F0E68C;display:inline-block;'><b>Системная ошибка</b><br/>" . $output . "</div";
 }
 
 function handle_fatal_error(){
