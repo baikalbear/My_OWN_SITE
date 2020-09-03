@@ -1,13 +1,11 @@
-<?php $this->setParentView('base') ?>
+<?php $this->extend('base') ?>
 
 <?php $this->start('body') ?>
-
-trainvue
-
+	<?=$this->data['text'];?>
 <?php $this->stop('body') ?>
 
 <?php $this->start('script') ?>
     <script>
 
-    </script>	
+	</script>	
 <?php $this->stop('script') ?>

@@ -42,7 +42,7 @@ class Records extends BaseController {
 	
 	function addAction(){
 		if(isset($_POST['confirm_add'])){
-			$sql = "INSERT INTO `records` SET text='" . htmlspecialchars($_POST['text']) . "', status=0, text_changed=0";
+			$sql = "INSERT INTO `records` SET `date_edit`=now(), text='" . htmlspecialchars($_POST['text']) . "', status=0, text_changed=0";
 			mysqli_query($this->db_link, $sql);
 			if(mysqli_affected_rows($this->db_link) > 0){
 				header("location:/records");
@@ -57,9 +57,9 @@ class Records extends BaseController {
 	function editAction(){
 		//Редактирование делаю, опираясь на id элемента в БД
 		if(!isset($_GET['id'])){
-			crash("ID не определён");
+			crash("ID записи не определён");
 		}
-
+		
 		//Теперь получаю элемент из базы в виде ассоц. массива
 		$id = $_GET['id'];
 		
@@ -67,33 +67,38 @@ class Records extends BaseController {
 		
 		$record = mysqli_fetch_array($q);
 
-		//Форма уже отправлена?
 		if(isset($_POST['text'])){
-			echo "Привет!";
-			//Да
 			//Проверка входа при сохранении
 			if(!$this->auth->isAdmin()){
 				//Просим авторизоваться
 				header("location: /signin");
 			} else {
-				echo "Привет";
-				exit;
-				//Перезаписываем значение в базе, только если текст отличается
+				$flag = false; //Флаг, что запись была изменена
+				
 				if($record['title'] != $_POST['title']){
 					mysqli_query($this->db_link, "UPDATE `records` SET `title`='" . htmlspecialchars($_POST['title']) . "', `text_changed`=1 WHERE id=" . $id);
+					$flag = true;
 				}
 
 				if($record['description'] != $_POST['description']){
 					mysqli_query($this->db_link, "UPDATE `records` SET `description`='" . htmlspecialchars($_POST['description']) . "', `text_changed`=1 WHERE id=" . $id);
+					$flag = true;
 				}
 				
 				if($record['text'] != $_POST['text']){
 					mysqli_query($this->db_link, "UPDATE `records` SET `text`='" . htmlspecialchars($_POST['text']) . "', `text_changed`=1 WHERE id=" . $id);
+					$flag = true;
 				}				
 
 				if($record['unique_name'] != $_POST['unique_name']){
 					mysqli_query($this->db_link, "UPDATE `records` SET `unique_name`='" . htmlspecialchars($_POST['unique_name']) . "', `text_changed`=1 WHERE id=" . $id);
+					$flag = true;
 				}
+				
+				if($flag){
+					mysqli_query($this->db_link, "UPDATE `records` SET `date_edit`=now() WHERE `id`=$id");
+				}
+				
 				//Для вывода сообщения используем хранение в COOKIE
 				$_SESSION['record_edited'] = true;
 				
@@ -115,6 +120,28 @@ class Records extends BaseController {
 		}
 	}
 	
+	function deleteAction(){
+		if(!isset($_GET['id'])){
+			crash("ID записи не определён");
+		}
+		
+		$id = $_GET['id'];
+		
+		if(isset($_GET['timestamp'])){
+			$live = time()-substr($_GET['timestamp'], 0, strlen($_GET['timestamp'])-3);
+			if($live > 60){
+				return $this->view->universal("Устаревшая ссылка на удаление записи");
+			}else{
+				$sql = "DELETE FROM `records` WHERE `id`=$id";
+				mysqli_query($this->db_link, $sql);
+				//echo($sql);
+				header("location: /records/delete/?id=$id&deleted_success");
+			}
+		}elseif(isset($_GET['deleted_success'])){
+			return $this->view->universal("Запись успешно удалена");
+		}
+	}
+	
 	function changestatusAction(){
 		//Проверка авторизации
 		if(!$this->auth->isAdmin()){
@@ -131,8 +158,5 @@ class Records extends BaseController {
 		return json_encode( ['result' => 'success']);
 	}
 	
-	function trainvueAction(){
-		return $this->view->load('records/trainvue', []);
-	}
-	
+
 }

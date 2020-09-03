@@ -9,6 +9,9 @@
 		 */
 		public $data;
 		
+		//Сюда будет помещён объект $auth, созданный в контроллере, из которого был вызван данный шаблон
+		public $auth;
+		
 		/**
 		 * Store full html for the view
 		 */
@@ -25,6 +28,10 @@
 		
 		//Здесь я буду хранить имя родительского шаблона
 		public $parentView = '';
+
+		public function setAuth($auth){
+			$this->auth = $auth;
+		}
 
 		//Буду выполнять эту функцию при обращении к недоступным свойствам объекта
 		public function __get($name) {
@@ -66,6 +73,10 @@
 			
 			//Возврат буферизированного вывода методу контроллера
 			return ob_get_clean();
+		}
+		
+		public function universal($text){
+			return $this->load("universal", ['text'=>$text]);
 		}
 		
 		/**

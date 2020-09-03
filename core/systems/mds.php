@@ -1,7 +1,5 @@
 <?php
 
-<<<<<<< HEAD
->>>>>>> 28f0eb5228c35631c508c6275e9da8a77b4e64c4
 //mds - "My decoration system" или "Моя система декорирования"
 function mds($command, $string=""){
 	$command = "  " . $command . " ";

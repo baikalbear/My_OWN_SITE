@@ -44,6 +44,9 @@
 				$cf_name = ucfirst($piece1);
 			}
 
+			if(!class_exists($cf_name)){
+				crash("Контроллер '$cf_name' не существует");
+			}
 			//Создаю экземпляр класса
 			$instance = new $cf_name();
 			

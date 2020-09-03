@@ -1,4 +1,6 @@
-/* Раздел /blocks/ */
+/*
+Маршрут /blocks/
+*/
 #blocks_table td {
 	border: 1px solid gray;
 	padding: 2px 3px;
@@ -20,4 +22,19 @@
 	border:1px solid #666;
 	padding:8px;
 	background:#AFEEEE;
+}
+
+/*
+Маршрут /records/edit/
+*/
+#record_edit_buttons{
+	width:100%;padding:10px 0;
+}
+
+#del_button{
+	float:left;
+}
+
+#save_button{
+	float:right;
 }

@@ -47,10 +47,11 @@
 	  <thead>
 		<tr>
 		  
-		  <th scope="col"><a href="<?=$links['username']?>">Имя пользователя</a></th>
-		  <th scope="col"><a href="<?=$links['email']?>">Email</a></th>
+		  <!--<th scope="col"><a href="<?=$links['username']?>">Имя пользователя</a></th>
+		  <th scope="col"><a href="<?=$links['email']?>">Email</a></th>-->
+		  <th scope="col">Дата редактирования</th>
 		  <th scope="col">Заголовок записи</th>
-		  <th scope="col"><a href="<?=$links['status']?>">Статус</a></th>
+		  <!--<th scope="col"><a href="<?=$links['status']?>">Статус</a></th>-->
 		  <?if($this->auth->isAdmin()){?>
 				<th>Действие</th>
 		  <?}?>
@@ -74,10 +75,8 @@
 				
 				?>
 				<tr>
-				  <td><?=$t['username']?></td>
-				  <td><?=$t['email']?></td>
+				  <td><?=$t['date_edit']?></td>
 				  <td><?=$t['title']?></td>
-				  <td><?=$status?></td>
 				  <?if($this->auth->isAdmin()){?>
 						<td><a href="/records/edit/?id=<?=$t['id']?>">Изменить</a></td>
 				  <?}?>
@@ -115,9 +114,6 @@
 		?>
 		<?=$paginator?>
 	</div>
-    
-	<br/>
-	<a href="/">Перейти на главную</a>
 <?php $this->stop('body') ?>
 
 <?php $this->start('script') ?>

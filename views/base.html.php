@@ -43,7 +43,7 @@
     <?php $this->assetJS('bootstrap.min.js') ?>
 	
     <?php $this->assetJS('app.js') ?>
-	<?php $this->assetJS('https://cdn.jsdelivr.net/npm/vue/dist/vue.js') ?>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 	<?php //$this->assetJS('https://cdn.tiny.cloud/1/580ji8e36b7rvnybxmhfyyeiis3ii4blu3zyzbzegnh7uwbi/tinymce/5/tinymce.min.js') ?>
 	<script src="https://cdn.tiny.cloud/1/580ji8e36b7rvnybxmhfyyeiis3ii4blu3zyzbzegnh7uwbi/tinymce/5/tinymce.min.js" referrerpolicy="origin"/></script>	
 
