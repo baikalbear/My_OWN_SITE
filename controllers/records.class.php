@@ -2,22 +2,22 @@
 //Класс предметной области "Задачи"
 class Records extends BaseController {
 
-	//Построит HTML всех имеющихся в базе задач
 	function defaultAction(){
-		//Определяет количество записей на странице
-		$records_per_page = 20;
+		//Определяю количество записей на странице
+		$records_per_page = $GLOBALS['records_per_page'];
+		
 		//Настрою сортировку
 		if(isset($_GET['sort'])) {
 			$sort = $_GET['sort'];
 		}else{
-			$sort = 'username';
+			$sort = 'date_edit';
 		}
 		
 		//Настрою направление сортировки
 		if(isset($_GET['sortdirection'])) {
 			$sortdirection = $_GET['sortdirection'];
 		}else{
-			$sortdirection = 'asc';
+			$sortdirection = 'desc';
 		}
 
 		//Настрою пагинацию
@@ -138,7 +138,7 @@ class Records extends BaseController {
 				header("location: /records/delete/?id=$id&deleted_success");
 			}
 		}elseif(isset($_GET['deleted_success'])){
-			return $this->view->universal("Запись успешно удалена");
+			return $this->view->universal("Запись успешно удалена.<br/>Перейти к <a href='/records/'>списку записей</a>");
 		}
 	}
 	

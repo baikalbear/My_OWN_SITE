@@ -29,31 +29,31 @@
 		
 		<div>
 		  <label>Дата редактирования</label>
-		  <input type="text" data-noempty class="form-control" id="input_date_edit" value="<?=$this->data['record']['date_edit']?>" readonly>
+		  <input type="text" class="form-control" id="input_date_edit" value="<?=$this->data['record']['date_edit']?>" readonly>
 		  <div class="help-block with-errors"></div>
 		</div>
 		
 		<div>
 		  <label for="inputText">Заголовок</label>
-		  <input type="text" data-noempty class="form-control" id="inputTitle" name ="title" value="<?=$this->data['record']['title']?>" rows="7">
+		  <input type="text" class="form-control" id="inputTitle" name ="title" value="<?=$this->data['record']['title']?>" rows="7">
 		  <div class="help-block with-errors"></div>
 		</div>
 		
 		<div>
 		  <label for="inputText">Описание</label>
-		  <textarea data-noempty class="form-control" id="inputDescription" name="description" rows="7" required><?=$this->data['record']['description']?></textarea>
+		  <textarea class="form-control" id="inputDescription" name="description" rows="7"><?=$this->data['record']['description']?></textarea>
 		  <div class="help-block with-errors"></div>
 		</div>         
 		
 		<div>
 		  <label for="inputText">Текст</label>
-		  <textarea data-noempty class="form-control" id="inputText" name="text" rows="7" required><?=$this->data['record']['text']?></textarea>
+		  <textarea class="form-control" id="inputText" name="text" rows="7"><?=$this->data['record']['text']?></textarea>
 		  <div class="help-block with-errors"></div>
 		</div>     
 		
 		<div>
 		  <label for="inputText">Уникальное имя</label>
-		  <input type="text" data-noempty class="form-control" id="inputUniqueName" name ="unique_name" value="<?=$this->data['record']['unique_name']?>" rows="7">
+		  <input type="text" class="form-control" id="inputUniqueName" name ="unique_name" value="<?=$this->data['record']['unique_name']?>" rows="7">
 		  <div class="help-block with-errors"></div>
 		</div>
 		
