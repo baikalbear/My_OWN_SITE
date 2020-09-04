@@ -6,12 +6,12 @@
 	padding: 2px 3px;
 }
 
-#blocks_form input {
+#pg_blocks_form input {
 	border:1px solid #FFA07A;
 	border-radius:5px;
 }
 
-#blocks_form .zapis {
+#pg_blocks_form .zapis {
 	width:200px;
 }
 
@@ -24,6 +24,26 @@
 	background:#AFEEEE;
 }
 
+.pg_blocks_hex{
+	width:30px;height:15px;
+}
+
+.pg_blocks_changecolor_td{
+	position:relative;
+}
+
+.pg_blocks_palitra{
+	display:none;
+	position:absolute;
+	width:40px;
+	border:5px solid #000;
+	background:#999;
+	z-index:999;
+}
+
+.pg_blocks_palitra_color{
+	width:30px;height:15px;
+}
 /*
 Маршрут /records/edit/
 */

@@ -29,7 +29,7 @@
 
 	?>
 
-	<form id="blocks_form">
+	<form id="pg_blocks_form">
 		<table id="blocks_table">
 			<tr>
 				<td>ID</td>
@@ -37,18 +37,32 @@
 				<td>Связанная запись</td>
 			</tr>
 			<?php
+				$db_link = $this->data['db_link'];
 				while($t = mysqli_fetch_array($this->data['q'])){
-					$db_link = $this->data['db_link'];
-					$q1 = mysqli_query($db_link, "SELECT * FROM `records` 
+					$sql1 = "SELECT * FROM `records`
 											LEFT JOIN `records_blocks` ON `records`.`id`=`records_blocks`.`record_id`
-											WHERE `records_blocks`.`block_id`={$t['id']}");
+											LEFT JOIN `blocks` ON `blocks`.`id`=`records_blocks`.`block_id`
+											LEFT JOIN `colors` ON `blocks`.`color_id`=`colors`.`id`
+											WHERE `records_blocks`.`block_id`={$t['id']}";
+					//echo $sql1;
+					$q1 = mysqli_query($db_link, $sql1);
 					$t1 = mysqli_fetch_array($q1);
 					if($t1['record_id'] == 0) $t1['title'] = "==НЕ ВЫБРАНО==";
 					
 					?>
 						<tr>
 							<td><?=$t['id']?></td>
-							<td><input type="text" name="b_<?=$t['id']?>" value="<?=$t['color']?>" onchange="change_color(<?=$t['id']?>, this);"></td>
+							<td class="pg_blocks_changecolor_td">
+								<div style="background:#<?=$t1['hex']?>;" class="pg_blocks_hex" @click="pg_blocks_palitra(<?=$t1['id']?>)"></div>
+								<div id="pg_blocks_palitra_<?=$t1['id']?>" class="pg_blocks_palitra">
+									<?
+										$q2 = mysqli_query($db_link, "SELECT * FROM `colors`  ORDER BY `id`");
+										while($t2 = mysqli_fetch_array($q2)){?>
+											<div class="pg_blocks_palitra_color" style="background:#<?=$t2['hex']?>" @click="pg_blocks_choosecolor(<?=$t2['id']?>)"></div>
+										<?}
+									?>
+								</div>
+							</td>
 							<td class="zapis"><a href="#" onclick="dd_menu1(<?=$t['id']?>);" id="dd_menu1_a_<?=$t['id']?>"><?=$t1['title']?></a>
 							<div class="dd_menu1" id="dd_menu1_<?=$t['id']?>">
 								<?=str_replace("{id}", $t['id'], $records_list_html)?>
@@ -120,5 +134,29 @@
 				}
 			});					
 		}
+		
+		vue1 = new Vue({
+			el: '#pg_blocks_form',
+			data: {
+				palitra_open: false,
+				palitra_open_id: 0
+			},
+			methods: {
+				pg_blocks_palitra: function(id){
+					if(!this.palitra_open){
+						$("#pg_blocks_palitra_"+id).show();
+						this.palitra_open = true;
+						palitra_open_id = id;
+					}else{
+						$("#pg_blocks_palitra_"+palitra_open_id).hide();
+						$("#pg_blocks_palitra_"+id).hide();
+						this.palitra_open = false;
+					}
+				},
+				pg_blocks_choosecolor(color_id){
+					alert(color_id);
+				}
+			}
+		})	
     </script>
 <?php $this->stop('script') ?>
