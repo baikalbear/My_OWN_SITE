@@ -22,6 +22,8 @@
 			<a href="/remotedump/">Работа с файлом дампа БД</a>
 			<br/><br/>
 			<a href="/dbconnect/">Работа с MySQL</a>
+			<br/><br/>
+			<a href="<?=$GLOBALS['myadmin_link']?>" target="_blank">PhpMyAdmin</a>
 		</div>
 	<!--END-->
 	
