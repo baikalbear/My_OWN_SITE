@@ -20,11 +20,7 @@ class Blocks extends BaseController {
 	}
 	
 	function defaultAction(){
-		$q = mysqli_query($this->db_link, "select * from `blocks` order by `id`");
-		
-		$q1 = mysqli_query($this->db_link, "select * from `records` order by `id`");
-
-		return $this->view->load('blocks', ['q' => $q, 'q1' => $q1, 'auth'=>$this->auth, 'db_link'=>$this->db_link]);
+		return $this->view->load('blocks', ['db_link'=>$this->db_link]);
 	}
 	
 	function linkrecordAction(){

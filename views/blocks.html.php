@@ -16,17 +16,21 @@
 	<br/><br/>
 	
 	<?php
+		//START: Формирую пункты всплывающей менюшки со списком записей
 		$records_list_html = "";$m = [];$m[0] = "==НЕ ВЫБРАНО==";
 		
-		while ($t1 = mysqli_fetch_array($this->data['q1'])){
-			$m[$t1['id']] = $t1['title'];
+		$sql_q_records = mysqli_query($this->db_link, "SELECT * FROM `records` ORDER BY `id`");
+		
+		while ($sql_r_records = mysqli_fetch_array($sql_q_records)){
+			$m[$sql_r_records['id']] = $sql_r_records['title'];
 		}
 		
 		foreach ($m as $id => $title){
 			$records_list_html .= "<a href=\"#\" onclick=\"dd_menu1_choose({id}, '{$title}', {$id})\">{$title}</a>
 							<input type='hidden' name='record_link[{id}]' value='' id='record_link_{id}'/><br/>";
 		}
-
+		//END: Пункты всплывающей менюшки сформированы и находятся в переменной $records_list_html
+		//Для каждого отдельного блока выражение {id} будет заменено на id той записи, которая присвоена блоку.
 	?>
 
 	<form id="pg_blocks_form">
@@ -37,37 +41,49 @@
 				<td>Связанная запись</td>
 			</tr>
 			<?php
-				$db_link = $this->data['db_link'];
-				while($t = mysqli_fetch_array($this->data['q'])){
-					$sql1 = "SELECT * FROM `records`
+				$sql_blocks = "
+					SELECT `blocks`.`id` as `id`, `colors`.`hex` as `hex` 
+					FROM `blocks`
+					LEFT JOIN `colors` ON `blocks`.`color_id`=`colors`.`id`
+					ORDER BY `blocks`.`id`
+				";
+				
+				$sql_q_blocks = mysqli_query($this->db_link, $sql_blocks);				
+				
+				//Перебираю блоки в цикле
+				while($sql_r_block = mysqli_fetch_array($sql_q_blocks)){
+					//START: Получаю информацию о записи, соответствующей блоку в таблице records_blocks
+					$sql_block_record = "SELECT * FROM `records`
 											LEFT JOIN `records_blocks` ON `records`.`id`=`records_blocks`.`record_id`
-											LEFT JOIN `blocks` ON `blocks`.`id`=`records_blocks`.`block_id`
-											LEFT JOIN `colors` ON `blocks`.`color_id`=`colors`.`id`
-											WHERE `records_blocks`.`block_id`={$t['id']}";
-					//echo $sql1;
-					$q1 = mysqli_query($db_link, $sql1);
-					$t1 = mysqli_fetch_array($q1);
-					if($t1['record_id'] == 0) $t1['title'] = "==НЕ ВЫБРАНО==";
+											WHERE `records_blocks`.`block_id`={$sql_r_block['id']}";
+
+					$sql_q_block_record = mysqli_query($this->db_link, $sql_block_record);
+					$sql_t_block_record = mysqli_fetch_array($sql_q_block_record);
+					//END: Информация о записи получена
 					
-					?>
-						<tr>
-							<td><?=$t['id']?></td>
-							<td class="pg_blocks_changecolor_td">
-								<div style="background:#<?=$t1['hex']?>;" class="pg_blocks_hex" @click="pg_blocks_palitra(<?=$t1['id']?>)" id="pg_blocks_color_<?=$t1['id']?>"></div>
-								<div id="pg_blocks_palitra_<?=$t1['id']?>" class="pg_blocks_palitra">
-									<?
-										$q2 = mysqli_query($db_link, "SELECT * FROM `colors`  ORDER BY `id`");
-										while($t2 = mysqli_fetch_array($q2)){?>
-											<div class="pg_blocks_palitra_color" style="background:#<?=$t2['hex']?>" @click="pg_blocks_choosecolor(<?=$t2['id']?>, '<?=$t2['hex']?>')"></div>
-										<?}
-									?>
-								</div>
-							</td>
-							<td class="zapis"><a href="#" onclick="dd_menu1(<?=$t['id']?>);" id="dd_menu1_a_<?=$t['id']?>"><?=$t1['title']?></a>
-							<div class="dd_menu1" id="dd_menu1_<?=$t['id']?>">
-								<?=str_replace("{id}", $t['id'], $records_list_html)?>
-							</div></td>
-						</tr>
+					//Обзываю невыбранную запись
+					if($sql_t_block_record['record_id'] == 0) $sql_t_block_record['title'] = "==НЕ ВЫБРАНО==";?>
+
+					<tr>
+						<td><?=$sql_r_block['id']?></td>
+						<!--START: Ячейка с выбором цвета-->
+						<td class="pg1_changecolor_td">
+							<div style="background:#<?=$sql_r_block['hex']?>;" class="pg1_changecolor_hex" @click="pg_blocks_palitra(<?=$sql_r_block['id']?>)" id="pg_blocks_color_<?=$sql_r_block['id']?>"></div>
+							<!--START: Блок палитры-->
+							<div id="pg_blocks_palitra_<?=$sql_r_block['id']?>" class="pg1_palitra"><?	
+								$sql_q_colors = mysqli_query($this->db_link, "SELECT * FROM `colors`  ORDER BY `id`");
+								while($sql_r_colors = mysqli_fetch_array($sql_q_colors)){?>
+									<div class="pg1_palitra_a_color" style="background:#<?=$sql_r_colors['hex']?>" @click="pg_blocks_choosecolor(<?=$sql_r_colors['id']?>, '<?=$sql_r_colors['hex']?>')"></div>
+								<?}
+							?></div>
+							<!--END: Блок палитры закончился-->
+						</td>
+						<!--END-->
+						<td class="zapis"><a href="#" onclick="dd_menu1(<?=$sql_r_block['id']?>);" id="dd_menu1_a_<?=$sql_r_block['id']?>"><?=$sql_t_block_record['title']?></a>
+						<div class="dd_menu1" id="dd_menu1_<?=$sql_r_block['id']?>">
+							<?=str_replace("{id}", $sql_r_block['id'], $records_list_html)?>
+						</div></td>
+					</tr>
 				<?}?>
 		</table>
 	</form>		
@@ -153,7 +169,6 @@
 					$("#pg_blocks_palitra_"+id).show();
 					this.palitra_open = true;
 					this.changecolor_block_id = id;
-					alert(id);
 				},
 				pg_blocks_palitra_close: function(id){
 					$("#pg_blocks_palitra_"+this.changecolor_block_id).hide();
@@ -166,7 +181,7 @@
 					this.pg_blocks_change_color_on_server(color_id);
 				},
 				pg_blocks_change_color_on_server: function(color_id){
-					alert("color_id:" + color_id + ":block_id:" + this.changecolor_block_id);
+					//alert("color_id:" + color_id + ":block_id:" + this.changecolor_block_id);
 					$.ajax({
 						url: "/blocks/changecolor/",
 						type: "POST",

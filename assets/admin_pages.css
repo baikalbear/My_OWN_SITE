@@ -1,5 +1,5 @@
 /*
-Маршрут /blocks/
+Страничка /blocks/
 */
 #blocks_table td {
 	border: 1px solid gray;
@@ -24,15 +24,15 @@
 	background:#AFEEEE;
 }
 
-.pg_blocks_hex{
-	width:30px;height:15px;
-}
-
-.pg_blocks_changecolor_td{
+.pg1_changecolor_td{
 	position:relative;
 }
 
-.pg_blocks_palitra{
+.pg1_changecolor_hex{
+	width:30px;height:15px;
+}
+
+.pg1_palitra{
 	display:none;
 	position:absolute;
 	width:40px;
@@ -41,11 +41,12 @@
 	z-index:999;
 }
 
-.pg_blocks_palitra_color{
+.pg1_palitra_a_color{
 	width:30px;height:15px;
 }
+
 /*
-Маршрут /records/edit/
+Страничка /records/edit/
 */
 #record_edit_buttons{
 	width:100%;padding:10px 0;

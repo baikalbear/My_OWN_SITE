@@ -12,6 +12,9 @@
 		//Сюда будет помещён объект $auth, созданный в контроллере, из которого был вызван данный шаблон
 		public $auth;
 		
+		//Сюда будет помещён объект $db_link, созданный в контроллере, из которого был вызван данный шаблон
+		public $db_link;
+		
 		/**
 		 * Store full html for the view
 		 */
@@ -31,6 +34,10 @@
 
 		public function setAuth($auth){
 			$this->auth = $auth;
+		}
+
+		public function setDbLink($db_link){
+			$this->db_link = $db_link;
 		}
 
 		//Буду выполнять эту функцию при обращении к недоступным свойствам объекта

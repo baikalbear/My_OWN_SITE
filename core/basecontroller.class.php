@@ -11,6 +11,7 @@ class BaseController {
 		$this->auth = new Auth();
 		$this->view = new View();
 		$this->view->setAuth($this->auth);
+		$this->view->setDbLink($this->db_link);
 	}
 
 }

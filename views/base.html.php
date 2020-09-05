@@ -17,20 +17,23 @@
 	<?php $this->assetCSS('admin_pages.css') //Админский дизайн, по страницам ?>	
 	<?php $this->assetCSS('colors.css') //Таблица цветов?>
 	<!--END-->
+	
+	<!--Метрики показываем только на удалённом хосте-->
+	<?if($isRemoteHost){?>
+		<!-- Yandex.Metrika counter -->
+		<script type="text/javascript" >
+		   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+		   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+		   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
 
-	<!-- Yandex.Metrika counter -->
-	<script type="text/javascript" >
-	   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-	   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-	   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-
-	   ym(61860529, "init", {
-			clickmap:true,
-			trackLinks:true,
-			accurateTrackBounce:true,
-			webvisor:true
-	   });
-	</script>
+		   ym(61860529, "init", {
+				clickmap:true,
+				trackLinks:true,
+				accurateTrackBounce:true,
+				webvisor:true
+		   });
+		</script>
+	<?}?>
 	<noscript><div><img src="https://mc.yandex.ru/watch/61860529" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 	<!-- /Yandex.Metrika counter -->
     
@@ -71,10 +74,10 @@
 				<?}?>
 			</div>
 			<div id="uppanel_rightside">
+				<a href="/" style="margin-right:25px;">Главная</a>
 				<?if($this->auth->isAdmin()){?>
 					<a href="/service/" style="margin-right:25px;">Сервис</a>
 				<?}?>			
-				<a href="/">На главную</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<?if($this->auth->isAdmin()){?>
 					<?=$_SESSION['username']?> <a href="/signout/" style="margin-left:25px;">Выйти</a>	
 				<?}else{?>
