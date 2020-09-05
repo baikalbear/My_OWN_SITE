@@ -40,6 +40,12 @@
 			<?unset($_SESSION['record_add_id']);?>
 		</div>
 	<?}?>
+	<?if(isset($_SESSION['message'])){?>
+		<div class="pg1_message">
+			<?=$_SESSION['message'];?>
+			<?unset($_SESSION['message']);?>
+		</div>
+	<?}?>
 	<!--END: Окончание блока результата вывода-->
 	
 	<form id="pg1_form">
@@ -48,6 +54,7 @@
 				<td>ID</td>
 				<td>Цвет</td>
 				<td>Связанная запись</td>
+				<td>Действия</td>
 			</tr>
 			<?php
 				$sql_blocks = "
@@ -88,10 +95,15 @@
 							<!--END: Блок палитры закончился-->
 						</td>
 						<!--END-->
-						<td class="zapis"><a href="#" onclick="pg1_records_menu(<?=$sql_r_block['id']?>);" id="pg1_records_menu_link_<?=$sql_r_block['id']?>"><?=$sql_t_block_record['title']?></a>
-						<div class="pg1_records_menu" id="pg1_records_menu_<?=$sql_r_block['id']?>">
-							<?=str_replace("{id}", $sql_r_block['id'], $records_list_html)?>
-						</div></td>
+						<td class="zapis">
+							<a href="#" onclick="pg1_records_menu(<?=$sql_r_block['id']?>);" id="pg1_records_menu_link_<?=$sql_r_block['id']?>"><?=$sql_t_block_record['title']?></a>
+							<div class="pg1_records_menu" id="pg1_records_menu_<?=$sql_r_block['id']?>">
+								<?=str_replace("{id}", $sql_r_block['id'], $records_list_html)?>
+							</div>
+						</td>
+						<td>
+							<button type="button" class="btn btn-danger pg1_delete_button" @click="pg1_delete_block(<?=$sql_r_block['id']?>)">Удалить</button>
+						</td>
 					</tr>
 				<?}?>
 		</table>
@@ -197,6 +209,12 @@
 							//alert(data.result);
 						}
 					});				
+				},
+				pg1_delete_block: function(id){
+					if(confirm("Подтверждаете удаление блока с ID=" + id + "?")){
+						window.location="/blocks/delete/?id=" + id + "&timestamp=" + Date.now();
+					}
+					
 				}
 			}
 		})	

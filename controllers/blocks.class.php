@@ -62,4 +62,12 @@ class Blocks extends BaseController {
 			return json_encode( ['result' => 'Ошибка выполнения SQL-запроса']);
 		}
 	}
+	
+	function deleteAction(){
+		$action = new RepeatedActions();
+		return $action->deletePattern($this->db_link,
+				['множ'=>'blocks'],
+				['един_с_большой'=>'Блок', 'родительный_падеж'=>'блока', 'множ'=>'блоки'],
+				);
+	}
 }
