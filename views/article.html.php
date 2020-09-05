@@ -21,7 +21,7 @@
 	</div>
 	
 
-	<div class="clear"></div>
+	<div class="float-stop"></div>
 	
 <?php $this->stop('body') ?>
 

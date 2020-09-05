@@ -26,7 +26,7 @@
 		}
 		
 		foreach ($m as $id => $title){
-			$records_list_html .= "<a href=\"#\" onclick=\"dd_menu1_choose({id}, '{$title}', {$id})\">{$title}</a>
+			$records_list_html .= "<a href=\"#\" onclick=\"pg1_records_menu_choose({id}, '{$title}', {$id})\">{$title}</a>
 							<input type='hidden' name='record_link[{id}]' value='' id='record_link_{id}'/><br/>";
 		}
 		//END: Пункты всплывающей менюшки сформированы и находятся в переменной $records_list_html
@@ -43,7 +43,7 @@
 	<!--END: Окончание блока результата вывода-->
 	
 	<form id="pg1_form">
-		<table id="blocks_table">
+		<table id="pg1_blocks_table">
 			<tr>
 				<td>ID</td>
 				<td>Цвет</td>
@@ -88,8 +88,8 @@
 							<!--END: Блок палитры закончился-->
 						</td>
 						<!--END-->
-						<td class="zapis"><a href="#" onclick="dd_menu1(<?=$sql_r_block['id']?>);" id="dd_menu1_a_<?=$sql_r_block['id']?>"><?=$sql_t_block_record['title']?></a>
-						<div class="dd_menu1" id="dd_menu1_<?=$sql_r_block['id']?>">
+						<td class="zapis"><a href="#" onclick="pg1_records_menu(<?=$sql_r_block['id']?>);" id="pg1_records_menu_link_<?=$sql_r_block['id']?>"><?=$sql_t_block_record['title']?></a>
+						<div class="pg1_records_menu" id="pg1_records_menu_<?=$sql_r_block['id']?>">
 							<?=str_replace("{id}", $sql_r_block['id'], $records_list_html)?>
 						</div></td>
 					</tr>
@@ -100,24 +100,33 @@
 
 <?php $this->start('script') ?>
     <script>
-        function dd_menu1(id){
-			a = document.getElementById("dd_menu1_" + id).style.display;
-
+        function pg1_records_menu(id){
+			a = document.getElementById("pg1_records_menu_" + id).style.display;
+			
 			if(a != "block") {
-				document.getElementById("dd_menu1_" + id).style.display = "block"
+				document.getElementById("pg1_records_menu_" + id).style.display = "block";
+				$("#pg1_records_menu_link_" + id).css('font-weight', 'bold');
+				$('html, body').animate({
+					scrollTop: $("#pg1_records_menu_" + id).offset().top-150  // класс объекта к которому приезжаем
+				}, 500); // Скорость прокрутки
+				//console.log($("#pg0_box").scrollTop());
 			} else {
-				document.getElementById("dd_menu1_" + id).style.display = "none";
+				document.getElementById("pg1_records_menu_" + id).style.display = "none";
+				$("#pg1_records_menu_link_" + id).css('font-weight', 'normal');
+				$('html, body').animate({
+					scrollTop: $("#pg1_records_menu_link_" + id).offset().top-150  // класс объекта к которому приезжаем
+				}, 500); // Скорость прокрутки
 			}
 		}
 		
-		function dd_menu1_choose(id, val, record_id){
-			document.getElementById("dd_menu1_a_" + id).innerHTML = val;
+		function pg1_records_menu_choose(id, val, record_id){
+			document.getElementById("pg1_records_menu_link_" + id).innerHTML = val;
 			//document.getElementById("record_link_" + id).value = record_id;
-			linkrecord(id, record_id);
-			document.getElementById("dd_menu1_" + id).style.display = "none";
+			link_record(id, record_id);
+			pg1_records_menu(id);
 		}
 		
-		function linkrecord(block_id, record_id){
+		function link_record(block_id, record_id){
 			$.ajax({
 				url: "/blocks/linkrecord/",
 				type: "POST",
@@ -140,27 +149,8 @@
 				}
 			});
 		}
-		
-		function change_color(block_id, obj){
-			$.ajax({
-				url: "/blocks/changecolor/",
-				type: "POST",
-				dataType: "json",
-				data: {
-					block_id: block_id,
-					color: obj.value
-				},
-				error: function(data) {
-					//alert('AJAX response for "' + this.url + '" error:\n' + data.responseText);
-					alert("Системная ошибка обработки запроса AJAX. Текст ошибки: " + data.responseText);
-				},
-				success : function(data) {
-					//alert(data.result);
-				}
-			});					
-		}
-		
-		vue1 = new Vue({
+				
+		pg1_vue1 = new Vue({
 			el: '#pg1_form',
 			data: {
 				palitra_open: false,

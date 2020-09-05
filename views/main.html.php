@@ -62,7 +62,7 @@
 	?>
 	<!--END-->
 
-	<div class="clear"></div>
+	<div class="float-stop"></div>
 	
 	<!--BEGIN: Подвал-->
 	<br/><br/><br/><br/>

@@ -17,7 +17,7 @@
 		Передний стеклоочиститель
 	</div>
 
-	<div class="clear"></div>
+	<div class="float-stop"></div>
 
 	<div class="block_9 yellow_bright">
 		Кнопка фар
@@ -31,7 +31,7 @@
 		Блок 6
 	</div>
 	
-	<div class="clear"></div>
+	<div class="float-stop"></div>
 
 	<div class="block_9 cian_noble">
 		Блок 7
@@ -45,7 +45,7 @@
 		Блок 9
 	</div>
 
-	<div class="clear"></div>
+	<div class="float-stop"></div>
 	
 <?php $this->stop('body') ?>
 

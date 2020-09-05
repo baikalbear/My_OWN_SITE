@@ -61,7 +61,7 @@
 	<!--END-->	
   </head>
   <body>
-    <div class="container">
+    <div class="container" id="pg0_box">
 		<!--BEGIN: Панель авторизации-->
 		<div id="uppanel">
 			<div id="uppanel_leftside">
@@ -84,7 +84,7 @@
 					<a href="/signin/">Войти</a>
 				<?}?>
 			</div>
-			<div class="floatstop"></div>
+			<div class="float-stop"></div>
 		</div>
 		<!--END-->	
 		

@@ -72,7 +72,7 @@
 		<div id="record_edit_buttons">
 			<button type="button" class="btn btn-danger" id="del_button" v-on:click="confirm_delete">Удалить запись</button>
 			<button type="submit" class="btn btn-primary" id="save_button" >Сохранить</button>
-			<div class="floatstop"></div>
+			<div class="float-stop"></div>
 		</div>		
 	</form>
 	

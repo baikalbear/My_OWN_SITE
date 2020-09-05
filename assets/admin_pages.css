@@ -1,7 +1,7 @@
 /*
 Страничка /blocks/
 */
-#blocks_table td {
+#pg1_blocks_table td {
 	border: 1px solid gray;
 	padding: 2px 3px;
 }
@@ -19,7 +19,7 @@
 	width:200px;
 }
 
-.dd_menu1 { /*DropDown меню*/
+.pg1_records_menu { /*DropDown меню*/
 	position:absolute;
 	display:none;
 	width:350px;

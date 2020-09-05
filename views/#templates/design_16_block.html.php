@@ -19,7 +19,7 @@
 		Блок 4
 	</div>
 
-	<div class="clear"></div>
+	<div class="float-stop"></div>
 
 	<div class="block_16 cian_light">
 		Блок 5
@@ -70,7 +70,7 @@
 	</div>
 
 
-	<div class="clear"></div>
+	<div class="float-stop"></div>
 	
 <?php $this->stop('body') ?>
 
