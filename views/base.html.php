@@ -93,7 +93,7 @@
 		<?php $this->output('body') ?>
 	</div>
 	<div id="footer">
-		Это подвал моего сайта
+		Сайт Домышева Ильи &#169; 2020
 	</div>
     <?php $this->output('script') ?>
   </body>

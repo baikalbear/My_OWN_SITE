@@ -53,12 +53,12 @@
 						<tr>
 							<td><?=$t['id']?></td>
 							<td class="pg_blocks_changecolor_td">
-								<div style="background:#<?=$t1['hex']?>;" class="pg_blocks_hex" @click="pg_blocks_palitra(<?=$t1['id']?>)"></div>
+								<div style="background:#<?=$t1['hex']?>;" class="pg_blocks_hex" @click="pg_blocks_palitra(<?=$t1['id']?>)" id="pg_blocks_color_<?=$t1['id']?>"></div>
 								<div id="pg_blocks_palitra_<?=$t1['id']?>" class="pg_blocks_palitra">
 									<?
 										$q2 = mysqli_query($db_link, "SELECT * FROM `colors`  ORDER BY `id`");
 										while($t2 = mysqli_fetch_array($q2)){?>
-											<div class="pg_blocks_palitra_color" style="background:#<?=$t2['hex']?>" @click="pg_blocks_choosecolor(<?=$t2['id']?>)"></div>
+											<div class="pg_blocks_palitra_color" style="background:#<?=$t2['hex']?>" @click="pg_blocks_choosecolor(<?=$t2['id']?>, '<?=$t2['hex']?>')"></div>
 										<?}
 									?>
 								</div>
@@ -139,22 +139,50 @@
 			el: '#pg_blocks_form',
 			data: {
 				palitra_open: false,
-				palitra_open_id: 0
+				changecolor_block_id: 0
 			},
 			methods: {
 				pg_blocks_palitra: function(id){
 					if(!this.palitra_open){
-						$("#pg_blocks_palitra_"+id).show();
-						this.palitra_open = true;
-						palitra_open_id = id;
+						this.pg_blocks_palitra_open(id);
 					}else{
-						$("#pg_blocks_palitra_"+palitra_open_id).hide();
-						$("#pg_blocks_palitra_"+id).hide();
-						this.palitra_open = false;
+						this.pg_blocks_palitra_close(id);
 					}
 				},
-				pg_blocks_choosecolor(color_id){
-					alert(color_id);
+				pg_blocks_palitra_open: function(id){
+					$("#pg_blocks_palitra_"+id).show();
+					this.palitra_open = true;
+					this.changecolor_block_id = id;
+					alert(id);
+				},
+				pg_blocks_palitra_close: function(id){
+					$("#pg_blocks_palitra_"+this.changecolor_block_id).hide();
+					$("#pg_blocks_palitra_"+id).hide();
+					this.palitra_open = false;					
+				},
+				pg_blocks_choosecolor(color_id, hex){
+					this.pg_blocks_palitra_close(this.changecolor_block_id);
+					$("#pg_blocks_color_" + this.changecolor_block_id).css("background-color", "#"+hex);
+					this.pg_blocks_change_color_on_server(color_id);
+				},
+				pg_blocks_change_color_on_server: function(color_id){
+					alert("color_id:" + color_id + ":block_id:" + this.changecolor_block_id);
+					$.ajax({
+						url: "/blocks/changecolor/",
+						type: "POST",
+						dataType: "json",
+						data: {
+							block_id: this.changecolor_block_id,
+							color_id: color_id
+						},
+						error: function(data) {
+							//alert('AJAX response for "' + this.url + '" error:\n' + data.responseText);
+							alert("Системная ошибка обработки запроса AJAX. Текст ошибки: " + data.responseText);
+						},
+						success : function(data) {
+							//alert(data.result);
+						}
+					});				
 				}
 			}
 		})	

@@ -4,10 +4,11 @@ class Blocks extends BaseController {
 	function mainPageAction(){
 		$q = mysqli_query($this->db_link, "
 				select `blocks`.`color` as `color`, `records`.`id` as `record_id`, `records`.`title` as `title`, `records`.`description` as `description`,
-				`records`.`unique_name` as `unique_name`
+				`records`.`unique_name` as `unique_name`, `colors`.`hex` as `hex`
 				FROM `blocks`
 				left join records_blocks on blocks.id=records_blocks.block_id
 				left join records on records.id=records_blocks.record_id
+				LEFT JOIN `colors` ON `colors`.`id`=`blocks`.`color_id`
 				order by blocks.id asc");		
 
 		$q1 = mysqli_query($this->db_link, "
@@ -22,8 +23,6 @@ class Blocks extends BaseController {
 		$q = mysqli_query($this->db_link, "select * from `blocks` order by `id`");
 		
 		$q1 = mysqli_query($this->db_link, "select * from `records` order by `id`");
-
-		$num = mysqli_num_rows($q);
 
 		return $this->view->load('blocks', ['q' => $q, 'q1' => $q1, 'auth'=>$this->auth, 'db_link'=>$this->db_link]);
 	}
@@ -65,9 +64,9 @@ class Blocks extends BaseController {
 	
 	function changeColorAction(){
 		$block_id = $_POST['block_id'];
-		$color = $_POST['color'];
+		$color_id = $_POST['color_id'];
 
-		$sql = "UPDATE `blocks` SET `color`='$color' WHERE `id`=$block_id";
+		$sql = "UPDATE `blocks` SET `color_id`='$color_id' WHERE `id`=$block_id";
 		//echo "'" . $sql . "'";
 		
 		mysqli_query($this->db_link, $sql);

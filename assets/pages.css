@@ -1,5 +1,5 @@
 /*Оформление главной страницы*/
-.blocks_on_mainpage {
+.block_on_mainpage {
 	float:left;
 	width:320px;
 	height:170px;
@@ -9,5 +9,5 @@
 	overflow:hidden;
 	text-overflow: clip;
 	padding: 20px;
-	background: #aaa;
+	border:2px solid #666;
 }

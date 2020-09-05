@@ -29,7 +29,7 @@
 			<?if($t['record_id']){?>
 				<a href="/articles/<?=$t['unique_name']?>/">
 			<?}?>
-				<div class="blocks_on_mainpage <?=$t['color']?>">
+				<div class="block_on_mainpage" style="<?if($t['hex']!=""){echo "border-color:#".$t['hex'];}?>">
 					<div>
 						<span style="font-size:11pt;color:#222;"><?=$t['title']?></span>
 						<?if($this->auth->isAdmin()){?>
