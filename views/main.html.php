@@ -16,8 +16,13 @@
 	<div id="nav2">
 		Категории: <a href="/" class="nav2">Все</a>
 		<?php
-			while($t1 = mysqli_fetch_array($this->data['q1'])){?>	
-				<a href="#" class="nav2"><?=$t1['name']?></a>			
+			$sql_q_categories = mysqli_query($this->db_link, "
+					SELECT *
+					FROM `categories`
+					ORDER BY `id` ASC");	
+
+			while($sql_r_categories = mysqli_fetch_array($sql_q_categories)){?>	
+				<a href="#" class="nav2"><?=$sql_r_categories['name']?></a>			
 			<?}
 		?>		
 	</div>
@@ -25,22 +30,32 @@
 	
 	<!--BEGIN: Блоки-->
 	<?php
-		while($t = mysqli_fetch_array($this->data['q'])){?>
-			<?if($t['record_id']){?>
-				<a href="/articles/<?=$t['unique_name']?>/">
+		$sql_q = mysqli_query($this->db_link, "
+				SELECT `records`.`id` as `record_id`, `records`.`title` as `title`, `records`.`description` as `description`,
+					`records`.`unique_name` as `unique_name`, `colors`.`hex` as `hex`
+				FROM `blocks`
+				LEFT JOIN records_blocks on blocks.id=records_blocks.block_id
+				LEFT JOIN records on records.id=records_blocks.record_id
+				LEFT JOIN `colors` ON `colors`.`id`=`blocks`.`color_id`
+				ORDER BY blocks.id asc");		
+
+	
+		while($sql_r = mysqli_fetch_array($sql_q)){?>
+			<?if($sql_r['record_id']){?>
+				<a href="/articles/<?=$sql_r['unique_name']?>/">
 			<?}?>
-				<div class="block_on_mainpage" style="<?if($t['hex']!=""){echo "border-color:#".$t['hex'];}?>">
+				<div class="block_on_mainpage" style="<?if($sql_r['hex']!=""){echo "border-color:#".$sql_r['hex'];}?>">
 					<div>
-						<span style="font-size:11pt;color:#222;"><?=$t['title']?></span>
+						<span style="font-size:11pt;color:#222;"><?=$sql_r['title']?></span>
 						<?if($this->auth->isAdmin()){?>
-							<?if($t['record_id']){?>
-								<a href="/records/edit/?id=<?=$t['record_id']?>" class="link-type3-style1">*ред*</a>
+							<?if($sql_r['record_id']){?>
+								<a href="/records/edit/?id=<?=$sql_r['record_id']?>" class="link-type3-style1">*ред*</a>
 							<?}?>
 						<?}?>
 					</div>
-					<div style="margin-top:5px;font-size:10pt;color:#222;"><?=htmlspecialchars_decode ($t['description'])?></div>
+					<div style="margin-top:5px;font-size:10pt;color:#222;"><?=htmlspecialchars_decode ($sql_r['description'])?></div>
 				</div>
-			<?if($t['record_id']){?>
+			<?if($sql_r['record_id']){?>
 				</a>
 			<?}?>
 		<?}

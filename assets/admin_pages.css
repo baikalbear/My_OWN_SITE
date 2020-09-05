@@ -6,12 +6,16 @@
 	padding: 2px 3px;
 }
 
-#pg_blocks_form input {
+#pg1_actions{padding-bottom:10px;}
+
+#pg1_form{padding-top:10px;}
+
+#pg1_form input {
 	border:1px solid #FFA07A;
 	border-radius:5px;
 }
 
-#pg_blocks_form .zapis {
+#pg1_form .zapis {
 	width:200px;
 }
 
@@ -43,6 +47,12 @@
 
 .pg1_palitra_a_color{
 	width:30px;height:15px;
+}
+
+.pg1_message{
+	font-family:Tahoma;
+	color:#1E90FF;font-weight:bold;
+	padding:10px 0 10px 0;
 }
 
 /*

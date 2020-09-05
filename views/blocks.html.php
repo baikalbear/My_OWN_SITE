@@ -11,9 +11,9 @@
 	<?}?>	
 	
 	<h1 align="center" class="control">Блоки</h1>
-	<br/>
-	<a href="/blocks/add" class="link-type2-style1">=добавить=</a>
-	<br/><br/>
+	<div id="pg1_actions">
+		<a href="/blocks/add" class="link-type2-style1">=добавить=</a>
+	</div>
 	
 	<?php
 		//START: Формирую пункты всплывающей менюшки со списком записей
@@ -32,8 +32,17 @@
 		//END: Пункты всплывающей менюшки сформированы и находятся в переменной $records_list_html
 		//Для каждого отдельного блока выражение {id} будет заменено на id той записи, которая присвоена блоку.
 	?>
-
-	<form id="pg_blocks_form">
+	
+	<!--BEGIN: Сообщение с результатом действия-->
+	<?if(isset($_SESSION['record_add_id'])){?>
+		<div class="pg1_message">
+			Запись успешно добавлена (ID = <?=$_SESSION['record_add_id']?>).
+			<?unset($_SESSION['record_add_id']);?>
+		</div>
+	<?}?>
+	<!--END: Окончание блока результата вывода-->
+	
+	<form id="pg1_form">
 		<table id="blocks_table">
 			<tr>
 				<td>ID</td>
@@ -152,7 +161,7 @@
 		}
 		
 		vue1 = new Vue({
-			el: '#pg_blocks_form',
+			el: '#pg1_form',
 			data: {
 				palitra_open: false,
 				changecolor_block_id: 0

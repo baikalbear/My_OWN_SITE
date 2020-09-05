@@ -2,25 +2,11 @@
 class Blocks extends BaseController {
 
 	function mainPageAction(){
-		$q = mysqli_query($this->db_link, "
-				select `blocks`.`color` as `color`, `records`.`id` as `record_id`, `records`.`title` as `title`, `records`.`description` as `description`,
-				`records`.`unique_name` as `unique_name`, `colors`.`hex` as `hex`
-				FROM `blocks`
-				left join records_blocks on blocks.id=records_blocks.block_id
-				left join records on records.id=records_blocks.record_id
-				LEFT JOIN `colors` ON `colors`.`id`=`blocks`.`color_id`
-				order by blocks.id asc");		
-
-		$q1 = mysqli_query($this->db_link, "
-				select *
-				FROM `categories`
-				order by `id` asc");		
-		
-		return $this->view->load('main', ['q'=>$q, 'q1'=>$q1, 'auth'=>$this->auth]);
+		return $this->view->load('main', []);
 	}
 	
 	function defaultAction(){
-		return $this->view->load('blocks', ['db_link'=>$this->db_link]);
+		return $this->view->load('blocks');
 	}
 	
 	function linkrecordAction(){
@@ -54,7 +40,10 @@ class Blocks extends BaseController {
 	}
 	
 	function addAction(){
-		mysqli_query($this->db_link, "INSERT INTO `blocks` SET `color`=''");
+		$sql_add = "INSERT INTO `blocks` SET `color_id`=0";
+		echo $sql_add;
+		mysqli_query($this->db_link, $sql_add);
+		$_SESSION['record_add_id'] = mysqli_insert_id($this->db_link);
 		header("location:/blocks/");
 	}
 	
