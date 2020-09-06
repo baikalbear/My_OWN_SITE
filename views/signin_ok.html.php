@@ -4,7 +4,7 @@
 	<h1 align="center" class="control">Вход</h1>
 	<div style="height:30px;"></div>
 	Вы успешно вошли<br/><br/>
-	<a href="/">Перейти на главную страницу</a><br/>
+	<a href="/">Перейти на главную</a><br/>
 <?php $this->stop('body') ?>
 
 <?php $this->start('script') ?>

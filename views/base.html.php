@@ -96,7 +96,7 @@
 		<?php $this->output('body') ?>
 	</div>
 	<div id="footer">
-		Сайт Домышева Ильи &#169; 2020
+		Илья Домышев &#169; 2020
 	</div>
     <?php $this->output('script') ?>
   </body>

@@ -32,7 +32,7 @@
 	<?php
 		$sql_q = mysqli_query($this->db_link, "
 				SELECT `records`.`id` as `record_id`, `records`.`title` as `title`, `records`.`description` as `description`,
-					`records`.`unique_name` as `unique_name`, `colors`.`hex` as `hex`
+					`records`.`unique_name` as `unique_name`, `colors`.`hex` as `hex`, `blocks`.`id` as `block_id`
 				FROM `blocks`
 				LEFT JOIN records_blocks on blocks.id=records_blocks.block_id
 				LEFT JOIN records on records.id=records_blocks.record_id
@@ -41,23 +41,28 @@
 
 	
 		while($sql_r = mysqli_fetch_array($sql_q)){?>
-			<?if($sql_r['record_id']){?>
-				<a href="/articles/<?=$sql_r['unique_name']?>/">
-			<?}?>
-				<div class="block_on_mainpage" style="<?if($sql_r['hex']!=""){echo "border-color:#".$sql_r['hex'];}?>">
-					<div>
-						<span style="font-size:11pt;color:#222;"><?=$sql_r['title']?></span>
-						<?if($this->auth->isAdmin()){?>
-							<?if($sql_r['record_id']){?>
-								<a href="/records/edit/?id=<?=$sql_r['record_id']?>" class="link-type3-style1">*ред*</a>
-							<?}?>
+			<div class="mp_block" style="<?if($sql_r['hex']!=""){echo "border-color:#".$sql_r['hex'];}?>">
+				<!--BEGIN: Номер блока-->
+				<?if($this->auth->isAdmin()){?>
+					<div class='mp_block_number'>#<?=$sql_r['block_id']?></div>
+				<?}?>			
+				<!--END: Конец номера блока-->
+				<div class="mp_block_title">
+					<?if($sql_r['record_id']){?>
+						<a href="/articles/<?=$sql_r['unique_name']?>/">
+							<span style="font-size:11pt;color:#222;"><?=$sql_r['title']?></span>
+						</a>
+					<?}?>
+					<?if($this->auth->isAdmin()){?>
+						<?if($sql_r['record_id']){?>
+							<a href="/records/edit/?id=<?=$sql_r['record_id']?>" class="link-type3-style1">*ред*</a>
 						<?}?>
-					</div>
-					<div style="margin-top:5px;font-size:10pt;color:#222;"><?=htmlspecialchars_decode ($sql_r['description'])?></div>
+					<?}?>
 				</div>
-			<?if($sql_r['record_id']){?>
-				</a>
-			<?}?>
+				<div class="mp_block_description">
+					<?=htmlspecialchars_decode ($sql_r['description'])?>
+				</div>
+			</div>
 		<?}
 	?>
 	<!--END-->

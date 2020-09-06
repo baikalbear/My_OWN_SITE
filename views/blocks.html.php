@@ -217,10 +217,10 @@
 					
 				},
 				pg1_block_up: function(id){
-					window.location="/blocks/up/?id=" + id + "&timestamp=" + Date.now();
+					window.location="/blocks/updown/?id=" + id + "&type=0&timestamp=" + Date.now();
 				},
 				pg1_block_down: function(id){
-					window.location="/blocks/down/?id=" + id + "&timestamp=" + Date.now();
+					window.location="/blocks/updown/?id=" + id + "&type=1&&timestamp=" + Date.now();
 				}
 			}
 		})	

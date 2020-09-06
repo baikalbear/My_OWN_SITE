@@ -1,5 +1,5 @@
 /*Оформление главной страницы*/
-.block_on_mainpage {
+.mp_block {
 	float:left;
 	width:320px;
 	height:170px;
@@ -10,4 +10,15 @@
 	text-overflow: clip;
 	padding: 20px;
 	border:2px solid #666;
+	position:relative;
 }
+
+.mp_block_number{
+	position:absolute;
+	bottom:0px;right:0px;
+	border-left:1px solid #666;border-top:1px solid #666;
+	font:Tahoma 10pt;padding:0 1px 0 2px;
+}
+
+.mp_block_title{} /*Объявление класса без описания нужно для того, чтобы быстро можно было заполнить описание при необходимости внесения изменений*/
+.mp_block_description{margin-top:5px;font-size:10pt;color:#222;}
