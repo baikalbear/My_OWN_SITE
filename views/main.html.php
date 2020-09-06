@@ -37,7 +37,7 @@
 				LEFT JOIN records_blocks on blocks.id=records_blocks.block_id
 				LEFT JOIN records on records.id=records_blocks.record_id
 				LEFT JOIN `colors` ON `colors`.`id`=`blocks`.`color_id`
-				ORDER BY blocks.id asc");		
+				ORDER BY `blocks`.`sort` ASC");		
 
 	
 		while($sql_r = mysqli_fetch_array($sql_q)){?>
@@ -63,11 +63,7 @@
 	<!--END-->
 
 	<div class="float-stop"></div>
-	
-	<!--BEGIN: Подвал-->
-	<br/><br/><br/><br/>
-	<!--END-->
-	
+		
 <?php $this->stop('body') ?>
 
 <?php $this->start('script') ?>

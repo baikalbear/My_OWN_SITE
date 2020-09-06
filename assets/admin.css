@@ -51,8 +51,13 @@
 }
 
 /*Сообщения об ошибке (используются, например, в функции crash)*/
-.msg-error-style1{
+.msg-error-style1, .msg-error-style2{
+	display:inline-block;
 	font-family:Tahoma;
 	padding: 3px 10px;
 	background: #FF69B4;
 }
+.msg-error-style2{
+	background:#E9967A;
+}
+

@@ -51,10 +51,15 @@ a.pg1_add_button{font-size:10pt;height:25px;padding:2px 5px;text-decoration:none
 	width:30px;height:15px;
 }
 
-.pg1_message{
+.pg1_message, .pg1_message_empty{
 	font-family:Tahoma;
-	color:#1E90FF;font-weight:bold;
 	padding:10px 0 10px 0;
+	color:#1E90FF;font-weight:bold;
+	
+}
+
+.pg1_message_empty {
+	color:#000;font-weight:normal;
 }
 
 .pg1_btn_up, .pg1_btn_up:hover, .pg1_btn_up:visited{margin-left:8px;}

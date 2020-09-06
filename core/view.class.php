@@ -85,6 +85,10 @@
 		public function universal($text){
 			return $this->load("universal", ['text'=>$text]);
 		}
+
+		public function error($text){
+			return $this->load("error", ['text'=>$text]);
+		}
 		
 		/**
 		 * Add var to use in view file

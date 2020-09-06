@@ -34,16 +34,14 @@
 	?>
 	
 	<!--BEGIN: Сообщение с результатом действия-->
-	<?if(isset($_SESSION['record_add_id'])){?>
-		<div class="pg1_message">
-			Запись успешно добавлена (ID = <?=$_SESSION['record_add_id']?>).
-			<?unset($_SESSION['record_add_id']);?>
-		</div>
-	<?}?>
 	<?if(isset($_SESSION['message'])){?>
 		<div class="pg1_message">
 			<?=$_SESSION['message'];?>
 			<?unset($_SESSION['message']);?>
+		</div>
+	<?}else{?>
+		<div class="pg1_message_empty">
+			Сообщений нет
 		</div>
 	<?}?>
 	<!--END: Окончание блока результата вывода-->
@@ -61,7 +59,7 @@
 					SELECT `blocks`.`id` as `id`, `colors`.`hex` as `hex` 
 					FROM `blocks`
 					LEFT JOIN `colors` ON `blocks`.`color_id`=`colors`.`id`
-					ORDER BY `blocks`.`id`
+					ORDER BY `blocks`.`sort` ASC
 				";
 				
 				$sql_q_blocks = mysqli_query($this->db_link, $sql_blocks);				
@@ -103,8 +101,8 @@
 						</td>
 						<td>
 							<button type="button" class="btn btn-danger btn-small" @click="pg1_delete_block(<?=$sql_r_block['id']?>)">Удалить</button>
-							<a type="button" class="btn btn-small btn-up_down pg1_btn_up" @click="pg1_delete_block(<?=$sql_r_block['id']?>)">&uarr;</a>
-							<a type="button" class="btn btn-small btn-up_down" @click="pg1_delete_block(<?=$sql_r_block['id']?>)">&darr;</a>
+							<button type="button" class="btn btn-small btn-up_down pg1_btn_up" @click="pg1_block_up(<?=$sql_r_block['id']?>)">&uarr;</button>
+							<button type="button" class="btn btn-small btn-up_down" @click="pg1_block_down(<?=$sql_r_block['id']?>)">&darr;</button>
 						</td>
 					</tr>
 				<?}?>
@@ -217,6 +215,12 @@
 						window.location="/blocks/delete/?id=" + id + "&timestamp=" + Date.now();
 					}
 					
+				},
+				pg1_block_up: function(id){
+					window.location="/blocks/up/?id=" + id + "&timestamp=" + Date.now();
+				},
+				pg1_block_down: function(id){
+					window.location="/blocks/down/?id=" + id + "&timestamp=" + Date.now();
 				}
 			}
 		})	

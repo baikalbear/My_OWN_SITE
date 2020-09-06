@@ -40,10 +40,12 @@ class Blocks extends BaseController {
 	}
 	
 	function addAction(){
-		$sql_add = "INSERT INTO `blocks` SET `color_id`=0";
-		echo $sql_add;
+		$max_sort=$this->db_link->query("SELECT max(`sort`) FROM `blocks`")->fetch_row()[0];
+		$sql_add = "INSERT INTO `blocks` SET `sort`=" . ($max_sort+1);
+		//echo $sql_add;
 		mysqli_query($this->db_link, $sql_add);
-		$_SESSION['record_add_id'] = mysqli_insert_id($this->db_link);
+		$new_block_id = mysqli_insert_id($this->db_link);
+		$_SESSION['message'] = "Блок (ID = $new_block_id) успешно добавлен";
 		header("location:/blocks/");
 	}
 	
@@ -69,5 +71,48 @@ class Blocks extends BaseController {
 				['множ'=>'blocks'],
 				['един_с_большой'=>'Блок', 'родительный_падеж'=>'блока', 'множ'=>'блоки'],
 				);
+	}
+	
+	function upAction(){
+		if(!isset($_GET['id'])){
+			$this->view->error("ID блока не определён.");
+		}
+		
+		//ID Блока
+		$id = $_GET['id'];
+
+		//Проверяю, что ссылка не устарела
+		if(isset($_GET['timestamp'])){
+			$live = time()-substr($_GET['timestamp'], 0, strlen($_GET['timestamp'])-3);
+			if($live > 10){
+				return $this->view->error("Устаревшая ссылка на удаление блока.");
+			}else{
+				$sql_sort = "SELECT `sort` FROM `blocks` WHERE `id`=$id";
+				//echo $sql_sort;
+				$sql_q_sort = mysqli_query($this->db_link, $sql_sort);
+				$sql_r_sort = mysqli_fetch_array($sql_q_sort);
+				$old_sort = $sql_r_sort['sort'];
+				$new_sort = $old_sort-1;
+				//Выясню, есть ли блоки со значением сортировки меньше, чем у текущего блока
+				$sql_less = "SELECT `sort` FROM `blocks` WHERE `sort`<$old_sort";
+				$sql_q_less = mysqli_query($this->db_link, $sql_less);
+				if(mysqli_num_rows($sql_q_less)>0){
+					//Поднимаю значение сортировки для блока сверху
+					$sql_update_sort_other = "UPDATE `blocks` SET `sort`=`sort`+1 WHERE `sort`=$new_sort";
+					mysqli_query($this->db_link, $sql_update_sort_other);		
+					//Обновляю значение сортировки указанного блока
+					$sql_update_sort = "UPDATE `blocks` SET `sort`=$new_sort WHERE `id`=$id";
+					mysqli_query($this->db_link, $sql_update_sort);
+					//Готовлю сообщение для пользователя об успехе
+					$_SESSION['message'] = "Блок (ID = $id) успешно поднят";
+					//Переадресую на страницу со списком
+				}else{
+					$_SESSION['message'] = "Блок (ID = $id) уже на самом верху";
+				}
+				header("location: /blocks/");
+			}
+		}else{
+			return $this->view->error("Метка времени не определена");
+		}		
 	}
 }
