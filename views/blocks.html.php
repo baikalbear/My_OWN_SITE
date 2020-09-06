@@ -12,7 +12,7 @@
 	
 	<h1 align="center" class="control">Блоки</h1>
 	<div id="pg1_actions">
-		<a href="/blocks/add" class="link-type2-style1">=добавить=</a>
+		<a href="/blocks/add" type="button" class="btn btn-success pg1_add_button" @click="pg1_delete_block(<?=$sql_r_block['id']?>)">Добавить</a>
 	</div>
 	
 	<?php
@@ -102,7 +102,9 @@
 							</div>
 						</td>
 						<td>
-							<button type="button" class="btn btn-danger pg1_delete_button" @click="pg1_delete_block(<?=$sql_r_block['id']?>)">Удалить</button>
+							<button type="button" class="btn btn-danger btn-small" @click="pg1_delete_block(<?=$sql_r_block['id']?>)">Удалить</button>
+							<a type="button" class="btn btn-small btn-up_down pg1_btn_up" @click="pg1_delete_block(<?=$sql_r_block['id']?>)">&uarr;</a>
+							<a type="button" class="btn btn-small btn-up_down" @click="pg1_delete_block(<?=$sql_r_block['id']?>)">&darr;</a>
 						</td>
 					</tr>
 				<?}?>
