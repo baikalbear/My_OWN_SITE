@@ -8,6 +8,7 @@
 			<a href="/blocks/" class="link-type1-style4">Блоки</a>
 			<a href="/records/" class="link-type1-style2">Записи</a>
 			<a href="/categories/" class="link-type1-style3">Категории</a>
+			<a href="/areas/" class="link-type1-style5">Области</a>
 		</div>
 	<?}?>
 	<!--END-->

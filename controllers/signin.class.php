@@ -9,15 +9,15 @@ class Signin extends BaseController {
 				$_SESSION['username'] = "baikalbear";
 				
 				//Возвращаю view
-				return $this->view->load('signin_ok', ['auth'=>$this->auth]);	
+				return $this->view->load('signin/signin_ok', ['auth'=>$this->auth]);	
 			}else{
-				return $this->view->load('signin', ['hidden' => '', 'username' => $_POST['username'],
+				return $this->view->load('signin/signin', ['hidden' => '', 'username' => $_POST['username'],
 												'error' => "Неверные пользователь или пароль.", 'auth'=>$this->auth]);
 				
 			}
 		//Случай, когда форма ещё не была отправлена
 		}else{
-			return $this->view->load('signin', ['hidden' => 'hidden', 'username'=>"", 'auth'=>$this->auth]);
+			return $this->view->load('signin/signin', ['hidden' => 'hidden', 'username'=>"", 'auth'=>$this->auth]);
 		}
 	}
 }

@@ -47,7 +47,7 @@
 	<!--END: Окончание блока результата вывода-->
 	
 	<form id="pg1_form">
-		<table id="pg1_blocks_table">
+		<table id="pg1_table">
 			<tr>
 				<td>ID</td>
 				<td>Цвет</td>

@@ -6,6 +6,6 @@ class Signout extends BaseController {
 		unset($_SESSION['username']);
 
 		//Возвращаю view
-		return $this->view->load('signout_ok', ['auth'=>$this->auth]);	
+		return $this->view->load('signout/signout_ok', ['auth'=>$this->auth]);	
 	}
 }
