@@ -44,6 +44,20 @@ class Areas extends BaseController {
 			}
 		}	
 	}
+	
+	function saveallAction(){
+		if(isset($_GET['timestamp'])){
+			$live = time()-substr($_GET['timestamp'], 0, strlen($_GET['timestamp'])-3);
+			if($live > 10){
+				return json_encode( ['result' => true, 'message' => "Устаревшая ссылка на сохранение всех областей"] );
+			}else{
+				print_r($_POST);
+				$message = "Значения успешно сохранены";
+				return json_encode( ['result' => true, 'message' => $message]);
+			}
+		}	
+	}
+	
 	//Функционал данной функции для действия "вверх" и "вниз" аналогичен и одновременно зеркально противоположен по выполняемым операциям.
 	//Именно поэтому операции "вверх" и "вниз" решено объединить в одну функцию, и прописать противоположное поведение.
 	function upDownAction(){

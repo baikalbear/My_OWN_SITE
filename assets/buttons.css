@@ -1,8 +1,12 @@
 /*Общие настройки*/
-.beauty_small{font-size:10pt;height:25px;padding:2px 5px;text-decoration:none;color:#fff;}
-.beauty_small:hover{color:#fff;}
+.beauty_small{
+	font-size:10pt;height:25px;padding:2px 5px;text-decoration:none;color:#fff;
+	border:none;border-radius:5px;
+}
 
 .beauty_medium{
 	font-size:10pt;height:28px;padding:3px 6px;text-decoration:none;color:#fff;
 	border:none;border-radius:5px;
 }
+
+.beauty_small:hover, .beauty_medium:hover{color:#fff;}

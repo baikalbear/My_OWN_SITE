@@ -12,7 +12,7 @@
 	
 	<h1 align="center" class="control">Области</h1>
 	<div id="pg1_actions">
-		<button type="button" class="beauty_medium crimson-bgrd" @click="pg_area_add">Добавить</button>
+		<button type="button" class="beauty_small forestgreen-bgrd" @click="pg_area_add">Добавить</button>
 	</div>
 	
 	<!--BEGIN: Сообщение с результатом действия-->
@@ -32,7 +32,7 @@
 			<tr v-for="area in orderedAreas">
 				<td>{{ area.id }}</td>
 				<td class="pg1_name">
-					<input class="pg1_name_input" type="text" :value="area.name">
+					<input class="pg1_name_input" type="text" v-bind:name="'name_' + area.id + ''" :value="area.name">
 				</td>
 				<!--END-->
 				<td>
@@ -43,6 +43,7 @@
 			</tr>
 		</table>
 		<br/>
+		<button type="button" class="beauty_small steelblue-bgrd" @click="pg_area_save">Сохранить</button>
 	</form>		
 <?php $this->stop('body') ?>
 
@@ -159,8 +160,42 @@
 							}
 						}
 					});								
-				}
+				},
+				pg_area_save: function(){
+					console.log(get_values());
+					//console.log(document.getElementById('pg1_form').value);
+					return;
+					$.ajax({
+						url: "/areas/saveall/?timestamp=" + Date.now(),
+						type: "POST",
+						dataType: "json",
+						data: {
+							
+						},
+						error: function(data) {
+							pg1_vue2.message = format_error("Системная ошибка обработки запроса AJAX. Текст ошибки: " + data.responseText);
+						},
+						success : function(data) {
+							if(data.result == true) {
+								pg1_vue2.message = data.message;
+								pg1_vue.pg_fill_table();
+							} else{
+								pg1_vue2.message = format_error(data.message);
+							}
+						}
+					});								
+				},
 			}
-		})	
+		})
+
+		function get_values(){
+			var fields = [];
+			var arr = $('#pg1_form').not('input[type="submit"]').find('input[type="text"]')
+			$(arr).each(function(i,val){
+				fields.push({name:$(val).attr('name'),value:$(val).val()})
+			})
+			return fields;
+		}		
+		
     </script>
 <?php $this->stop('script') ?>

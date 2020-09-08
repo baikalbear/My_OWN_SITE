@@ -1,6 +1,10 @@
 /*Цвет текста*/
 .salmon-color{color:#FA8072;}
 .red-color{color:#FF0000;}
+.mediumspringgreen-color{color:#00FA9A;}
+
+/*Цвет фона*/
 .salmon-bgrd{background:#FA8072;}
 .crimson-bgrd{background:#DC143C;}
-
+.forestgreen-bgrd{background:#228B22;}
+.steelblue-bgrd{background:#4682B4;}
