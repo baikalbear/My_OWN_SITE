@@ -23,8 +23,6 @@
 	width:400px;
 }
 
-a.pg1_add_button{font-size:10pt;height:25px;padding:2px 5px;text-decoration:none;color:#fff;}
-
 .pg1_records_menu { /*DropDown меню*/
 	position:absolute;
 	display:none;
@@ -67,8 +65,6 @@ a.pg1_add_button{font-size:10pt;height:25px;padding:2px 5px;text-decoration:none
 }
 
 .pg1_btn_up, .pg1_btn_up:hover, .pg1_btn_up:visited{margin-left:8px;}
-
-.pg1_save{margin-top:10px;}
 
 /*
 Страничка /records/edit/

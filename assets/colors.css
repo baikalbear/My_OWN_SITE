@@ -1,47 +1,6 @@
-/*По классам*/
-.pink_fine{
-	background:#fff;
-	border: 2px solid #ff5050;
-}
+/*Цвет текста*/
+.salmon-color{color:#FA8072;}
+.red-color{color:#FF0000;}
+.salmon-bgrd{background:#FA8072;}
+.crimson-bgrd{background:#DC143C;}
 
-
-.yellow_bright{
-	background:#fff;
-	border: 2px solid #ffcc00;
-}
-
-.orange_ground{
-	background:#fff;
-	border: 2px solid #cc3300;
-}
-
-.orange_pale{
-	background:#fff;
-	border: 2px solid #ffcc66;
-}
-
-.brown_fine{
-	background:#fff;
-	border: 2px solid #cc6600;
-}
-
-
-.cian_noble{
-	background:#fff;
-	border: 2px solid #00ccff;
-}
-
-.cian_light{
-	background:#fff;
-	border: 2px solid #66ccff;
-}
-
-.blue_light{
-	background:#fff;
-	border: 2px solid #3399ff;
-}
-
-.magenta_light{
-	background:#fff;
-	border: 2px solid #9999ff;
-}

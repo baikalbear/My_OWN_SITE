@@ -16,6 +16,7 @@
     <?php $this->assetCSS('admin.css') //Общий дизайн, только для админов?>	
 	<?php $this->assetCSS('admin_pages.css') //Админский дизайн, по страницам ?>	
 	<?php $this->assetCSS('colors.css') //Таблица цветов?>
+	<?php $this->assetCSS('buttons.css') //Кнопки?>
 	<!--END-->
 	
 	<!--Метрики показываем только на удалённом хосте-->
