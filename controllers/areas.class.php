@@ -67,13 +67,29 @@ class Areas extends BaseController {
 	}
 	
 	function deleteAction(){
-		$action = new RepeatedActions();
-		return $action->deletePattern($this->db_link, $this->view,
-				['множ'=>'areas'],
-				['един_с_большой'=>'Область', 'родительный_падеж'=>'области', 'множ'=>'области', 'действие_в_прошедшем'=>'удалена'],
-				);
+		if(!isset($_GET['id'])){
+			crash("ID области не определён");
+		}
+		
+		$id = $_GET['id'];
+		
+		if(isset($_GET['timestamp'])){
+			$live = time()-substr($_GET['timestamp'], 0, strlen($_GET['timestamp'])-3);
+			if($live > 10){
+				return json_encode( ['result' => true, 'message' => "Устаревшая ссылка на удаление области"] );
+			}else{
+				//Получаю значение сортировки для сущности, которую собираюсь удалить
+				$sort_deleted_area = $this->db_link->query("SELECT `sort` FROM `areas` WHERE `id`={$id}")->fetch_array()[0];
+				//Удаляю сущность
+				$sql = "DELETE FROM `areas` WHERE `id`=$id";
+				$this->db_link->query($sql);
+				//Обновляю значение сортировки для остальных блоков
+				$this->db_link->query("UPDATE `areas` SET `sort`=`sort`-1 WHERE `sort`> $sort_deleted_area");
+				$message = "Область успешно удалена (ID = $id)";
+				return json_encode( ['result' => true, 'message' => $message]);
+			}
+		}	
 	}
-	
 	//Функционал данной функции для действия "вверх" и "вниз" аналогичен и одновременно зеркально противоположен по выполняемым операциям.
 	//Именно поэтому операции "вверх" и "вниз" решено объединить в одну функцию, и прописать противоположное поведение.
 	function upDownAction(){

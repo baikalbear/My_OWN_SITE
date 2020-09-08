@@ -15,24 +15,6 @@
 		<a href="/areas/add" type="button" class="btn btn-success pg1_add_button" @click="pg1_delete_area(<?=$sql_r_area['id']?>)">Добавить</a>
 	</div>
 	
-	<?php
-		//START: Формирую пункты всплывающей менюшки со списком записей
-		$records_list_html = "";$m = [];$m[0] = "==НЕ ВЫБРАНО==";
-		
-		$sql_q_records = mysqli_query($this->db_link, "SELECT * FROM `records` ORDER BY `id`");
-		
-		while ($sql_r_records = mysqli_fetch_array($sql_q_records)){
-			$m[$sql_r_records['id']] = $sql_r_records['title'];
-		}
-		
-		foreach ($m as $id => $title){
-			$records_list_html .= "<a href=\"#\" onclick=\"pg1_records_menu_choose({id}, '{$title}', {$id})\">{$title}</a>
-							<input type='hidden' name='record_link[{id}]' value='' id='record_link_{id}'/><br/>";
-		}
-		//END: Пункты всплывающей менюшки сформированы и находятся в переменной $records_list_html
-		//Для каждого отдельного области выражение {id} будет заменено на id той записи, которая присвоена области.
-	?>
-	
 	<!--BEGIN: Сообщение с результатом действия-->
 	<?if(isset($_SESSION['message'])){?>
 		<div class="pg1_message">
@@ -53,54 +35,21 @@
 				<td>Название</td>
 				<td>Действия</td>
 			</tr>
-			<?php
-				$sql_areas = "
-					SELECT `areas`.`id` as `id`, `areas`.`name` as `name`, `colors`.`hex` as `hex` 
-					FROM `areas`
-					LEFT JOIN `colors` ON `areas`.`color_id`=`colors`.`id`
-					ORDER BY `areas`.`sort` ASC
-				";
-				
-				$sql_q_areas = mysqli_query($this->db_link, $sql_areas);				
-				
-				//Перебираю области в цикле
-				while($sql_r_area = mysqli_fetch_array($sql_q_areas)){
-					//START: Получаю информацию о записи, соответствующей области в таблице records_areas
-					$sql_area_record = "SELECT * FROM `records`
-											LEFT JOIN `records_areas` ON `records`.`id`=`records_areas`.`record_id`
-											WHERE `records_areas`.`area_id`={$sql_r_area['id']}";
 
-					$sql_q_area_record = mysqli_query($this->db_link, $sql_area_record);
-					//$sql_t_area_record = mysqli_fetch_array($sql_q_area_record);
-					//END: Информация о записи получена
-					
-					//Обзываю невыбранную запись
-					if($sql_t_area_record['record_id'] == 0) $sql_t_area_record['title'] = "==НЕ ВЫБРАНО==";?>
-
-					<tr>
-						<td><?=$sql_r_area['id']?></td>
-						<td class="pg1_name">
-							<!--<input class="pg1_name_input" type="text" v-model="area_<?=$sql_r_area['id']?>_name" placeholder="<?if($sql_r_area['name']==""){echo "Не заполнено";}else{echo $sql_r_area['name'];}?>">-->
-						</td>
-						<!--END-->
-						<td>
-							<button type="button" class="btn btn-danger btn-small" @click="pg1_delete_area(<?=$sql_r_area['id']?>)">Удалить</button>
-							<button type="button" class="btn btn-small btn-up_down pg1_btn_up" @click="pg1_area_up(<?=$sql_r_area['id']?>)">&uarr;</button>
-							<button type="button" class="btn btn-small btn-up_down" @click="pg1_area_down(<?=$sql_r_area['id']?>)">&darr;</button>
-						</td>
-					</tr>
-				<?}?>
+			<tr v-for="area in orderedAreas">
+				<td>{{ area.id }}</td>
+				<td class="pg1_name">
+					<input class="pg1_name_input" type="text" :value="area.name">
+				</td>
+				<!--END-->
+				<td>
+					<button type="button" class="btn btn-danger btn-small" @click="pg1_delete_area(area.id)">Удалить</button>
+					<button type="button" class="btn btn-small btn-up_down pg1_btn_up" @click="pg1_area_up(area.id)">&uarr;</button>
+					<button type="button" class="btn btn-small btn-up_down" @click="pg1_area_down(area.id)">&darr;</button>
+				</td>
+			</tr>
 		</table>
 		<button type="button" @click="pg1_save_form" class="btn btn-success pg1_save">Сохранить</button>
-		
-		<br/>
-		----
-		<li v-for="area in areas">
-			{{ area.id }} } {{ area.name }}
-		</li>
-		----
-		{{ test }}
-		----
 	</form>		
 <?php $this->stop('body') ?>
 
@@ -156,36 +105,41 @@
 			});
 		}
 				
-		pg1_vue1 = new Vue({
+		pg1_vue = new Vue({
 			el: '#pg1_form',
 			data: {
 				palitra_open: false,
 				changecolor_area_id: 0,
-				test: ''
-				 /* areas: [
-				  { name: 'Foo' },
-				  { name: 'Bar' }
-				] */				 
-
+				areas: []
 			},
 			created() {
-				$.ajax({
-					url: "/areas/getall/",
-					type: "POST",
-					dataType: "json",
-					data: {
-					},
-					error: function(data) {
-						//alert('AJAX response for "' + this.url + '" error:\n' + data.responseText);
-						alert("Системная ошибка обработки запроса AJAX. Текст ошибки: " + data.responseText);
-					},
-					success : function(data) {
-						pg1_vue1.areas = data.areas;
-						pg1_vue1.test = "test";
-					}
-				});			
+				return this.pg_fill_table();
+			},
+			mounted() {
+			},
+			computed: {
+				orderedAreas: function () {
+					return _.orderBy(this.areas, 'sort')
+				}
 			},
 			methods: {
+				pg_fill_table: function(){
+					$.ajax({
+						url: "/areas/getall/",
+						type: "POST",
+						dataType: "json",
+						data: {
+						},
+						error: function(data) {
+							//alert('AJAX response for "' + this.url + '" error:\n' + data.responseText);
+							alert("Системная ошибка обработки запроса AJAX. Текст ошибки: " + data.responseText);
+						},
+						success : function(data) {
+							pg1_vue.areas = data.areas;
+							pg1_vue.test = "test";
+						}
+					});			
+				},
 				pg_areas_palitra: function(id){
 					if(!this.palitra_open){
 						this.pg_areas_palitra_open(id);
@@ -228,10 +182,32 @@
 					});				
 				},
 				pg1_delete_area: function(id){
+					/* console.log('До удаления:');
+					console.log(pg1_vue.areas['0'].name);
+					pg1_vue.areas['0'].name="Новое имя";
+					pg1_vue.areas["1"].name="Замена";
+					return; */
 					if(confirm("Подтверждаете удаление области с ID=" + id + "?")){
-						window.location="/areas/delete/?id=" + id + "&timestamp=" + Date.now();
+						$.ajax({
+							url: "/areas/delete/?id=" + id + "&timestamp=" + Date.now(),
+							type: "POST",
+							dataType: "json",
+							data: {
+							},
+							error: function(data) {
+								//alert('AJAX response for "' + this.url + '" error:\n' + data.responseText);
+								alert("Системная ошибка обработки запроса AJAX. Текст ошибки: " + data.responseText);
+							},
+							success : function(data) {
+								if(data.result == true) {
+									pg1_vue.pg_fill_table();
+									//_.remove(pg1_vue.areas, area => area.id === id);
+								} else{
+									alert(data.error);
+								}
+							}
+						});				
 					}
-					
 				},
 				pg1_area_up: function(id){
 					window.location="/areas/updown/?id=" + id + "&type=0&timestamp=" + Date.now();
