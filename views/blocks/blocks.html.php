@@ -12,7 +12,7 @@
 	
 	<h1 align="center" class="control">Блоки</h1>
 	<div id="pg1_actions">
-		<a href="/blocks/add" type="button" class="btn btn-success pg1_add_button" @click="pg1_delete_block(<?=$sql_r_block['id']?>)">Добавить</a>
+		<button onclick="window.location.href='/blocks/add'" type="button" class="beauty_small forestgreen-bgrd">Добавить</button>
 	</div>
 	
 	<?php

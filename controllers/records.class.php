@@ -36,7 +36,7 @@ class Records extends BaseController {
 		$q1 = mysqli_query($this->db_link, "select * from `records`");
 		$records_num = mysqli_num_rows($q1);
 
-		return $this->view->load('records', ['q' => $q, 'records_num' => $records_num, 'sort' => $sort, 'page' => $page, 'sortdirection' => $sortdirection,
+		return $this->view->load('records/records', ['q' => $q, 'records_num' => $records_num, 'sort' => $sort, 'page' => $page, 'sortdirection' => $sortdirection,
 												'records_per_page' => $records_per_page, 'auth'=>$this->auth]);
 	}
 	
@@ -116,7 +116,7 @@ class Records extends BaseController {
 				$message = "";
 			}
 			
-			return $this->view->load('edit', ['record' => $record, 'hidden' => $hidden, 'message' => $message, 'auth'=>$this->auth]);
+			return $this->view->load('records/edit', ['record' => $record, 'hidden' => $hidden, 'message' => $message, 'auth'=>$this->auth]);
 		}
 	}
 	

@@ -51,7 +51,13 @@ class Areas extends BaseController {
 			if($live > 10){
 				return json_encode( ['result' => true, 'message' => "Устаревшая ссылка на сохранение всех областей"] );
 			}else{
-				print_r($_POST);
+				$values = $_POST['values'];
+				foreach($values as $key=>$value){
+					$sql="UPDATE `areas` SET `name`='{$value['value']}' WHERE `id`={$value['name']}";
+					$this->db_link->query($sql);
+					//$message .= "<pre>".print_r($sql, true)."</pre>";
+				}
+				//$message = "<pre>".print_r($values, true)."</pre>";
 				$message = "Значения успешно сохранены";
 				return json_encode( ['result' => true, 'message' => $message]);
 			}

@@ -15,6 +15,6 @@ class Articles  extends BaseController {
 						order by blocks.id asc")
 					->fetch_array();	
 				
-		return $this->view->load('article', ['r'=>$sql_res]);
+		return $this->view->load('articles/article', ['r'=>$sql_res]);
 	}
 }

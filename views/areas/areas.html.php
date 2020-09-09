@@ -32,7 +32,7 @@
 			<tr v-for="area in orderedAreas">
 				<td>{{ area.id }}</td>
 				<td class="pg1_name">
-					<input class="pg1_name_input" type="text" v-bind:name="'name_' + area.id + ''" :value="area.name">
+					<input class="pg1_name_input" type="text" v-bind:name="'' + area.id + ''" :value="area.name">
 				</td>
 				<!--END-->
 				<td>
@@ -162,15 +162,14 @@
 					});								
 				},
 				pg_area_save: function(){
-					console.log(get_values());
-					//console.log(document.getElementById('pg1_form').value);
-					return;
+					values = get_values();
+
 					$.ajax({
 						url: "/areas/saveall/?timestamp=" + Date.now(),
 						type: "POST",
 						dataType: "json",
 						data: {
-							
+							values: values
 						},
 						error: function(data) {
 							pg1_vue2.message = format_error("Системная ошибка обработки запроса AJAX. Текст ошибки: " + data.responseText);
