@@ -23,6 +23,10 @@
 	<h1 align="center" class="control">Редактировать запись</h1>
 	
 	<form action="/records/edit/?id=<?=$this->data['record']['id']?>" method="post" id="edit_record_form">
+		<!--BEGIN: Сообщение с результатом действия-->
+		<div class="message" id="message" v-html="message">
+		</div>
+		<!--END: Окончание области результата вывода-->	
 		<div class="alert alert-info <?=$this->data['hidden']?>" role="alert" id="submitAnswer">
 			<?=$this->data['message']?>
 		</div>
@@ -56,19 +60,18 @@
 		  <input type="text" class="form-control" id="inputUniqueName" name ="unique_name" value="<?=$this->data['record']['unique_name']?>" rows="7">
 		  <div class="help-block with-errors"></div>
 		</div>
-		
-		<!--<div class="form-group">
-			<label>Задача выполнена</label>
-			<?php
-				if($this->data['record']['status'] == 1){
-					$status = "checked";
-				} else {
-					$status = "";
-				}
-			?>
+
+		<div>
 			<br/>
-			<input type="checkbox" name="status" id="status" <?=$status?> style="width:20px;height:20px;" onChange="saveStatus();" />
-		</div>--> 
+			<label for="inputText">Категории</label><br/>
+			<select v-model="categories_active" multiple @change="update_record_categories()">
+				<option v-for="category in categories" v-bind:value="category.id">
+					{{ category.name }}
+				</option>
+			</select>
+			<div class="help-block with-errors"></div>
+		</div>
+		
 		<div id="record_edit_buttons">
 			<button type="button" class="btn btn-danger" id="del_button" v-on:click="confirm_delete">Удалить запись</button>
 			<button type="submit" class="btn btn-primary" id="save_button" >Сохранить</button>
@@ -80,49 +83,71 @@
 
 <?php $this->start('script') ?>
     <script>
+		record_id = <?=$this->data['record']['id'];?>; 
 		vue1 = new Vue({
-		  el: '#edit_record_form',
-		  data: {
-		  },
-		  methods: {
-			  confirm_delete: function(event){
-				  if(confirm("Подтверждаете удаление записи? Данное действие нельзя будет отменить.")){
+			el: '#edit_record_form',
+			data: {
+			  options : {
+				  1: {
+					  value: 1,
+					  text: '123'
+				  },
+				  2: {
+					  value: 2,
+					  text: '234'
+				  },
+				  
+			  },
+			  categories: [],
+			  categories_active: [],
+			  message: ''
+			},
+			created() {
+				return this.fill_select();
+			},		  
+			methods: {
+				fill_select: function(){
+					$.ajax({
+						url: "/records/getrecordcategories/?id=" + record_id,
+						type: "POST",
+						dataType: "json",
+						data: {
+						},
+						error: function(data) {
+							vue1.message = format_error("Системная ошибка обработки запроса AJAX. Текст ошибки: " + data.responseText);
+						},
+						success : function(data) {
+							vue1.categories = data.categories;
+							vue1.categories_active = data.categories_active;
+						}
+					});			
+				},				
+				confirm_delete: function(event){
+					if(confirm("Подтверждаете удаление записи? Данное действие нельзя будет отменить.")){
 						window.location.replace("/records/delete/?id=<?=$this->data['record']['id']?>&timestamp=" + Date.now());
-				  }
-			  }
-		  }
-		})	
-		function saveStatus(){
-			if(document.getElementById('status').checked == true){
-				status = 1;
-			} else {
-				status = 0;
-			}
-			
-			$.ajax({
-				url: "/records/changestatus/",
-				type: "POST",
-				dataType: "json",
-				data: {
-					id: <?=$this->data['record']['id']?>,
-					status: status
-				},
-				error: function(data) {
-					//alert('AJAX response for "' + this.url + '" error:\n' + data.responseText);
-					alert("Ошибка сохранения статуса задачи. Попробуйте ещё раз.");
-				},
-				success : function(data) {
-					if (data.result == 'success') {
-						//alert("есть");
 					}
-					
-					if (data.result == 'non-authorized') {
-						alert("Вы не авторизованы и будете перенаправлены на главную страницу...");
-						window.location.replace("/")
-					}
+				},
+				update_record_categories: function(){
+					$.ajax({
+						url: "/records/updaterecordcategories/?id=" + record_id,
+						type: "POST",
+						dataType: "json",
+						data: {
+							categories_active: vue1.categories_active
+						},
+						error: function(data) {
+							vue1.message = format_error("Системная ошибка обработки запроса AJAX. Текст ошибки: " + data.responseText);
+						},
+						success : function(data) {
+							if(data.result){
+								vue1.message = data.message;
+							}else{
+								vue1.message = format_error(data.message);
+							}
+						}
+					});			
 				}
-			});
-		}
-		
+			}
+		})	
 	</script>	
 <?php $this->stop('script') ?>

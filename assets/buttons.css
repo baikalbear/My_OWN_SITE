@@ -1,8 +1,10 @@
 /*Общие настройки*/
-.beauty_small{
+.beauty_small, .btn-xs{
 	font-size:10pt;height:25px;padding:2px 5px;text-decoration:none;color:#fff;
 	border:none;border-radius:5px;
 }
+
+.btn-xs{font-size:9pt;height:22px;}
 
 .beauty_medium{
 	font-size:10pt;height:28px;padding:3px 6px;text-decoration:none;color:#fff;
@@ -10,3 +12,10 @@
 }
 
 .beauty_small:hover, .beauty_medium:hover{color:#fff;}
+
+/*Кнопка ВВЕРХ-ВНИЗ*/
+.updown, .updown:hover, .updown:visited{
+	background:#8FBC8F;border:#8FBC8F;margin-left:0;height:22px;font-size:9pt;margin:3px 0 3px 5px ;padding:2px 2px;color:#fff;
+	border-radius:5px;
+}
+.updown:hover{background:#8FBCFF;border:#BFBCB0;}

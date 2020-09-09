@@ -4,6 +4,7 @@ class Articles  extends BaseController {
 	function showAction(){
 		//Получаю уникальное имя записи
 		$unique_name = $this->mvc->getPiece(2);
+		echo $unique_name;
 		
 		$sql_res = $this->db_link->query("
 						select `records`.`id` as `record_id`, `records`.`title` as `title`, `records`.`description` as `description`,
@@ -16,5 +17,9 @@ class Articles  extends BaseController {
 					->fetch_array();	
 				
 		return $this->view->load('articles/article', ['r'=>$sql_res]);
+	}
+	
+	function defaultAction(){
+		return $this->showAction();
 	}
 }

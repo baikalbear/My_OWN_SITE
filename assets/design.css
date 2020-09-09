@@ -36,12 +36,6 @@ a.nav2{
 	text-decoration:underline;
 }
 
-/*Кнопки*/
-.btn-small,.btn-small:hover, .btn-small:visited{height:22px;font-size:9pt;margin:3px 0 3px 5px ;padding:2px 2px;color:#fff;}
-.btn-up_down, .btn-up_down:hover, .btn-up_down:visited{background:#8FBC8F;border:#8FBC8F;margin-left:0;}
-.btn-up_down:hover{background:#8FBCFF;border:#BFBCB0;}
-a.btn-small, a.btn-up_down{text-decoration:none;}
-
 /*Подвал*/
 #footer{
 	width:100%;

@@ -116,7 +116,7 @@ class Records extends BaseController {
 				$message = "";
 			}
 			
-			return $this->view->load('records/edit', ['record' => $record, 'hidden' => $hidden, 'message' => $message, 'auth'=>$this->auth]);
+			return $this->view->load('records/record_edit', ['record' => $record, 'hidden' => $hidden, 'message' => $message, 'auth'=>$this->auth]);
 		}
 	}
 	
@@ -156,6 +156,64 @@ class Records extends BaseController {
 		
 		//Формирую ответ JSON встроенными средствами PHP
 		return json_encode( ['result' => 'success']);
+	}
+	
+	//Возвращает список категорий сопоставленных записи или пустой объект в случае, если нет сопоставленных записи категорий
+	function getRecordCategoriesAction(){
+		//Выполняю необходимые проверки
+		if(!isset($_GET['id'])) crash("ID записи не определён");
+		$record_id = $_GET['id'];
+		if(!preg_match("/^[0-9]{1,100}$/", $record_id)) crash("ID записи не является числом");
+		if($this->db_link->query("SELECT * FROM `records` WHERE `id`=$record_id")->num_rows < 1) crash("Запись с таким ID не найдена в БД");
+		//Получаю список всех категорий из БД
+		$sql_cat = 
+			"SELECT `id`, `name`
+			FROM `categories`
+			ORDER BY `sort` ASC
+			";
+		$categories = $this->db_link->query($sql_cat)->fetch_all(MYSQLI_ASSOC);
+		//Получаю список указанных для статьи категорий
+		$sql_binded = 
+			"SELECT `categories`.`id` as `id`
+			FROM `categories`
+			LEFT JOIN `records_categories` ON `records_categories`.`category_id`=`categories`.`id`
+			WHERE `records_categories`.`record_id`=$record_id
+			";
+		$categories_binded = $this->db_link->query($sql_binded)->fetch_all(MYSQLI_ASSOC);
+		//Теперь создаю упрощённый массив активных категорий
+		$categories_active = [];
+		foreach($categories_binded as $key=>$value){
+			$categories_active[] = $value['id'];
+		}
+		//print_r($categories_active);
+		return json_encode( ['categories' => $categories, 'categories_active' => $categories_active]);
+	}
+	
+	function updaterecordcategoriesAction(){
+		//Выполняю необходимые проверки
+		if(!isset($_GET['id'])) crash("ID записи не определён");
+		$record_id = $_GET['id'];
+		if(!preg_match("/^[0-9]{1,100}$/", $record_id)) crash("ID записи не является числом");
+		if($this->db_link->query("SELECT * FROM `records` WHERE `id`=$record_id")->num_rows < 1) crash("Запись с таким ID не найдена в БД");
+		if(!is_array($_POST['categories_active'])) crash("Переменная categories_active должна быть массивом");
+		$categories_active = $_POST['categories_active'];
+		//Удаляю все соответствия категорий для записи
+		$sql_del="DELETE FROM `records_categories` WHERE `record_id`=$record_id";
+		if($this->db_link->query($sql_del)){
+			
+			//Добавляю новые соответствия
+			$insert_errors = ''; //В этой строке сохраню id категорий, для которых не удалось создать новые соответствия.
+			foreach($categories_active as $key=>$id){
+				if(!$this->db_link->query("INSERT INTO `records_categories` SET `record_id`=$record_id, `category_id`=$id")){
+					$insert_errors .= $id . " ";
+				}
+			}
+			if($insert_errors!=''){return json_encode( ['result'=>false, 'message'=>"Для следующих категорий возникла ошибка установки
+																					новых соответствий записи (ID категорий): " + $insert_errors]);}
+			return json_encode( ['result'=>true, 'message'=>"Категории для записи успешно обновлены"]);
+		}else{
+			return json_encode( ['result'=>false, 'message'=>"Ошибка удаления связанных с записью категорий"]);
+		}
 	}
 	
 

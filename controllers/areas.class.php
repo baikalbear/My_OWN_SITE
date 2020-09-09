@@ -30,7 +30,7 @@ class Areas extends BaseController {
 		if(isset($_GET['timestamp'])){
 			$live = time()-substr($_GET['timestamp'], 0, strlen($_GET['timestamp'])-3);
 			if($live > 10){
-				return json_encode( ['result' => true, 'message' => "Устаревшая ссылка на удаление области"] );
+				return json_encode( ['result' => false, 'message' => "Устаревшая ссылка на удаление области"] );
 			}else{
 				//Получаю значение сортировки для сущности, которую собираюсь удалить
 				$sort_deleted_area = $this->db_link->query("SELECT `sort` FROM `areas` WHERE `id`={$id}")->fetch_array()[0];
@@ -109,7 +109,7 @@ class Areas extends BaseController {
 					$sql_update_sort = "UPDATE `areas` SET `sort`=$new_sort WHERE `id`=$id";
 					mysqli_query($this->db_link, $sql_update_sort);
 					//Готовлю сообщение для пользователя об успехе
-					$type==0 ? $what="поднят" : $what="опущен";
+					$type==0 ? $what="поднята" : $what="опущена";
 					return json_encode( ['result' => true, 'message' => "Область (ID = $id) успешно $what"]);
 				}else{
 					$type==0 ? $where="на самом верху" : $where="в самом низу";

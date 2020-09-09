@@ -36,9 +36,9 @@
 				</td>
 				<!--END-->
 				<td>
-					<button type="button" class="btn btn-danger btn-small" @click="pg1_delete_area(area.id)">Удалить</button>
-					<button type="button" class="btn btn-small btn-up_down pg1_btn_up" @click="pg_area_updown(area.id,0)">&uarr;</button>
-					<button type="button" class="btn btn-small btn-up_down" @click="pg_area_updown(area.id,1)">&darr;</button>
+					<button type="button" class="btn-xs darkred-bgrd" @click="pg1_delete_area(area.id)">Удалить</button>
+					<button type="button" class="updown" @click="pg_area_updown(area.id,0)">&uarr;</button>
+					<button type="button" class="updown" @click="pg_area_updown(area.id,1)">&darr;</button>
 				</td>
 			</tr>
 		</table>
@@ -49,10 +49,6 @@
 
 <?php $this->start('script') ?>
     <script>
-		function format_error(str){
-			return "<span class='red-color'>" + str + "</span>";
-		}
-		
 		pg1_actions = new Vue({
 			el: '#pg1_actions',
 			data: {

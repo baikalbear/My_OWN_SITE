@@ -20,10 +20,10 @@
 			$sql_q_categories = mysqli_query($this->db_link, "
 					SELECT *
 					FROM `categories`
-					ORDER BY `id` ASC");	
+					ORDER BY `sort` ASC");	
 
 			while($sql_r_categories = mysqli_fetch_array($sql_q_categories)){?>	
-				<a href="#" class="nav2"><?=$sql_r_categories['name']?></a>			
+				<a href="/articles/<?=$sql_r_categories['alias']?>/" class="nav2"><?=$sql_r_categories['name']?></a>			
 			<?}
 		?>		
 	</div>
