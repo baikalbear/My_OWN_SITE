@@ -1,7 +1,7 @@
 <?php
-	//Реализация одноимённого подхода
+	/*** CLASS BEGIN: Данный класс реализует механизм "модель-представление-контроллер" в приложении***/
 	class MVC{
-		//Выделю переменную для HTML-потока, обращаюсь только через функции класса, поэтому private
+		//Выделяю свойство, в котором буду хранить HTML-поток. Доступ к HTML-потоку только через методы класса.
 		private $html_flow;
 		private $url_pieces;
 		
@@ -9,74 +9,106 @@
 			
 		}
 		
-		//Маршрутизация url-а		
+		/***METHOD BEGIN: Данный метод реализует обработку URL-а приложения или иначе механизм маршрутизации***/
 		function processUrl(){
-			//Отделяю Facebook Client ID
+			//Специальное правило для обработки Facebook Client ID
 			if(preg_match("/^(.*)\?fbclid=(.*)$/", $_SERVER['REQUEST_URI'], $m)) {
-
 				$url = $m[1];
 				$fbclientid = $m[2];
 			} else {
 				$url = $_SERVER['REQUEST_URI'];
 			}
 			
-			//Беру url запроса, пришедшего на веб-сервер и разделяю его на части по слэшу
-			$parsed_url = explode("/", $url);
+			//Беру url запроса, пришедшего на веб-сервер и разделяю его на части по разделителю "слэш"
+			$pieces = explode("/", $url);
 			
-			//Сохраню для обращения из вне через getter
-			$this->url_pieces = $parsed_url;
+			//Сохраняю массив с кусочками URL в свойство класса, чтобы можно было обратиться через геттер к нему
+			$this->url_pieces = $pieces;
 			
-			//Записываю значение первого и второго кусочков URL в отдельные переменные, чтобы было проще обращаться с ними			
-			$piece1 = $parsed_url[1];
-			$piece2 = $parsed_url[2];
+			//Переменные для быстрого обращения к кусочкам URL
+			$piece1 = $pieces[1];
+			$piece2 = $pieces[2];
+			$piece3 = $pieces[3];
 			
 			//Синтаксическая проверка первого и второго кусочков URL
-			if (!preg_match('/^[a-z]{0,30}$/', $piece1) || !preg_match('/^[a-z\_\-]{0,100}$/', $piece2)){
-				echo "Check url fatal error.";
-				exit;
+			if (!preg_match('/^[a-z\_]{0,30}$/', $piece1) || !preg_match('/^[a-z\_\-]{0,100}$/', $piece2)){
+				crash("Ошибка в URL.");
 			}
-						
-			//Маршрутизация
-			if($piece1 == ""){
-				$cf_name = "Blocks";
-			} else {
-				//Определяю имя класса, сделав первую букву большой
-				$cf_name = ucfirst($piece1);
+			
+			//Флаг маршрута
+			$route_flag = true;
+			
+			//Корневой каталог
+			if($piece1 == "" && $route_flag){
+				$class_name = $GLOBALS['routes']['/']['class'];
+				$method_prepared_name = $GLOBALS['routes']['/']['method'];
+				$route_flag = false;
+			}
+			
+			
+			
+			// +++ Стартовая страница бэкофиса +++
+			if($piece1 == $GLOBALS['backoffice_url'] && $piece2 == "" && $route_flag){
+				$class_name = $GLOBALS['routes']['/backoffice/']['class'];
+				$method_prepared_name = $GLOBALS['routes']['/backoffice/']['method'];
+				$route_flag = false;
+			}
+			
+			
+			
+			//Бэкофис, дефолтное действие
+			if($piece1 == $GLOBALS['backoffice_url'] && $piece2 != "" && $piece3 == "" && $route_flag){
+				$class_name = ucfirst($piece2) . $GLOBALS['backoffice_class_postfix'];
+				$method_prepared_name = 'default';
+				$route_flag = false;
+			}
+			
+			
+			//Бэкофис, полноценное действие
+			if($piece1 == $GLOBALS['backoffice_url'] && $piece2 != "" && $piece3 != "" && $route_flag){
+				$class_name = ucfirst($piece2) . $GLOBALS['backoffice_class_postfix'];
+				$method_prepared_name = $piece3;
+				$route_flag = false;
+			}
+			
+			//Клиентская часть, первый уровень вложенности
+			if($piece1 != $GLOBALS['backoffice_url'] && $piece2 == "" && $route_flag){
+				$class_name = ucfirst($piece1);
+				$method_prepared_name = 'default';
+				$route_flag = false;
+			}
+			
+
+			//Клиентская часть, второй уровень вложенности
+			if($piece1 != $GLOBALS['backoffice_url'] && $piece2 != "" && $route_flag){
+				$class_name = ucfirst($piece1);
+				$method_prepared_name = $piece2;
+				$route_flag = false;
 			}
 
-			if(!class_exists($cf_name)){
-				crash("Контроллер '$cf_name' не существует");
+			/* echo "Класс:" . $class_name;
+			echo "<br/>";
+			echo "Метод:" . $method_prepared_name;
+			exit; */
+
+
+			//+++ Проверка существования соответствующего контроллеру класса +++
+			if(!class_exists($class_name)){
+				crash("Контроллер '$class_name' не существует");
 			}
-			//Создаю экземпляр класса
-			$instance = new $cf_name();
 			
-			if($piece2 == ""){
-				if($piece1 == ""){
-					//Для главной страницы действие по умолчанию отличается
-					$this->html_flow = $instance->mainPageAction();
-				} else {
-					//Проверяю, существует ли метод default в объекте класса
-					if (method_exists($instance, 'defaultAction')) {
-						//Стандартное действие default если действие не указано явно
-						$this->html_flow = $instance->defaultAction();
-					} else {
-						crash("Метод defaultAction отсутствует в контроллере $cf_name");
-					}
-				}
-			}else{
-				if ($piece1 == "articles"){
-					$action_main_word = "show";
-				} else {
-					$action_main_word = $piece2;
-				}
-				//Случай, когда действие указано явно
-				$action = $action_main_word . "Action";
-				
-				if (method_exists($instance, $action)) {
-					$this->html_flow = $instance->$action();
-				} else {
-				crash("Метод {$action} отсутствует в контроллере $cf_name");
-				}
+			//Создаю экземпляр класса
+			$controller = new $class_name();
+
+			//Формирую полное имя метода
+			$method_name = $method_prepared_name . "Action";
+			
+			
+			//Выполняю действие в контроллере и возвращаю результат в переменную html-потока
+			if (method_exists($controller, $method_name)) {
+				$this->html_flow = $controller->$method_name();
+			} else {
+				crash("Метод {$method_name} отсутствует в контроллере $class_name");
 			}
 		}
 		

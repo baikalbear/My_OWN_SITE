@@ -18,7 +18,7 @@
 	session_start();
 	
 	//BEGIN: Автоподключение классов именно в таком порядке по степени значимости/порядке наследования
-	foreach(['core', 'controllers'] as $null => $class_dir){
+	foreach(['core', 'controllers', 'controllers/backoffice'] as $null => $class_dir){
 		$scandir = scandir($_SERVER['DOCUMENT_ROOT'] . "/" . $class_dir);
 		
 		foreach($scandir as $n => $fname){

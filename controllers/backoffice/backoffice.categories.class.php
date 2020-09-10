@@ -1,7 +1,7 @@
 <?php
-class Categories extends BaseController {
+class CategoriesBackoffice extends BaseController {
 	function defaultAction(){
-		return $this->view->load('categories/categories');
+		return $this->view->load('backoffice/categories/categories');
 	}
 
 	function getAllAction(){

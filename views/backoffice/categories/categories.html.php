@@ -56,7 +56,7 @@
 			methods: {
 				pg_category_add: function(){
 					$.ajax({
-						url: "/categories/add/",
+						url: "/backoffice/categories/add/",
 						type: "POST",
 						dataType: "json",
 						data: {
@@ -102,7 +102,7 @@
 			methods: {
 				pg_fill_table: function(){
 					$.ajax({
-						url: "/categories/getall/",
+						url: "/backoffice/categories/getall/",
 						type: "POST",
 						dataType: "json",
 						data: {
@@ -118,7 +118,7 @@
 				pg1_delete_category: function(id){
 					if(confirm("Подтверждаете удаление категории с ID=" + id + "?")){
 						$.ajax({
-							url: "/categories/delete/?id=" + id + "&timestamp=" + Date.now(),
+							url: "/backoffice/categories/delete/?id=" + id + "&timestamp=" + Date.now(),
 							type: "POST",
 							dataType: "json",
 							data: {
@@ -139,7 +139,7 @@
 				},
 				pg_category_updown: function(id, type){
 					$.ajax({
-						url: "/categories/updown/?id=" + id + "&type=" + type + "&timestamp=" + Date.now(),
+						url: "/backoffice/categories/updown/?id=" + id + "&type=" + type + "&timestamp=" + Date.now(),
 						type: "POST",
 						dataType: "json",
 						data: {
@@ -161,7 +161,7 @@
 					values = get_values();
 
 					$.ajax({
-						url: "/categories/saveall/?timestamp=" + Date.now(),
+						url: "/backoffice/categories/saveall/?timestamp=" + Date.now(),
 						type: "POST",
 						dataType: "json",
 						data: {
