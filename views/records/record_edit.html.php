@@ -4,7 +4,7 @@
 	<!--BEGIN: Управление-->
 	<div class="control1">
 		<a href="/" class="link-type1-style1">Главная</a>
-		<a href="/records/" class="link-type1-style2">Записи</a>
+		<a href="/records/" class="link-type1-style2">Статьи</a>
 		<a href="/articles/<?=$this->data['record']['unique_name']?>" class="link-type2-style1">=на сайте=</a>
 	</div>	
 	<!--END-->
@@ -20,7 +20,7 @@
 	</script>
 	
 	
-	<h1 align="center" class="control">Редактировать запись</h1>
+	<h1 align="center" class="control">Редактировать статью</h1>
 	
 	<form action="/records/edit/?id=<?=$this->data['record']['id']?>" method="post" id="edit_record_form">
 		<!--BEGIN: Сообщение с результатом действия-->
@@ -73,7 +73,7 @@
 		</div>
 		
 		<div id="record_edit_buttons">
-			<button type="button" class="btn btn-danger" id="del_button" v-on:click="confirm_delete">Удалить запись</button>
+			<button type="button" class="btn btn-danger" id="del_button" v-on:click="confirm_delete">Удалить статью</button>
 			<button type="submit" class="btn btn-primary" id="save_button" >Сохранить</button>
 			<div class="float-stop"></div>
 		</div>		

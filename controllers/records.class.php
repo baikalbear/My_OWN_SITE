@@ -135,7 +135,8 @@ class Records extends BaseController {
 				$sql = "DELETE FROM `records` WHERE `id`=$id";
 				mysqli_query($this->db_link, $sql);
 				//echo($sql);
-				header("location: /records/delete/?id=$id&deleted_success");
+				//header("location: /records/delete/?id=$id&deleted_success");
+                header("location: /records/");
 			}
 		}elseif(isset($_GET['deleted_success'])){
 			return $this->view->universal("Запись успешно удалена.<br/>Перейти к <a href='/records/'>списку записей</a>");

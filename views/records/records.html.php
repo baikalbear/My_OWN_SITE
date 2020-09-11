@@ -9,13 +9,13 @@
 	<!--END-->
 	
 	<!--BEGIN: Заголовок страницы-->
-	<h1 align="center" class="control">Записи</h1>
+	<h1 align="center" class="control">Статьи</h1>
 	<!--END-->
 	
 	<br/>
 	<form action="/records/add" method="post">
 		<button type="submit" class="btn btn-success btn-sm" onclick="location.href='/records/add'">
-			Добавить запись
+			Добавить статью
 		</button>
 		<input type="hidden" name="confirm_add" value="1"/>
 	</form>
@@ -50,7 +50,7 @@
 		  <!--<th scope="col"><a href="<?=$links['username']?>">Имя пользователя</a></th>
 		  <th scope="col"><a href="<?=$links['email']?>">Email</a></th>-->
 		  <th scope="col">Дата редактирования</th>
-		  <th scope="col">Заголовок записи</th>
+		  <th scope="col">Заголовок статьи</th>
 		  <!--<th scope="col"><a href="<?=$links['status']?>">Статус</a></th>-->
 		  <?if($this->auth->isAdmin()){?>
 				<th>Действие</th>

@@ -12,11 +12,12 @@
     <?php $this->assetCSS('bootstrap.min.css') ?>
 	<?php $this->assetCSS('generalrules.css') //Общие правила для всего сайта?>		
 	<?php $this->assetCSS('design.css') //Общий дизайн, для всего сайта?>	
-	<?php $this->assetCSS('pages.css') //Дизайн, по страницам?>	
-    <?php $this->assetCSS('admin.css') //Общий дизайн, только для админов?>	
+	<?php $this->assetCSS('pages.css') //Дизайн, по страницам?>
+    <?php $this->assetCSS('admin.css') //Общий дизайн, только для админов?>
 	<?php $this->assetCSS('admin_pages.css') //Админский дизайн, по страницам ?>	
 	<?php $this->assetCSS('colors.css') //Таблица цветов?>
 	<?php $this->assetCSS('buttons.css') //Кнопки?>
+    <?php $this->assetCSS('headers.css') //Заголовки?>
 	<!--END-->
 	
 	<!--Метрики показываем только на удалённом хосте-->
