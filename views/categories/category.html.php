@@ -24,7 +24,7 @@
 	
 	<!--BEGIN: Навигация-->
 	<div id="nav2">
-		Категории статей: <a href="/" class="nav2">Все</a>
+		Категории статей:<br/>
 		<?php
 			$sql_q_categories = mysqli_query($this->db_link, "
 					SELECT *
@@ -35,6 +35,7 @@
 				<a href="/categories/<?=$sql_r_categories['alias']?>/" class="nav2"><?=$sql_r_categories['name']?></a>
 			<?}
 		?>
+        <a href="/" class="nav2">Все</a>
 	</div>
 	<!--END-->
 

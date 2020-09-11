@@ -14,7 +14,8 @@
 	<?}?>
 	<!--END-->
 		
-	<h2><?=$r['title']?></h2>
+	<h2 class="center-variant"><?=$r['title']?></h2>
+    <br/>
 	
 	<div>
 		<?=htmlspecialchars_decode($r['text'])?>

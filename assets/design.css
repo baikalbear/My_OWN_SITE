@@ -32,16 +32,19 @@
 }
 
 a.nav2{
-	padding:0 10px 0 10px;
+	padding:0 20px 0 0px;
 	text-decoration:underline;
 }
 
 /*Подвал*/
 #footer{
 	width:100%;
-	margin:40px 0 20px 0;
+	margin:40px 0 25px 0;
 	text-align:center;
 }
+
+.footer-header{font-size:11pt;}
+.footer-rights{font-size:9pt;}
 
 
 

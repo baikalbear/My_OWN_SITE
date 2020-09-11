@@ -64,7 +64,7 @@ class BlocksBackoffice extends BaseController {
 		$action = new RepeatedActions();
 		return $action->deletePattern($this->db_link, $this->view,
 				['множ'=>'blocks'],
-				['един_с_большой'=>'Блок', 'родительный_падеж'=>'блока', 'множ'=>'блоки', 'действие_в_прошедшем'=>'удалён'],
+				['един_с_большой'=>'Блок', 'родительный_падеж'=>'блока', 'множ'=>'блоки', 'действие_в_прошедшем'=>'удалён']
 				);
 	}
 	

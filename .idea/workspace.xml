@@ -20,19 +20,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5dbbea3b-08c0-4b59-aa6d-b4de72864013" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/baikal.home.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/headers.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/design.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/design.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/blocks.class.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/categories.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/categories.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/records.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/records.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/backoffice/backoffice.blocks.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/backoffice/backoffice.blocks.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/articles/article.html.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/articles/article.html.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/base.html.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/base.html.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/blocks/main.html.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/views/categories/category.html.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/categories/category.html.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/records/record_edit.html.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/records/record_edit.html.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/records/records.html.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/records/records.html.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,7 +71,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1599785559071</updated>
-      <workItem from="1599785560241" duration="4384000" />
+      <workItem from="1599785560241" duration="5988000" />
     </task>
     <servers />
   </component>
