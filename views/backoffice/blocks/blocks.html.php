@@ -12,7 +12,7 @@
 	
 	<h1 align="center" class="control">Блоки</h1>
 	<div id="pg1_actions">
-		<button onclick="window.location.href='/blocks/add'" type="button" class="beauty_small forestgreen-bgrd">Добавить</button>
+		<button onclick="window.location.href='/backoffice/blocks/add'" type="button" class="beauty_small forestgreen-bgrd">Добавить</button>
 	</div>
 	
 	<?php
@@ -140,7 +140,7 @@
 		
 		function link_record(block_id, record_id){
 			$.ajax({
-				url: "/blocks/linkrecord/",
+				url: "/backoffice/blocks/linkrecord/",
 				type: "POST",
 				dataType: "json",
 				data: {
@@ -194,7 +194,7 @@
 				pg_blocks_change_color_on_server: function(color_id){
 					//alert("color_id:" + color_id + ":block_id:" + this.changecolor_block_id);
 					$.ajax({
-						url: "/blocks/changecolor/",
+						url: "/backoffice/blocks/changecolor/",
 						type: "POST",
 						dataType: "json",
 						data: {
@@ -212,15 +212,15 @@
 				},
 				pg1_delete_block: function(id){
 					if(confirm("Подтверждаете удаление блока с ID=" + id + "?")){
-						window.location="/blocks/delete/?id=" + id + "&timestamp=" + Date.now();
+						window.location="/backoffice/blocks/delete/?id=" + id + "&timestamp=" + Date.now();
 					}
 					
 				},
 				pg1_block_up: function(id){
-					window.location="/blocks/updown/?id=" + id + "&type=0&timestamp=" + Date.now();
+					window.location="/backoffice/blocks/updown/?id=" + id + "&type=0&timestamp=" + Date.now();
 				},
 				pg1_block_down: function(id){
-					window.location="/blocks/updown/?id=" + id + "&type=1&&timestamp=" + Date.now();
+					window.location="/backoffice/blocks/updown/?id=" + id + "&type=1&&timestamp=" + Date.now();
 				}
 			}
 		})	

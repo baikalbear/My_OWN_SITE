@@ -45,8 +45,6 @@
 				$route_flag = false;
 			}
 			
-			
-			
 			// +++ Стартовая страница бэкофиса +++
 			if($piece1 == $GLOBALS['backoffice_url'] && $piece2 == "" && $route_flag){
 				$class_name = $GLOBALS['routes']['/backoffice/']['class'];
@@ -54,15 +52,12 @@
 				$route_flag = false;
 			}
 			
-			
-			
 			//Бэкофис, дефолтное действие
 			if($piece1 == $GLOBALS['backoffice_url'] && $piece2 != "" && $piece3 == "" && $route_flag){
 				$class_name = ucfirst($piece2) . $GLOBALS['backoffice_class_postfix'];
 				$method_prepared_name = 'default';
 				$route_flag = false;
 			}
-			
 			
 			//Бэкофис, полноценное действие
 			if($piece1 == $GLOBALS['backoffice_url'] && $piece2 != "" && $piece3 != "" && $route_flag){
@@ -78,6 +73,12 @@
 				$route_flag = false;
 			}
 			
+			//Клиентская часть, второй уровень вложенности динамический
+			if($piece1 != $GLOBALS['backoffice_url'] && $piece2 != "" && isset($GLOBALS['routes'][$piece1]) && $route_flag){
+				$class_name = ucfirst($piece1);
+				$method_prepared_name = $GLOBALS['routes'][$piece1]['method'];
+				$route_flag = false;
+			}
 
 			//Клиентская часть, второй уровень вложенности
 			if($piece1 != $GLOBALS['backoffice_url'] && $piece2 != "" && $route_flag){
@@ -85,12 +86,6 @@
 				$method_prepared_name = $piece2;
 				$route_flag = false;
 			}
-
-			/* echo "Класс:" . $class_name;
-			echo "<br/>";
-			echo "Метод:" . $method_prepared_name;
-			exit; */
-
 
 			//+++ Проверка существования соответствующего контроллеру класса +++
 			if(!class_exists($class_name)){

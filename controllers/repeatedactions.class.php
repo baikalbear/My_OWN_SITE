@@ -21,7 +21,7 @@ class RepeatedActions {
 				$db_link->query("UPDATE `{$eng['множ']}` SET `sort`=`sort`-1 WHERE `sort`> $sort_deleted_block");
 				$_SESSION['message'] = $rus['един_с_большой'] ." успешно {$rus['действие_в_прошедшем']} (ID = $id)";
 				//Выполняю переадресацию
-				header("location: /{$eng['множ']}/");
+				header("location: /backoffice/{$eng['множ']}/");
 			}
 		}
 	}
