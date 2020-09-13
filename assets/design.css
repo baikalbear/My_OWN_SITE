@@ -1,50 +1,43 @@
-/*Панель авторизации (верхняя панель)*/
-#uppanel {
-	width:100%;
-	margin:15px 0 0 0;
-}
+/*BEGIN: Основной блок сайта*/
+#pg0_box{}
+/*END: Конец описания основного блока сайта*/
 
-#uppanel_leftside{
-	float:left;
-}
+/*BEGIN: Блок содержательной части сайта*/
+#body_container{margin-left:40px;}
+/*END: Конец блока содержательной части сайта*/
 
-#uppanel_rightside{
-	float:right;
-}
+/*BEGIN: Панель авторизации (верхняя панель)*/
+#up-panel {display:table;width:100%;margin:15px 0 0 40px;}
+#up-panel_leftside, #up-panel_center, #up-panel_rightside{display:table-cell;}
+#up-panel_leftside a{margin-right:25px;}
+#up-panel_rightside{text-align:right;}
+#up-panel_rightside a, #up-panel_rightside span{margin-left:25px;}
+#up-panel_row{display: table-row;}
+/*END: Конец описания верхней панели*/
 
-/*Логотип сайта*/
-#sitelogo_header {
-	font-size:36px;
-}
-#sitelogo_descr {
-	padding: 0 0 20px 0;
-	font-size:12pt;
-}
+/*BEGIN: Логотип сайта*/
+#sitelogo_header {font-size:36px;}
+#sitelogo_descr {padding: 0 0 20px 0;font-size:12pt;}
+/*END: Конец описания логотипа*/
 
-/*Навигация первого уровня. Используется на админских страницах. Например, на главной - "Главная  Записи  Категории  Блоки"*/
-.nav1{
-	padding:0 0 10px 40px;
-}
+/*BEGIN: Навигация первого уровня.
+  Используется на админских страницах.
+  Например, на главной - "Главная  Записи  Категории  Блоки"*/
+.nav1{padding:0 0 10px 0px;}
+/*END: Навигация второго уровня*/
 
-/*Навигация второго уровня. Например, на главной - "Категории: ВСЕ Категория1 Категория2 ..."*/
-#nav2{
-	margin:20px 0 10px 40px;
-}
+/*BEGIN: Навигация второго уровня.
+  Например, на главной - "Категории: ВСЕ Категория1 Категория2 ..."*/
+#nav2{margin:20px 0 10px 0px;}
+a.nav2{padding:0 20px 0 0px;text-decoration:underline;}
+/*END: Навигация второго уровня*/
 
-a.nav2{
-	padding:0 20px 0 0px;
-	text-decoration:underline;
-}
-
-/*Подвал*/
-#footer{
-	width:100%;
-	margin:40px 0 25px 0;
-	text-align:center;
-}
-
+/*BEGIN: Подвал*/
+#footer{width:100%;margin:40px 0 25px 0;text-align:center;}
 .footer-header{font-size:11pt;}
 .footer-rights{font-size:9pt;}
+/*END: Подвал*/
+
 
 
 

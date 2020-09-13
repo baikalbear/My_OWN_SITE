@@ -66,28 +66,30 @@
   <body>
     <div class="container" id="pg0_box">
 		<!--BEGIN: Панель авторизации-->
-		<div id="uppanel">
-			<div id="uppanel_leftside">
-				<?if($this->auth->isAdmin()){?>
-					<?if($_SERVER['HTTP_HOST'] == $GLOBALS['remote_server_host']){?>
-						УДАЛЁННЫЙ ХОСТ (<a href="<?=$GLOBALS['local_server_url'] . $_SERVER['REQUEST_URI']?>">изменить</a>)
-					<?}elseif($_SERVER['HTTP_HOST'] == $GLOBALS['local_server_host']){?>
-						ЛОКАЛЬНЫЙ ХОСТ (<a href="<?=$GLOBALS['remote_server_url'] . $_SERVER['REQUEST_URI']?>">изменить</a>)
-					<?}?>
-				<?}?>
-			</div>
-			<div id="uppanel_rightside">
-				<a href="/" style="margin-right:25px;">Главная</a>
-				<?if($this->auth->isAdmin()){?>
-					<a href="/service/" style="margin-right:25px;">Сервис</a>
-				<?}?>			
-				<?if($this->auth->isAdmin()){?>
-					<?=$_SESSION['username']?> <a href="/signout/" style="margin-left:25px;">Выйти</a>	
-				<?}else{?>
-					<a href="/signin/">Войти</a>
-				<?}?>
-			</div>
-			<div class="float-stop"></div>
+		<div id="up-panel">
+            <div id="up-panel_row">
+                <div id="up-panel_leftside">
+                    <a href="/">Главная</a>
+                    <a href="/english/">Английский</a>
+                </div>
+                <div id="up-panel_center">
+                </div>
+                <div id="up-panel_rightside">
+                    <?if($this->auth->isAdmin()){?>
+                        <a href="/service/">Сервис</a>
+                        <?if($_SERVER['HTTP_HOST'] == $GLOBALS['remote_server_host']){?>
+                            <a href="<?=$GLOBALS['local_server_url'] . $_SERVER['REQUEST_URI']?>">УДАЛЁННЫЙ ХОСТ</a>
+                        <?}elseif($_SERVER['HTTP_HOST'] == $GLOBALS['local_server_host']){?>
+                            <a href="<?=$GLOBALS['remote_server_url'] . $_SERVER['REQUEST_URI']?>"><i>ЛОКАЛЬНЫЙ ХОСТ</i></a>
+                        <?}?>
+                    <?}?>
+                    <?if($this->auth->isAdmin()){?>
+                        <span><?=$_SESSION['username']?></span> <a href="/signout/">Выйти</a>
+                    <?}else{?>
+                        <a href="/signin/">Войти</a>
+                    <?}?>
+                </div>
+            </div>
 		</div>
 		<!--END-->	
 		
@@ -95,8 +97,9 @@
 		<h1 align="center" id="sitelogo_header">Baikal.Net.Ru</h1>
 		<div align="center" class="sitelogo_descr">Мастерство, техника и многое другое</div>
 		<!--END-->		
-		
-		<?php $this->output('body') ?>
+		<div id="body_container">
+            <?php $this->output('body') ?>
+        </div>
 	</div>
 	<div id="footer">
         <span class="footer-header">Байкал.Net.Ru &#169; 2020

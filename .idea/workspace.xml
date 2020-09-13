@@ -20,7 +20,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5dbbea3b-08c0-4b59-aa6d-b4de72864013" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/controllers/english.class.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/english/english.html.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/design.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/design.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/pages.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/pages.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/auth.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/core/auth.class.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/base.html.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/base.html.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -42,6 +47,9 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1hLLjG8eqCEbAnvOjLwDXX1DYl5" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -52,9 +60,14 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/views/english" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\web\baikal.home\views\english" />
+      <recent name="C:\web\baikal.home\controllers" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\web\baikal.home\views\categories" />
     </key>
@@ -68,7 +81,7 @@
       <option name="presentableId" value="Default" />
       <updated>1599785559071</updated>
       <workItem from="1599785560241" duration="7189000" />
-      <workItem from="1599995458370" duration="1209000" />
+      <workItem from="1599995458370" duration="14255000" />
     </task>
     <servers />
   </component>
