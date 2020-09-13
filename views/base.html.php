@@ -99,8 +99,9 @@
 		<?php $this->output('body') ?>
 	</div>
 	<div id="footer">
-        <span class="footer-header">Байкал.Net.Ru 2020 &#169; Авторский сайт Ильи Домышева</span><br/>
-        <span class="footer-rights">Все материалы сайта защищены авторским правом.</span>
+        <span class="footer-header">Байкал.Net.Ru &#169; 2020
+            <br/>Автор сайта: Илья Домышев</span><br/>
+        <span class="footer-rights"> Все материалы сайта защищены авторским правом.</span>
 	</div>
     <?php $this->output('script') ?>
   </body>

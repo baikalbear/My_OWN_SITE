@@ -21,11 +21,7 @@
   <component name="ChangeListManager">
     <list default="true" id="5dbbea3b-08c0-4b59-aa6d-b4de72864013" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/design.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/design.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/backoffice/backoffice.blocks.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/backoffice/backoffice.blocks.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/articles/article.html.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/articles/article.html.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/base.html.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/base.html.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/categories/category.html.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/categories/category.html.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +67,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1599785559071</updated>
-      <workItem from="1599785560241" duration="5988000" />
+      <workItem from="1599785560241" duration="7189000" />
+      <workItem from="1599995458370" duration="1209000" />
     </task>
     <servers />
   </component>
@@ -88,8 +85,13 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="474" y="252" key="#Notifications" timestamp="1599995716010">
+      <screen x="0" y="0" width="1440" height="860" />
+    </state>
+    <state x="474" y="252" key="#Notifications/0.0.1440.860@0.0.1440.860" timestamp="1599995716010" />
     <state x="500" y="183" key="FileChooserDialogImpl" timestamp="1599786978038">
       <screen x="0" y="0" width="1440" height="860" />
     </state>
