@@ -50,6 +50,7 @@
     <?php $this->assetJS('app.js') ?>
 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 	<script src="https://cdn.jsdelivr.net/lodash/4.13.1/lodash.js"></script>
+    <script src="https://momentjs.com/downloads/moment.js"></script>
 	<?php //$this->assetJS('https://cdn.tiny.cloud/1/580ji8e36b7rvnybxmhfyyeiis3ii4blu3zyzbzegnh7uwbi/tinymce/5/tinymce.min.js') ?>
 	<script src="https://cdn.tiny.cloud/1/580ji8e36b7rvnybxmhfyyeiis3ii4blu3zyzbzegnh7uwbi/tinymce/5/tinymce.min.js" referrerpolicy="origin"/></script>	
 

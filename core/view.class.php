@@ -149,4 +149,12 @@
 		{
 			echo '<script src="'.\ASSETS_PATH.$file.'"></script>'."\n";
 		}
+
+		public function jsonEncode($array){
+			return json_encode($array);
+		}
+
+		public function json($result, $message){
+			return $this->jsonEncode( ['result'=>$result, 'message'=>$message] );
+		}
 	}

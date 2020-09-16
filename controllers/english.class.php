@@ -4,8 +4,29 @@ class English extends BaseController {
 		return $this->view->load('english/english');
 	}
 
+	function resultsAction(){
+        return $this->view->load('english/results');
+    }
+
+    function getAllResultsAction(){
+    	//Проверяю наличие пользователя в группе безопасности
+    	if(!$message = $this->auth->isUserInGroup('english') === true){
+    		return $this->view->json(false, $message);
+    	}
+
+    	$sql = "SELECT * FROM `english.words` WHERE `status`=1 AND `user_id`={$this->auth->user_id} ORDER BY `sort` DESC";
+    	//print_r($sql);
+        if($sql_res = $this->db_link->query($sql)->fetch_all(MYSQLI_ASSOC)){
+        	
+        	return json_encode( ['words' => $sql_res]);
+    	}else{
+			return json_encode( ['result' => false, 'message' => $sql]);
+    	}
+    }
+
 	function getAllAction(){
-		$sql_res = $this->db_link->query("SELECT * FROM `english.words` WHERE `status`=0 ORDER BY `sort` DESC")->fetch_all(MYSQLI_ASSOC);
+		$sql_res = $this->db_link->query("SELECT * FROM `english.words` WHERE `status`=0 AND `user_id`={$this->auth->getUserId()} 
+            ORDER BY `sort` DESC")->fetch_all(MYSQLI_ASSOC);
 		//print_r($sql_res);
 		return json_encode( ['words' => $sql_res]);
 	}
@@ -15,11 +36,35 @@ class English extends BaseController {
 		$sql_add = "INSERT INTO `english.words` SET `sort`=" . ($max_sort+1) . ", `user_id`=" .
                 $this->auth->getUserId() . ", `status`=0";
 
-        //return json_encode( ['result' => false, 'message' => $sql_add]);
-		mysqli_query($this->db_link, $sql_add);
+        
+		if(!$this->db_link->query($sql_add)){
+			return json_encode( ['result' => false, 'message' => $sql_add]);
+		}
+
 		$new_category_id = mysqli_insert_id($this->db_link);
 		$message = "Слово успешно добавлено";
 		return json_encode( ['result' => true, 'message' => $message]);
+	}
+
+	function addresultAction(){
+		if(isset($_GET['timestamp'])){
+			$live = time()-substr($_GET['timestamp'], 0, strlen($_GET['timestamp'])-3);
+			if($live > 10){
+				return json_encode( ['result' => false, 'message' => "Устаревшая ссылка"] );
+			}else{
+				$sql = "INSERT INTO `english.trainings` SET `time`=now()";
+				if(!$this->db_link->query($sql)){
+					return json_encode( ['result' => false, 'message' => "Устаревшая ссылка"] );	
+				}else{
+					$training_id = $this->db_link->insert_id;
+					if($training_id){
+						return json_encode( ['result' => true, 'message' => "Тренировка (ID=$training_id) успешно добавлена"] );	
+					}else{
+						return json_encode( ['result' => false, 'message' => "Ошибка добавления тренировки"] );		
+					}
+				}
+			}
+		}
 	}
 	
 	function deleteAction(){
@@ -63,13 +108,14 @@ class English extends BaseController {
 
 				foreach($values as $key=>$value){
 					$sql="UPDATE `english.words` SET `name`='{$value['value']}'{$save_result_str} WHERE `id`={$value['name']}";
-					$this->db_link->query($sql);
-					//$message .= "<pre>".print_r($sql, true)."</pre>";
+					if(!$this->db_link->query($sql)){
+						$message .= "<pre>".print_r($sql, true)."</pre>";
+					}
 				}
 				//$message = "<pre>".print_r($values, true)."</pre>";
                 //return json_encode( ['result' => false, 'message' => $message]);
                 if($save_result_flag){
-                    $message = "Результат записан, теперь можете заново начать тренировку";
+                    $message = "Результат записан, теперь можно посмотреть результаты или заново начать тренировку";
                 }else{
                     $message = "Слова сохранены";
                 }
