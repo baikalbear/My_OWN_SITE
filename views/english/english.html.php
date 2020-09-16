@@ -5,7 +5,7 @@
 	<?if($this->auth->isAdmin()){?>
 		<!--BEGIN: Управление-->		
 		<div class="control1">
-			<a href="/english/" class="link-type1-style2">Начать тренировку</a>
+			<a href="/english/" class="link-type1-style2">Тренировка</a>
             <a href="/english/results/" class="link-type1-style3">Результаты</a>
 		</div>
 		<!--END-->			
@@ -32,7 +32,7 @@
 			<tr v-for="(word, index) in orderedwords" :key="index">
 				<td>{{ index+1 }}</td>
 				<td class="pg1_name">
-					<input class="pg1_name_input" type="text" v-bind:name="'' + word.id + ''" :value="word.name" @change="english_words_save(0)">
+					<input class="pg1_name_input" type="text" v-bind:name="'' + word.id + ''" :value="word.name" @change="english_words_save(0, 0)">
 				</td>
 				<!--END-->
 				<td>
@@ -41,13 +41,13 @@
 			</tr>
 		</table>
 		<br/>
-		<button type="button" class="beauty_small steelblue-bgrd" @click="english_finish_train">Сохранить результат и закончить тренировку</button>
+		<button type="button" class="beauty_small steelblue-bgrd" v-if="words_count" @click="english_finish_train">Сохранить результат и закончить тренировку</button>
 	</form>		
 <?php $this->stop('body') ?>
 
 <?php $this->start('script') ?>
     <script>
-		pg1_actions = new Vue({
+		vue_actions = new Vue({
 			el: '#pg1_actions',
 			data: {
 			},
@@ -60,14 +60,14 @@
 						data: {
 						},
 						error: function(data) {
-							pg1_vue2.message = format_error("Системная ошибка обработки запроса AJAX. Текст ошибки: " + data.responseText);
+							vue_message.message = format_error("Системная ошибка обработки запроса AJAX. Текст ошибки: " + data.responseText);
 						},
 						success : function(data) {
 							if(data.result){
-								pg1_vue2.message = data.message;
-								pg1_vue.pg_fill_table();
+								vue_message.message = data.message;
+								vue_form.pg_fill_table();
 							}else{
-								pg1_vue2.message = format_error(data.message);
+								vue_message.message = format_error(data.message);
 							}
 						}
 					});			
@@ -75,20 +75,20 @@
 			}
 		})
 		
-		pg1_vue2 = new Vue({
+		vue_message = new Vue({
 			el: '#pg1_message',
 			data: {
 				message: "<span style='color:black;font-weight:normal;'>Сообщений нет</span>"
 			}
 		})
 		
-		pg1_vue = new Vue({
+		vue_form = new Vue({
 			el: '#pg1_form',
 			data: {
 				palitra_open: false,
 				changecolor_word_id: 0,
 				words: [],
-				training_id: 0
+				words_count: 0
 			},
 			created() {
 				return this.pg_fill_table();
@@ -111,10 +111,11 @@
 						data: {
 						},
 						error: function(data) {
-							pg1_vue2.message = format_error("Системная ошибка обработки запроса AJAX. Текст ошибки: " + data.responseText);
+							vue_message.message = format_error("Системная ошибка обработки запроса AJAX. Текст ошибки: " + data.responseText);
 						},
 						success : function(data) {
-							pg1_vue.words = data.words;
+							vue_form.words = data.words;
+							vue_form.words_count = vue_form.words.length;
 						}
 					});			
 				},
@@ -127,14 +128,14 @@
 							data: {
 							},
 							error: function(data) {
-								pg1_vue2.message = format_error("Системная ошибка обработки запроса AJAX. Текст ошибки: " + data.responseText);
+								vue_message.message = format_error("Системная ошибка обработки запроса AJAX. Текст ошибки: " + data.responseText);
 							},
 							success : function(data) {
 								if(data.result == true) {
-									pg1_vue.pg_fill_table();
-									pg1_vue2.message = data.message;
+									vue_form.pg_fill_table();
+									vue_message.message = data.message;
 								} else{
-									pg1_vue2.message = format_error(data.message);
+									vue_message.message = format_error(data.message);
 								}
 							}
 						});				
@@ -143,36 +144,33 @@
 				english_finish_train: function(){
 					values = get_values();
 					if(values.length==0){
-                        pg1_vue2.message = format_error("Нет слов для записи результата");
+                        vue_message.message = format_error("Нет слов для записи результата");
                         return;
                     }
 
-/*					$.ajax({
+					$.ajax({
 						url: "/english/addresult/?timestamp=" + Date.now(),
 						type: "POST",
 						dataType: "json",
 						data: {
 						},
 						error: function(data) {
-							pg1_vue2.message = format_error("Системная ошибка обработки запроса AJAX. Текст ошибки: " + data.responseText);
+							vue_message.message = format_error("Системная ошибка обработки запроса AJAX. Текст ошибки: " + data.responseText);
 						},
 						success : function(data) {
 							if(data.result == true) {
-								pg1_vue2.message = data.message;
-								console.log(data);
-								//pg1_vue.training_id = data.training_id;
-								//this.english_words_save(1);
+								vue_message.message = data.message;
+								vue_form.english_words_save(1, data.training_id);
 							} else{
-								pg1_vue2.message = format_error(data.message);
+								vue_message.message = format_error(data.message);
 							}
 						}
-					});			*/					
+					});
 				},
-				english_words_save: function(flag){
-					console.log("Окей");
+				english_words_save: function(flag, training_id){
 					values = get_values();
-					//console.log(values);
-					//return;
+
+					if(!flag){training_id = 0}
 
 					$.ajax({
 						url: "/english/saveall/?timestamp=" + Date.now(),
@@ -180,17 +178,18 @@
 						dataType: "json",
 						data: {
 							values: values,
-                            save_result_flag: flag
+                            save_result_flag: flag,
+                            training_id
 						},
 						error: function(data) {
-							pg1_vue2.message = format_error("Системная ошибка обработки запроса AJAX. Текст ошибки: " + data.responseText);
+							vue_message.message = format_error("Системная ошибка обработки запроса AJAX. Текст ошибки: " + data.responseText);
 						},
 						success : function(data) {
 							if(data.result == true) {
-								pg1_vue2.message = data.message;
-								pg1_vue.pg_fill_table();
+								vue_message.message = data.message;
+								vue_form.pg_fill_table();
 							} else{
-								pg1_vue2.message = format_error(data.message);
+								vue_message.message = format_error(data.message);
 							}
 						}
 					});								

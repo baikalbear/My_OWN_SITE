@@ -11,13 +11,19 @@ class English extends BaseController {
     function getAllResultsAction(){
     	//Проверяю наличие пользователя в группе безопасности
     	if(!$message = $this->auth->isUserInGroup('english') === true){
-    		return $this->view->json(false, $message);
+    		return $this->view->json($message, false);
     	}
 
-    	$sql = "SELECT * FROM `english.words` WHERE `status`=1 AND `user_id`={$this->auth->user_id} ORDER BY `sort` DESC";
-    	//print_r($sql);
+    	$sql = "SELECT /*`english.words`.`name` as `name`, `english.words`.`sort` as `sort`,
+    			`english.words`.`user_id` as `user_id`, `english.words`.`status` as `status`,
+    			`english.words`.`training_id` as `training_id`, `english.trainings`.`time` as `training_time`,*/
+    			*
+    			FROM `english.words`
+    			LEFT JOIN `english.trainings` ON `english.words`.`training_id`=`english.trainings`.`id`
+    			WHERE `status`=1 AND `user_id`={$this->auth->user_id}
+    			ORDER BY `sort` DESC";
+
         if($sql_res = $this->db_link->query($sql)->fetch_all(MYSQLI_ASSOC)){
-        	
         	return json_encode( ['words' => $sql_res]);
     	}else{
 			return json_encode( ['result' => false, 'message' => $sql]);
@@ -47,28 +53,25 @@ class English extends BaseController {
 	}
 
 	function addresultAction(){
-		if(isset($_GET['timestamp'])){
-			$live = time()-substr($_GET['timestamp'], 0, strlen($_GET['timestamp'])-3);
-			if($live > 10){
-				return json_encode( ['result' => false, 'message' => "Устаревшая ссылка"] );
-			}else{
-				$sql = "INSERT INTO `english.trainings` SET `time`=now()";
-				if(!$this->db_link->query($sql)){
-					return json_encode( ['result' => false, 'message' => "Устаревшая ссылка"] );	
-				}else{
-					$training_id = $this->db_link->insert_id;
-					if($training_id){
-						return json_encode( ['result' => true, 'message' => "Тренировка (ID=$training_id) успешно добавлена"] );	
-					}else{
-						return json_encode( ['result' => false, 'message' => "Ошибка добавления тренировки"] );		
-					}
-				}
-			}
+		if($message = $this->view->checkTimestamp() !== true) {
+			return $this->view->json($message, false);	
+		}
+
+		$sql = "INSERT INTO `english.trainings` SET `time`=now()";
+		if(!$this->db_link->query($sql)){
+			return $this->view->json("Устаревшая ссылка", false);	
+		}
+
+		$training_id = $this->db_link->insert_id;
+		if($training_id){
+			return $this->view->jsonArray(['result'=>true, 'message'=>"Тренировка успешно добавлена", 'training_id'=>$training_id]);	
+		}else{
+			return $this->view->json("Ошибка добавления тренировки", false);		
 		}
 	}
 	
 	function deleteAction(){
-		if(!isset($_GET['id'])){
+		if(!isset($_GET['id'])){  
 			crash("ID области не определён");
 		}
 		
@@ -93,36 +96,37 @@ class English extends BaseController {
 	}
 	
 	function saveallAction(){
-		if(isset($_GET['timestamp'])){
-			$live = time()-substr($_GET['timestamp'], 0, strlen($_GET['timestamp'])-3);
-			if($live > 10){
-				return json_encode( ['result' => true, 'message' => "Устаревшая ссылка на запоминание слов"] );
-			}else{
-				$values = $_POST['values'];
-				$save_result_flag = $_POST['save_result_flag'];
-				if($save_result_flag){
-				    $save_result_str = ", `status`=1";
-                }else{
-				    $save_result_str = "";
-                }
+		if($message = $this->view->checkTimestamp() !== true) {
+			return $this->view->json($message, false);	
+		}
 
-				foreach($values as $key=>$value){
-					$sql="UPDATE `english.words` SET `name`='{$value['value']}'{$save_result_str} WHERE `id`={$value['name']}";
-					if(!$this->db_link->query($sql)){
-						$message .= "<pre>".print_r($sql, true)."</pre>";
-					}
-				}
-				//$message = "<pre>".print_r($values, true)."</pre>";
-                //return json_encode( ['result' => false, 'message' => $message]);
-                if($save_result_flag){
-                    $message = "Результат записан, теперь можно посмотреть результаты или заново начать тренировку";
-                }else{
-                    $message = "Слова сохранены";
-                }
+		$values = $_POST['values'];
 
-				return json_encode( ['result' => true, 'message' => $message]);
+		$save_result_flag = $_POST['save_result_flag'];
+		$training_id = $_POST['training_id'];
+
+		if($save_result_flag){
+		    $save_result_str = ", `status`=1, `training_id`={$training_id}";
+        }else{
+		    $save_result_str = "";
+        }
+
+		foreach($values as $key=>$value){
+			$sql="UPDATE `english.words` SET `name`='{$value['value']}'{$save_result_str} WHERE `id`={$value['name']}";
+			if(!$this->db_link->query($sql)){
+				$message .= "<pre>".print_r($sql, true)."</pre>";
+				//$sql_summary .= $sql;
 			}
-		}	
+		}
+		//$message = "<pre>".print_r($values, true)."</pre>";
+        //return json_encode( ['result' => false, 'message' => $sql_summary]);
+        if($save_result_flag){
+            $message = "Результаты тренировки сохранены";
+        }else{
+            $message = "Слова сохранены";
+        }
+
+		return json_encode( ['result' => true, 'message' => $message]);
 	}
 	
 	//Функционал данной функции для действия "вверх" и "вниз" аналогичен и одновременно зеркально противоположен по выполняемым операциям.

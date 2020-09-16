@@ -5,23 +5,14 @@
 	<?if($this->auth->isAdmin()){?>
 		<!--BEGIN: Управление-->		
 		<div class="control1">
-			<a href="/english/" class="link-type1-style2">Начать тренировку</a>
+			<a href="/english/" class="link-type1-style2">Тренировка</a>
             <a href="/english/results/" class="link-type1-style3">Результаты</a>
 		</div>
 		<!--END-->			
 	<?}?>	
 	
 	<h1 align="center" class="control">Результаты</h1>
-	<div id="pg1_actions">
-		<button type="button" class="beauty_small forestgreen-bgrd" @click="pg_word_add">Добавить слово</button>
-	</div>
 	
-	<!--BEGIN: Сообщение с результатом действия-->
-	<div class="pg1_message" id="pg1_message" v-html="message">
-	</div>
-	<!--END: Окончание категории результата вывода-->
-	
-
 	<form id="pg1_form">
 		<table id="pg1_table">
 			<tr>
@@ -41,7 +32,6 @@
 			</tr>
 		</table>
 		<br/>
-		<button type="button" class="beauty_small steelblue-bgrd" @click="pg_word_save(1)">Записать результат и начать заново</button>
 	</form>		
 <?php $this->stop('body') ?>
 

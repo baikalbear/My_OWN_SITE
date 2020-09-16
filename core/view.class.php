@@ -150,11 +150,24 @@
 			echo '<script src="'.\ASSETS_PATH.$file.'"></script>'."\n";
 		}
 
-		public function jsonEncode($array){
+		public function jsonArray($array){
 			return json_encode($array);
 		}
 
-		public function json($result, $message){
-			return $this->jsonEncode( ['result'=>$result, 'message'=>$message] );
+		public function json($message, $result=true){
+			return $this->jsonArray( ['result'=>$result, 'message'=>$message] );
+		}
+
+		public function checkTimestamp(){
+			if(isset($_GET['timestamp'])){
+				$live = time() - substr($_GET['timestamp'], 0, strlen($_GET['timestamp']) - 3);
+				if($live > 10){
+					return "Устаревшая ссылка";
+				} else {
+					return true;
+				}
+			}else{
+				return "Не найдена метка времени в запросе GET";
+			}
 		}
 	}
