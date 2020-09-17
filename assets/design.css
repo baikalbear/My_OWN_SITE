@@ -16,6 +16,9 @@
 /*END: Конец описания верхней панели*/
 
 /*BEGIN: Логотип сайта*/
+#sitelogo_container{width:420px;margin:30px auto 0 auto;border:1px solid black;}
+#sitelogo_img{display:block;float:left;width:100px;height:100px;border-right:1px solid black;}
+#sitelogo_textpart{width:300px;float:left;}
 #sitelogo_header {font-size:36px;}
 #sitelogo_descr {padding: 0 0 20px 0;font-size:12pt;}
 /*END: Конец описания логотипа*/

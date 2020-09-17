@@ -4,26 +4,17 @@
 }
 
 /*Общие правила для тэгов*/
-h1{
-	font-size:16pt;
-}
+h1{font-size:16pt;}
+h2{padding-top:10px;}
+a {text-decoration:underline;}
+a:hover {text-decoration:none;}
+a,a:active,a:hover,a:visited{color:#333;}
 
-h2{
-	padding-top:10px;
-}
-
-a {
-	text-decoration:underline;
-}
-
-a:hover {
-	text-decoration:none;
-}
-
-a,a:active,a:hover,a:visited{
-	color:#333;
-}
-
+/*Общие правила для быстрого построения табличной разметки. Не меняй это правило под частные случаи
+Создавай отдельные классы в отдельных файлах разметки.*/
+.tbl-tbl{display:table;}
+.tbl-tr{display:table-row;}
+.tbl-td{display:table-cell;}
 
 /*Что это за правило?*/
 .mce-notification-inner {display:none!important;}

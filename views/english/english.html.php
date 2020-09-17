@@ -41,7 +41,7 @@
 			</tr>
 		</table>
 		<br/>
-		<button type="button" class="beauty_small steelblue-bgrd" v-if="words_count" @click="english_finish_train">Сохранить результат и закончить тренировку</button>
+		<button type="button" class="beauty_small steelblue-bgrd" v-if="words_count" @click="english_finish_train">Закончить тренировку</button>
 	</form>		
 <?php $this->stop('body') ?>
 

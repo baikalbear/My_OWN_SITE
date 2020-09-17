@@ -95,8 +95,14 @@
 		<!--END-->	
 		
 		<!--BEGIN: Лого сайта-->
-		<h1 align="center" id="sitelogo_header">Baikal.Net.Ru</h1>
-		<div align="center" class="sitelogo_descr">Мастерство, техника и многое другое</div>
+        <div id="sitelogo_container">
+            <img id="sitelogo_img" src="/images/logo_author.png">
+            <div id="sitelogo_textpart">
+    		  <h1 align="center" id="sitelogo_header">Baikal.Net.Ru</h1>
+    		  <div align="center" class="sitelogo_descr">Мастерство, техника и многое другое</div>
+            </div>
+            <div class="float-stop"></div>
+        </div>
 		<!--END-->		
 		<div id="body_container">
             <?php $this->output('body') ?>
