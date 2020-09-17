@@ -1,14 +1,13 @@
-/*BEGIN: Основной блок сайта*/
-#pg0_box{}
-/*END: Конец описания основного блока сайта*/
-
-/*BEGIN: Блок содержательной части сайта*/
-#body_container{margin-left:40px;padding-top:30px;}
-/*END: Конец блока содержательной части сайта*/
+/*BEGIN: Основные структурные блоки сайта*/
+body{height:100%;width:100%;} 
+#site_container{height:100%;} /*Основной блок сайта*/
+#body_container{margin:0 0 0 40px;padding-top:30px;}
+#content_container{min-height: 440px;}
+/*END: Конец основных структурных блоков сайта*/
 
 /*BEGIN: Панель авторизации (верхняя панель)*/
 #up-panel {display:table;width:100%;margin:15px 0 0 40px;}
-#up-panel_leftside, #up-panel_center, #up-panel_rightside{display:table-cell;}
+#up-panel_leftside, #up-panel_center, #up-panel_rightside{display:table-cell;} 
 #up-panel_leftside a{margin-right:25px;}
 #up-panel_rightside{text-align:right;}
 #up-panel_rightside a, #up-panel_rightside span{margin-left:25px;}
@@ -36,8 +35,12 @@ a.nav2{padding:0 20px 0 0px;text-decoration:underline;}
 /*END: Навигация второго уровня*/
 
 /*BEGIN: Подвал*/
-#footer{width:100%;margin:40px 0 25px 0;text-align:center;}
-.footer-header{font-size:11pt;}
+#footer{margin:40px auto 0 auto;padding:10px;border:1px solid black;}
+#footer_left{width:200px;float:left;text-align:left;}
+#footer_right{width:400px;padding:10px 0 0 0;float:right;text-align:right;}
+.footer-header{font-size:12pt;}
+.footer-author{font-size:11pt;}
+.footer-sign{font-size:11pt;padding-top:12px;}
 .footer-rights{font-size:9pt;}
 /*END: Подвал*/
 

@@ -62,16 +62,16 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 	
-	<!--END-->	
+	<!--END-->	 
   </head>
   <body>
-    <div class="container" id="pg0_box">
+    <div class="container" id="site_container">
 		<!--BEGIN: Панель авторизации-->
 		<div id="up-panel">
             <div id="up-panel_row">
                 <div id="up-panel_leftside">
                     <a href="/">Главная</a>
-                    <a href="/english/">Английский</a>
+                    <a href="/english/">Английский</a> 
                 </div>
                 <div id="up-panel_center">
                 </div>
@@ -92,7 +92,7 @@
                 </div>
             </div>
 		</div>
-		<!--END-->	
+		<!--END: Конец панели авторизации-->	
 		
 		<!--BEGIN: Лого сайта-->
         <div id="sitelogo_container">
@@ -103,15 +103,30 @@
             </div>
             <div class="float-stop"></div>
         </div>
-		<!--END-->		
+		<!--END: Конец лого сайта-->		
+
 		<div id="body_container">
-            <?php $this->output('body') ?>
+            <!--BEGIN: Начало контента-->
+            <div id="content_container">
+                <?php $this->output('body') ?>
+            </div>
+            <!--END: Конец контента-->
+
+            <!--BEGIN: Начало подвала-->
+            <div id="footer">
+                <div id="footer_left">
+                    <span class="footer-header">Байкал.Net.Ru &bull; 2020</span><br/>
+                    <span class="footer-author">Автор сайта: Илья Домышев</span><br/>
+                </div>
+                <div id="footer_right">
+                    <span class="footer-sign">&#169;</span> <span class="footer-rights">Все материалы сайта защищены авторским правом.</span>
+                </div>
+                <div class="float-stop"></div>
+            </div>
+            <!--END: Конец подвала-->
+
         </div>
-	</div>
-	<div id="footer">
-        <span class="footer-header">Байкал.Net.Ru &#169; 2020
-            <br/>Автор сайта: Илья Домышев</span><br/>
-        <span class="footer-rights"> Все материалы сайта защищены авторским правом.</span>
+
 	</div>
     <?php $this->output('script') ?>
   </body>

@@ -32,7 +32,7 @@
 			<tr v-for="(word, index) in orderedwords" :key="index">
 				<td>{{ index+1 }}</td>
 				<td class="pg1_name">
-					<input class="pg1_name_input" type="text" v-bind:name="'' + word.id + ''" :value="word.name" @change="english_words_save(0, 0)">
+					<input class="pg1_name_input" type="text" v-bind:name="'' + word.id + ''" :value="word.name" @change="english_words_save(0, 0)"> 
 				</td>
 				<!--END-->
 				<td>
