@@ -84,7 +84,7 @@
                             <a href="<?=$GLOBALS['remote_server_url'] . $_SERVER['REQUEST_URI']?>" id="up-panel_host">ЭТО ЛОКАЛЬНЫЙ ХОСТ</a>
                         <?}?>
                     <?}?>
-                    <?if($this->auth->isAdmin()){?>
+                    <?if($this->auth->isUserAuthorized()){?>
                         <span><?=$_SESSION['username']?></span> <a href="/signout/">Выйти</a>
                     <?}else{?>
                         <a href="/signin/">Войти</a>

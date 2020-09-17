@@ -4,9 +4,9 @@ class Signin extends BaseController {
 	function defaultAction(){
 		//Случай, когда форма отправлена
 		if(isset($_POST['username'])){
-			if($_POST['username'] == "baikalbear" && $_POST['password'] == "1122"){
+			if($this->auth->checkUserCredentials($_POST['username'], $_POST['password'])){
 				//Пишу в cookies имя пользователя
-				$_SESSION['username'] = "baikalbear";
+				$this->auth->authorizeUser($_POST['username']);
 				//Переадресую на главную
 				$this->view->redirect("/");
 			}else{

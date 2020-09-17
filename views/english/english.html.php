@@ -2,7 +2,7 @@
 
 <?php $this->start('body') ?>
 
-	<?if($this->auth->isAdmin()){?>
+	<?if($this->auth->isUserInGroup('english') === true){?>
 		<!--BEGIN: Управление-->		
 		<div class="control1">
 			<a href="/english/" class="link-type1-style2">Тренировка</a>

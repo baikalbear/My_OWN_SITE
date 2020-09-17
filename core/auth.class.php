@@ -8,6 +8,17 @@ class Auth {
         mysqli_query($this->db_link, "set names " . $GLOBALS['db_encoding']);
         $this->user_id = $this->getUserId();
     }
+
+    public function checkUserCredentials($username, $password){
+        $sql_str = "SELECT * FROM `users` WHERE `name`='$username' AND `password`='$password'";
+        $sql_query = $this->db_link->query($sql_str);
+        if(!$sql_query){$this->log($this->db_link->error); return false;}
+        if($sql_query->num_rows > 0){return true;}else{return false;}
+    }
+
+    public function authorizeUser($name){
+        $_SESSION['username'] = $name;
+    }
 	public function isAdmin(){
 		if(isset($_SESSION['username']) && $_SESSION['username'] == "baikalbear"){
 			return true;
@@ -30,6 +41,14 @@ class Auth {
         }
     }
 
+    public function isUserAuthorized(){
+        if(isset($_SESSION['username']) && $this->getUserId()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     public function isUserInGroup($groupname){
         $sql_str = "SELECT `users_groups`.`user_id` FROM `users_groups`
                 LEFT JOIN `usergroups` ON `usergroups`.`id`=`users_groups`.`group_id`
@@ -45,4 +64,14 @@ class Auth {
             return "У пользователя {$_SESSION['username']} нет прав доступа к группе безопасности {$groupname}";
         }
     }
+
+    function log($message){
+        if($GLOBALS['debug_mode'] == 'devel'){
+            crash($message);
+        }
+
+        if($GLOBALS['debug_mode'] == 'prod'){
+            echo($message);
+        }
+    }    
 }
