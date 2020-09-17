@@ -71,7 +71,7 @@
             <div id="up-panel_row">
                 <div id="up-panel_leftside">
                     <a href="/">Главная</a>
-                    <a href="/english/">Английский</a> 
+                    <? if($this->auth->isUserInGroup('english') === true){?><a href="/english/">Английский</a><?}?>
                 </div>
                 <div id="up-panel_center">
                 </div>
@@ -79,9 +79,9 @@
                     <?if($this->auth->isAdmin()){?>
                         <a href="/service/">Сервис</a>
                         <?if($_SERVER['HTTP_HOST'] == $GLOBALS['remote_server_host']){?>
-                            <a href="<?=$GLOBALS['local_server_url'] . $_SERVER['REQUEST_URI']?>">УДАЛЁННЫЙ ХОСТ</a>
+                            <a href="<?=$GLOBALS['local_server_url'] . $_SERVER['REQUEST_URI']?>" id="up-panel_host">ЭТО УДАЛЁННЫЙ ХОСТ</a>
                         <?}elseif($_SERVER['HTTP_HOST'] == $GLOBALS['local_server_host']){?>
-                            <a href="<?=$GLOBALS['remote_server_url'] . $_SERVER['REQUEST_URI']?>"><i>ЛОКАЛЬНЫЙ ХОСТ</i></a>
+                            <a href="<?=$GLOBALS['remote_server_url'] . $_SERVER['REQUEST_URI']?>" id="up-panel_host">ЭТО ЛОКАЛЬНЫЙ ХОСТ</a>
                         <?}?>
                     <?}?>
                     <?if($this->auth->isAdmin()){?>

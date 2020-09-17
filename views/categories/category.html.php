@@ -40,7 +40,7 @@
 	<!--END-->
 
     <h2 class="center-variant">
-        <?if($this->alias!=""){echo $category['name'];}else{echo "Все статьи";}?>
+        <?if($this->alias!=""){echo $category['name'];}else{echo "Мои статьи";}?>
     </h2>
 	
 	<!--BEGIN: Блоки-->

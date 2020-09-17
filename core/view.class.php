@@ -170,4 +170,8 @@
 				return "Не найдена метка времени в запросе GET";
 			}
 		}
+
+		public function redirect($url){
+			header("location: $url");
+		}
 	}

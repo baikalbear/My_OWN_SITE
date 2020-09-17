@@ -12,6 +12,7 @@ body{height:100%;width:100%;}
 #up-panel_rightside{text-align:right;}
 #up-panel_rightside a, #up-panel_rightside span{margin-left:25px;}
 #up-panel_row{display: table-row;}
+#up-panel_host{font-style:italic;}
 /*END: Конец описания верхней панели*/
 
 /*BEGIN: Логотип сайта*/

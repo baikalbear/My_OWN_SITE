@@ -5,7 +5,7 @@ class Signout extends BaseController {
 		//Очищаю значение переменной сессии
 		unset($_SESSION['username']);
 
-		//Возвращаю view
-		return $this->view->load('signout/signout_ok', ['auth'=>$this->auth]);	
+		//Переадресую на главную
+		$this->view->redirect("/");
 	}
 }
